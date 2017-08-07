@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{B70E04A5-4DE3-CB24-8659-0989D4C0F58F}</ProjectGuid>
+    <ProjectGuid>{82132DE5-633A-3D7C-D13C-EBFF9CD13941}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Pregunta_Control3.cs" />
      <Compile Include="Assets\Scripts\Proyectil_Control.cs" />
+     <Compile Include="Assets\Scripts\PruebaRotacion.cs" />
      <Compile Include="Assets\Scripts\Respuesta.cs" />
      <Compile Include="Assets\Scripts\Respuesta_Control3.cs" />
      <Compile Include="Assets\Scripts\Sistema.cs" />
@@ -94,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{0D381E8D-550C-D86D-9FA2-D056C38ED78F}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{0AFEF038-7289-7775-8791-E9F2B405EA2F}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

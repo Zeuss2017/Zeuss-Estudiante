@@ -12,6 +12,9 @@ public class Actividad3_Logica : MonoBehaviour {
     public GameObject respuesta1;
     public GameObject respuesta2;
     public GameObject respuesta3;
+	public GameObject canon1;
+	public GameObject canon2;
+	public GameObject canon3;
     List<GameObject> listaPreguntas= new List<GameObject>();
     List<GameObject> listaRespuestas = new List<GameObject>();
     private int contador = 0;
@@ -103,16 +106,19 @@ public class Actividad3_Logica : MonoBehaviour {
 		if (respuesta1 == null || respuesta2 == null || respuesta3 == null) {
 			if (Pregunta1 != null) {
 				Destroy (Pregunta1);
+				Destroy (canon1);
 				Pregunta2.SendMessage ("activarDisparo");
 			} else {
 				if ((respuesta1 == null && respuesta2 == null) || (respuesta1 == null && respuesta3 == null) || (respuesta2 == null && respuesta3 == null)) {
 					if (Pregunta2 != null) {
 						Destroy (Pregunta2);
+						Destroy (canon2);
 						Pregunta3.SendMessage ("activarDisparo");
 					} else {
 						if (respuesta1 == null && respuesta2 == null && respuesta3 == null) {
 							if (Pregunta3 != null) {
 								Destroy (Pregunta3);
+								Destroy (canon3);
 							}
 						}
 					}
