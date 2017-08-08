@@ -55,14 +55,15 @@
      <Compile Include="Assets\Scripts\CargarActividad2.cs" />
      <Compile Include="Assets\Scripts\CargarPartida.cs" />
      <Compile Include="Assets\Scripts\ConectarColegio.cs" />
+     <Compile Include="Assets\Scripts\ControladorGlobo.cs" />
      <Compile Include="Assets\Scripts\Disparar.cs" />
      <Compile Include="Assets\Scripts\Ejercicio.cs" />
      <Compile Include="Assets\Scripts\EjercicioEstudiante.cs" />
      <Compile Include="Assets\Scripts\Estudiante.cs" />
      <Compile Include="Assets\Scripts\InterfazRegistro.cs" />
      <Compile Include="Assets\Scripts\IntermedioActividades.cs" />
+     <Compile Include="Assets\Scripts\MenuActividadControlador.cs" />
      <Compile Include="Assets\Scripts\Persistencia.cs" />
-     <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Pregunta_Control3.cs" />
      <Compile Include="Assets\Scripts\Proyectil_Control.cs" />
      <Compile Include="Assets\Scripts\PruebaRotacion.cs" />
@@ -70,6 +71,7 @@
      <Compile Include="Assets\Scripts\Respuesta_Control3.cs" />
      <Compile Include="Assets\Scripts\Sistema.cs" />
      <Compile Include="Assets\Scripts\TablaCargarPartida.cs" />
+     <Compile Include="Assets\Scripts\TiendaController.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/David/Universidad/Trabajo de Grado/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

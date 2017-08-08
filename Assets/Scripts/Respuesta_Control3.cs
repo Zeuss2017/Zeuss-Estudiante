@@ -18,7 +18,9 @@ public class Respuesta_Control3 : MonoBehaviour {
 		if (this.pregunta == pre) {
 			//EditorUtility.DisplayDialog("asdasd", this.pregunta.ToString() + "vs" + pre.ToString(), "OK");
 			Destroy (this.gameObject);      
+			Persistencia.sistema.aciertosActual++;
 		} else {
+			Persistencia.sistema.erroresActual++;
 			EditorUtility.DisplayDialog ("Actividad", "Inténtalo de nuevo", "Ok");
 		}
       

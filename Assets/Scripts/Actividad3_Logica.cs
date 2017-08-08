@@ -98,6 +98,11 @@ public class Actividad3_Logica : MonoBehaviour {
         this.cantidadRespuestas = contador;
         Pregunta1.SendMessage("activarDisparo");
 
+		Persistencia.sistema.idActividadActual = 3;
+		Persistencia.sistema.idEjercicioActual = ej.idEjercicio;
+		Persistencia.sistema.aciertosActual = 0;
+		Persistencia.sistema.erroresActual = 0;
+		Persistencia.sistema.tiempoActual = Time.time;
     }
 	
 	
@@ -130,6 +135,8 @@ public class Actividad3_Logica : MonoBehaviour {
 		} 
 		if(Pregunta1 == null && Pregunta2 == null && Pregunta3 == null && ganador == false) {
 			//Mostrar pantalla de ganador
+			Persistencia.sistema.tiempoActual = Time.time - Persistencia.sistema.tiempoActual;
+			Persistencia.sistema.guardarEjercicio ();
 			EditorUtility.DisplayDialog ("Actividad", "Ganaste!", "Ok");
 			ganador = true;
 		}    

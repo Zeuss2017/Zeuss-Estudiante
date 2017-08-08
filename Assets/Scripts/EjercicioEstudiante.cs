@@ -7,12 +7,14 @@ public class EjercicioEstudiante  {
 
     public int aciertos;
     public int errores;
-    public int tiempo;
+    public float tiempo;
+	public int idEjercicio;
 
-    public EjercicioEstudiante(int aciertos, int errores, int tiempo)
+	public EjercicioEstudiante(int aciertos, int errores, float tiempo, int idEjercicio)
     {
         this.aciertos = aciertos;
         this.errores = errores;
         this.tiempo = tiempo;
+		this.idEjercicio = idEjercicio;
     }
 }

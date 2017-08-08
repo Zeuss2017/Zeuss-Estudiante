@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 
 
-public class PlayerController : MonoBehaviour {
+public class ControladorGlobo : MonoBehaviour {
 
    
     public GameObject globo;
@@ -29,9 +29,15 @@ public class PlayerController : MonoBehaviour {
     {
 		if (this.correcta == 0) {
 			this.gameObject.SetActive (false);
+			EditorUtility.DisplayDialog ("Actividad", "Vuelve a intentarlo!", "Ok");
+			Persistencia.sistema.erroresActual++;
 			Destroy (this.gameObject);
 		} else if(this.correcta == 1){
-			EditorUtility.DisplayDialog ("Actividad", "Escogiste la opción correcta", "Ok");
+			EditorUtility.DisplayDialog ("Actividad", "Ganaste!!", "Ok");
+			Persistencia.sistema.aciertosActual++;
+			Persistencia.sistema.tiempoActual = Time.time - Persistencia.sistema.tiempoActual;
+			Persistencia.sistema.guardarEjercicio ();
+			Destroy (this.gameObject);
 		}
     }
 

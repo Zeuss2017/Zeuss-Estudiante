@@ -20,7 +20,11 @@ public class CargarActividad2 : MonoBehaviour {
    
   
     void Start () {
-        
+		
+		Persistencia.sistema.idActividadActual = 2;
+		Persistencia.sistema.aciertosActual = 0;
+		Persistencia.sistema.erroresActual = 0;
+		Persistencia.sistema.tiempoActual = Time.time;
 	    
 	}
 
@@ -34,17 +38,18 @@ public class CargarActividad2 : MonoBehaviour {
             gameState = GameState.Playing;
             uiIdle.SetActive(false);
 			Ejercicio ej = Persistencia.sistema.obtenerEjercicio1 ();
-
+			Persistencia.sistema.idEjercicioActual = ej.idEjercicio;
             for (int i = 0; i < cantidadGlobos; i++)
             {
                 var position = new Vector2(Random.Range(-3, 3), Random.Range(-3, 3));
                 GameObject pl = Instantiate(globo,position,Quaternion.identity) as GameObject;
 				pl.transform.Find("Texto").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (i).enunciado;
-				pl.GetComponent<PlayerController>().correcta = ej.respuestas.ElementAt (i).correcto;
+				pl.GetComponent<ControladorGlobo>().correcta = ej.respuestas.ElementAt (i).correcto;
                 listaGlobos.Add(pl);
             }
 
 			GameObject.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.enunciado1;
+
 
         }
         /*if (listaGlobos.Count == 1) 
@@ -52,17 +57,7 @@ public class CargarActividad2 : MonoBehaviour {
             GameObject auxGlobo = listaGlobos[0];
             auxGlobo.SendMessage("UpdateState", "_GloboPosicionar");
         }*/
-		int count = 0;
 
-		foreach (GameObject go in listaGlobos) {
-			if (go != null) {
-				count++;
-			}
-		}
-		if (count == 1 && gano == false) {
-			gano = true;
-			EditorUtility.DisplayDialog ("Actividad", "Ganaste!", "Ok");
-		}
 
     }
 

@@ -8,6 +8,9 @@ public class Sistema {
 
     public int idActividadActual;
     public int idEjercicioActual;
+	public int aciertosActual;
+	public int erroresActual;
+	public float tiempoActual;
     public List<Actividad> actividades;
     public List<Estudiante> estudiantes;
     public Estudiante actual;
@@ -86,5 +89,24 @@ public class Sistema {
 		}
 
 		return null;
+	}
+
+	public void guardarEjercicio(){
+		EjercicioEstudiante ej = new EjercicioEstudiante (this.aciertosActual, this.erroresActual, this.tiempoActual, this.idEjercicioActual);
+		foreach (ActividadEstudiante a in  this.actual.actividadesEstudiante) {
+			if (a.idActividad == this.idActividadActual) {
+				a.ejerciciosEstudiante.Add (ej);
+				a.aciertos += this.aciertosActual;
+				a.errores += this.erroresActual;
+				a.tiempo += this.tiempoActual;
+				//Se tiene que realizar la lógica de subir o bajar nivel!!!
+				//Modificar nivel máximo si es necesario
+				//Modificar completado si es necesario
+				Debug.Log("Se guarda: actividad " + a.idActividad + " ejercicio "+ ej.idEjercicio + " tiempo: " + ej.tiempo);
+				Debug.Log("Totales actividad:  aciertos" + a.aciertos + " errores "+ a.errores + " tiempo: " + a.tiempo);
+			}
+		}
+
+		Persistencia.Save ();
 	}
 }

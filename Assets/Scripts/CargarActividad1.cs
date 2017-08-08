@@ -21,6 +21,11 @@ public class CargarActividad1 : MonoBehaviour {
 
 		GameObject.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.enunciado1;
 
+		Persistencia.sistema.idEjercicioActual = ej.idEjercicio;
+		Persistencia.sistema.idActividadActual = 1;
+		Persistencia.sistema.aciertosActual = 0;
+		Persistencia.sistema.erroresActual = 0;
+		Persistencia.sistema.tiempoActual = Time.time;
 	}
 	
 	// Update is called once per frame
