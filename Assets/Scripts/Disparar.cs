@@ -23,7 +23,7 @@ public class Disparar : MonoBehaviour {
         {
             
             Vector2 target = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x,Input.mousePosition.y));
-            Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
+            Vector2 myPos = new Vector2(transform.position.x - 0.2f, transform.position.y);
             Vector2 direction = target - myPos;
             direction.Normalize();
             vivo = (GameObject)Instantiate(proyectil, myPos, Quaternion.identity);

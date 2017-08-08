@@ -12,43 +12,45 @@ public class ControladorGlobo : MonoBehaviour {
     public float rebote;
 	public int correcta=-1;
     public Rigidbody2D rb;
-   // private Animator animator;
-	// Use this for initialization
-	void Start () {
-        rb.GetComponent<Rigidbody2D>();
-        //animator = GetComponent<Animator>();
+    private bool enPausa = false;
+    
 
+    // Use this for initialization
+    void Start () {
+        rb.GetComponent<Rigidbody2D>();
+       
     }
 	
 	// Update is called once per frame
 	void Update () {
         rb.AddForce(new Vector2(Random.Range(-0.3f,0.3f), Random.Range(-0.3f, 0.3f) ) * speed );
     }
-    
+
     public void OnMouseDown()
     {
-		if (this.correcta == 0) {
-			this.gameObject.SetActive (false);
-			EditorUtility.DisplayDialog ("Actividad", "Vuelve a intentarlo!", "Ok");
-			Persistencia.sistema.erroresActual++;
-			Destroy (this.gameObject);
-		} else if(this.correcta == 1){
-			EditorUtility.DisplayDialog ("Actividad", "Ganaste!!", "Ok");
-			Persistencia.sistema.aciertosActual++;
-			Persistencia.sistema.tiempoActual = Time.time - Persistencia.sistema.tiempoActual;
-			Persistencia.sistema.guardarEjercicio ();
-			Destroy (this.gameObject);
-		}
-    }
-
-   /* public void UpdateState(string state=null)
-    {
-        if (state != null)
+        if (!enPausa)
         {
-
-            animator.Play(state);
+            if (this.correcta == 0)
+            {
+                this.gameObject.SetActive(false);
+                Persistencia.sistema.erroresActual++;
+                Destroy(this.gameObject);
+                CargarActividad2.victoria(false);
+            }
+            else if (this.correcta == 1)
+            {
+                Persistencia.sistema.aciertosActual++;
+                Persistencia.sistema.tiempoActual = Time.time - Persistencia.sistema.tiempoActual;
+                Persistencia.sistema.guardarEjercicio();
+                Destroy(this.gameObject);
+                CargarActividad2.victoria(true);
+            }
         }
-    }*/
+    }
+    public void EnPausa(bool pausado)
+    {
+        this.enPausa = pausado;
+    }
 
     void OnCollisionEnter2D(Collision2D coll)
     {

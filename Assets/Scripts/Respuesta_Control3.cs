@@ -16,12 +16,13 @@ public class Respuesta_Control3 : MonoBehaviour {
     {
         
 		if (this.pregunta == pre) {
-			//EditorUtility.DisplayDialog("asdasd", this.pregunta.ToString() + "vs" + pre.ToString(), "OK");
 			Destroy (this.gameObject);      
 			Persistencia.sistema.aciertosActual++;
+            Actividad3_Logica.DisparoExitoso(pre);
 		} else {
 			Persistencia.sistema.erroresActual++;
-			EditorUtility.DisplayDialog ("Actividad", "Inténtalo de nuevo", "Ok");
+            Actividad3_Logica.DisparoExitoso(4);
+            //EditorUtility.DisplayDialog ("Actividad", "Inténtalo de nuevo", "Ok");
 		}
       
     }

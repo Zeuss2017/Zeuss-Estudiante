@@ -21,6 +21,12 @@ public class Pregunta_Control3 : MonoBehaviour {
     {
         this.id = id;
     }
+
+    public int getId()
+    {
+        return this.id;
+    }
+
 		
 
     
