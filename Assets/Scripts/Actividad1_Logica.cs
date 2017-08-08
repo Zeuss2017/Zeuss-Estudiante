@@ -23,11 +23,11 @@ public class Actividad1_Logica : MonoBehaviour {
 			Persistencia.sistema.aciertosActual++;
 			Persistencia.sistema.tiempoActual = Time.time - Persistencia.sistema.tiempoActual;
 			Persistencia.sistema.guardarEjercicio ();
-			//Debug.Log(Persistencia.sistema.tiempoActual + "  " +  Persistencia.sistema.aciertosActual );
-			EditorUtility.DisplayDialog ("Actividad", "Ganaste!", "Ok");
+            //Debug.Log(Persistencia.sistema.tiempoActual + "  " +  Persistencia.sistema.aciertosActual );
+            CargarActividad1.victoria(true);
 		} else {
 			Persistencia.sistema.erroresActual++;
-			EditorUtility.DisplayDialog ("Actividad", "Esa no es la opcion correcta", "Ok");
+            CargarActividad1.victoria(false);
 		}
 	}
 

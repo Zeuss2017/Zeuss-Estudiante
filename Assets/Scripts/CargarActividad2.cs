@@ -8,10 +8,10 @@ using UnityEngine.UI;
 public class CargarActividad2 : MonoBehaviour {
 
     
-    public GameObject uiIdleInstrucciones;
-    public GameObject uiIdlePausa;
-    public GameObject uiIdleGanar;
-    public GameObject uiIdleNuevoIntento;
+    public GameObject uiInstrucciones;
+    public GameObject uiPausa;
+    public GameObject uiGanar;
+    public GameObject uiNuevoIntento;
     public enum GameState { Inicio, Ejecucion , Pausa};
     public static GameState gameState = GameState.Inicio;
     public int cantidadGlobos;
@@ -24,15 +24,16 @@ public class CargarActividad2 : MonoBehaviour {
    
   
     void Start () {
-        uiIdlePausa.SetActive(false);
-        uiIdleGanar.SetActive(false);
-        uiIdleNuevoIntento.SetActive(false);
+        uiPausa.SetActive(false);
+        uiGanar.SetActive(false);
+        uiNuevoIntento.SetActive(false);
         Persistencia.sistema.idActividadActual = 2;
 		Persistencia.sistema.aciertosActual = 0;
 		Persistencia.sistema.erroresActual = 0;
 		gameState = GameState.Inicio;
         gano = false;
         noGano = false;
+        Time.timeScale = 1;
 
     }
 
@@ -44,7 +45,7 @@ public class CargarActividad2 : MonoBehaviour {
         {
             Persistencia.sistema.tiempoActual = Time.time;
             gameState = GameState.Ejecucion;
-            uiIdleInstrucciones.SetActive(false);
+            uiInstrucciones.SetActive(false);
 			Ejercicio ej = Persistencia.sistema.obtenerEjercicio1 ();
 			Persistencia.sistema.idEjercicioActual = ej.idEjercicio;
             for (int i = 0; i < cantidadGlobos; i++)
@@ -63,7 +64,7 @@ public class CargarActividad2 : MonoBehaviour {
         //Si el estado es en Ejecución, y oprime la tecla "p" se cambia de estado a Pausa.
         if (gameState == GameState.Ejecucion && Input.GetKeyDown("p"))
         {
-            uiIdlePausa.SetActive(true);
+            uiPausa.SetActive(true);
             gameState = GameState.Pausa;
             Time.timeScale = 0;
             cambiarEstadoGlobos(true);
@@ -74,13 +75,13 @@ public class CargarActividad2 : MonoBehaviour {
         {
             gameState = GameState.Ejecucion;
             Time.timeScale = 1;
-            uiIdlePausa.SetActive(false);
+            uiPausa.SetActive(false);
             cambiarEstadoGlobos(false);
         }
 
         if (gano)
         {
-            uiIdleGanar.SetActive(true);
+            uiGanar.SetActive(true);
             cambiarEstadoGlobos(true);
 
             
@@ -102,12 +103,12 @@ public class CargarActividad2 : MonoBehaviour {
     */
     IEnumerator mostrarNuevoIntento()
     {
-        uiIdleNuevoIntento.SetActive(true);
+        uiNuevoIntento.SetActive(true);
         Time.timeScale = 0.0000001f;
         cambiarEstadoGlobos(true);
         yield return new WaitForSeconds(1*Time.timeScale);
         Time.timeScale = 1;
-        uiIdleNuevoIntento.SetActive(false);
+        uiNuevoIntento.SetActive(false);
         cambiarEstadoGlobos(false);
     }
     /*Nombre del Metodo: cambiarEstadoGlobos
@@ -140,7 +141,7 @@ public class CargarActividad2 : MonoBehaviour {
     {
         gameState = GameState.Ejecucion;
         Time.timeScale = 1;
-        uiIdlePausa.SetActive(false);
+        uiPausa.SetActive(false);
         foreach (GameObject globo in listaGlobos)
         {
             if (globo != null)
@@ -159,7 +160,7 @@ public class CargarActividad2 : MonoBehaviour {
     {
         gameState = GameState.Pausa;
         Time.timeScale = 0;
-        uiIdlePausa.SetActive(true);
+        uiPausa.SetActive(true);
         foreach (GameObject globo in listaGlobos)
         {
             if (globo != null)

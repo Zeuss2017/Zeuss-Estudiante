@@ -15,10 +15,10 @@ public class Actividad3_Logica : MonoBehaviour {
 	public GameObject canon1;
 	public GameObject canon2;
 	public GameObject canon3;
-    public GameObject uiIdleInicio;
-    public GameObject uiIdlePausa;
-    public GameObject uiIdleGanar;
-    public GameObject uiIdleNuevoIntento;
+    public GameObject uiInicio;
+    public GameObject uiPausa;
+    public GameObject uiGanar;
+    public GameObject uiNuevoIntento;
     public enum GameState { Inicio, Ejecucion, Pausa };
     public static GameState gameState ;
     List<GameObject> listaPreguntas= new List<GameObject>();
@@ -39,11 +39,11 @@ public class Actividad3_Logica : MonoBehaviour {
         canon1.SetActive(false);
         canon2.SetActive(false);
         canon3.SetActive(false);
-        uiIdleGanar.SetActive(false);
-        uiIdleNuevoIntento.SetActive(false);
-        uiIdlePausa.SetActive(false);
+        uiGanar.SetActive(false);
+        uiNuevoIntento.SetActive(false);
+        uiPausa.SetActive(false);
         gameState = GameState.Inicio;
-       
+        Time.timeScale = 1;
     }
 	
 	void Update () {
@@ -51,7 +51,7 @@ public class Actividad3_Logica : MonoBehaviour {
         {
 
             gameState = GameState.Ejecucion;
-            uiIdleInicio.SetActive(false);
+            uiInicio.SetActive(false);
             pregunta1.SetActive(true);
             pregunta2.SetActive(true);
             pregunta3.SetActive(true);
@@ -184,7 +184,7 @@ public class Actividad3_Logica : MonoBehaviour {
                     case 5:
                         Persistencia.sistema.tiempoActual = Time.time - Persistencia.sistema.tiempoActual;
                         Persistencia.sistema.guardarEjercicio();
-                        uiIdleGanar.SetActive(true);
+                        uiGanar.SetActive(true);
                         idDisparo = 0;
                         break;
                 }
@@ -192,7 +192,7 @@ public class Actividad3_Logica : MonoBehaviour {
             if (Input.GetKeyDown("p"))
             {
                 gameState = GameState.Pausa;
-                uiIdlePausa.SetActive(true);
+                uiPausa.SetActive(true);
                 cambiarEstadoDisparo(false);
                 Time.timeScale = 0;
             }
@@ -203,7 +203,7 @@ public class Actividad3_Logica : MonoBehaviour {
         if (gameState == GameState.Pausa && Input.GetKeyDown("p"))
         {
             gameState = GameState.Ejecucion;
-            uiIdlePausa.SetActive(false);
+            uiPausa.SetActive(false);
             cambiarEstadoDisparo(true);
             Time.timeScale = 1;
         }
@@ -221,7 +221,7 @@ public class Actividad3_Logica : MonoBehaviour {
     public void ReanudarActividad()
     {
         gameState = GameState.Ejecucion;
-        uiIdlePausa.SetActive(false);
+        uiPausa.SetActive(false);
         cambiarEstadoDisparo(true);
         Time.timeScale = 1;
     }
@@ -234,7 +234,7 @@ public class Actividad3_Logica : MonoBehaviour {
     public void PausarActividad()
     {
         gameState = GameState.Pausa;
-        uiIdlePausa.SetActive(true);
+        uiPausa.SetActive(true);
         cambiarEstadoDisparo(false);
         Time.timeScale = 0;
     }
@@ -280,12 +280,12 @@ public class Actividad3_Logica : MonoBehaviour {
     */
     IEnumerator mostrarNuevoIntento()
     {
-        uiIdleNuevoIntento.SetActive(true);
+        uiNuevoIntento.SetActive(true);
         Time.timeScale = 0.0000001f;
         cambiarEstadoDisparo(false);
         yield return new WaitForSeconds(1 * Time.timeScale);
         Time.timeScale = 1;
-        uiIdleNuevoIntento.SetActive(false);
+        uiNuevoIntento.SetActive(false);
         cambiarEstadoDisparo(true);
     }
     public static void DisparoExitoso(int id)
