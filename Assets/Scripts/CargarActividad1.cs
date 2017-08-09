@@ -58,8 +58,7 @@ public class CargarActividad1 : MonoBehaviour {
             uiPausa.SetActive(true);
             gameState = GameState.Pausa;
             Time.timeScale = 0;
-            //cambiarEstadoGlobos(true);
-        }
+         }
         else
         // si el estado es Pausa, y oprime la tecla p se cambia al estado en Ejecución.
         if (gameState == GameState.Pausa && Input.GetKeyDown("p"))
@@ -67,14 +66,12 @@ public class CargarActividad1 : MonoBehaviour {
             gameState = GameState.Ejecucion;
             Time.timeScale = 1;
             uiPausa.SetActive(false);
-            //cambiarEstadoGlobos(false);
-        }
+         }
 
         if (gano)
         {
             uiGanar.SetActive(true);
             Time.timeScale = 0;
-            
         }
         if (noGano)
         {
