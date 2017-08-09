@@ -19,13 +19,15 @@ public class Actividad1_Logica : MonoBehaviour {
 
 	public void OnCollisionEnter2D(Collision2D coll){
 		if (correcta == 1) {
+			//GANA ACTIVIDAD 1
 			Destroy (this.gameObject);
 			Persistencia.sistema.aciertosActual++;
 			Persistencia.sistema.tiempoActual = Time.time - Persistencia.sistema.tiempoActual;
 			Persistencia.sistema.guardarEjercicio ();
-            //Debug.Log(Persistencia.sistema.tiempoActual + "  " +  Persistencia.sistema.aciertosActual );
+            
             CargarActividad1.victoria(true);
 		} else {
+			//INTENTO FALLIDO
 			Persistencia.sistema.erroresActual++;
             CargarActividad1.victoria(false);
 		}

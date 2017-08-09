@@ -9,12 +9,14 @@ public class EjercicioEstudiante  {
     public int errores;
     public float tiempo;
 	public int idEjercicio;
+	public int consecutivo;
 
-	public EjercicioEstudiante(int aciertos, int errores, float tiempo, int idEjercicio)
+	public EjercicioEstudiante(int aciertos, int errores, float tiempo, int idEjercicio, int consecutivo)
     {
         this.aciertos = aciertos;
         this.errores = errores;
         this.tiempo = tiempo;
 		this.idEjercicio = idEjercicio;
+		this.consecutivo = consecutivo;
     }
 }

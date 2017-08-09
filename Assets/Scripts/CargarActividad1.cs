@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEditor;
 
 public class CargarActividad1 : MonoBehaviour {
 
@@ -13,6 +14,7 @@ public class CargarActividad1 : MonoBehaviour {
     public static GameState gameState = GameState.Inicio;
     private static bool gano ;
     private static bool noGano ;
+	public bool ayudado = false;
     // Use this for initialization
     void Start () {
         gano = false;
@@ -164,4 +166,24 @@ public class CargarActividad1 : MonoBehaviour {
         }
 
     }
+
+	public void pista(){
+		if (ayudado == true) {
+			EditorUtility.DisplayDialog ("Advertencia", "Ya utilizaste tu pista!", "Ok");
+		} else {
+			if (Persistencia.sistema.actual.cantidadAyudas > 0) {
+				if (GameObject.Find ("Opcion1").GetComponent<Actividad1_Logica> ().correcta == 1) {
+					Destroy (GameObject.Find ("Opcion3"));
+				} else if (GameObject.Find ("Opcion3").GetComponent<Actividad1_Logica> ().correcta == 1) {
+					Destroy (GameObject.Find ("Opcion1"));
+				} else {
+					Destroy (GameObject.Find ("Opcion1"));
+				}
+				Persistencia.sistema.erroresActual++;
+				ayudado = true;
+			} else {
+				EditorUtility.DisplayDialog ("Advertencia", "No tienes pistas disponibles!", "Ok");
+			}
+		}
+	}
 }

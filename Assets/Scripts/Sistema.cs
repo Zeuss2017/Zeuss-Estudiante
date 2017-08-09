@@ -92,9 +92,11 @@ public class Sistema {
 	}
 
 	public void guardarEjercicio(){
-		EjercicioEstudiante ej = new EjercicioEstudiante (this.aciertosActual, this.erroresActual, this.tiempoActual, this.idEjercicioActual);
+		EjercicioEstudiante ej = new EjercicioEstudiante (this.aciertosActual, this.erroresActual, this.tiempoActual, this.idEjercicioActual,0);
 		foreach (ActividadEstudiante a in  this.actual.actividadesEstudiante) {
 			if (a.idActividad == this.idActividadActual) {
+				ej.consecutivo = a.cantidadEjercicios + 1;
+				a.cantidadEjercicios++;
 				a.ejerciciosEstudiante.Add (ej);
 				a.aciertos += this.aciertosActual;
 				a.errores += this.erroresActual;
@@ -102,11 +104,12 @@ public class Sistema {
 				//Se tiene que realizar la lógica de subir o bajar nivel!!!
 				//Modificar nivel máximo si es necesario
 				//Modificar completado si es necesario
-				Debug.Log("Se guarda: actividad " + a.idActividad + " ejercicio "+ ej.idEjercicio + " tiempo: " + ej.tiempo);
+				Debug.Log("Se guarda: actividad " + a.idActividad + " ejercicio "+ ej.idEjercicio + " tiempo: " + ej.tiempo+"  consecutivo: " + ej.consecutivo);
 				Debug.Log("Totales actividad:  aciertos" + a.aciertos + " errores "+ a.errores + " tiempo: " + a.tiempo);
 			}
 		}
-
+		//Suma las monedas ganadas
+		this.actual.monedas += 3;
 		Persistencia.Save ();
 	}
 }

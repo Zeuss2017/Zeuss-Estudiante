@@ -12,10 +12,10 @@ public class ActividadEstudiante{
     public bool completado;
     public int idActividad;
     public int nivelMaximo;
-    public int cantidadAyudas;
     public List<EjercicioEstudiante> ejerciciosEstudiante;
+	public int cantidadEjercicios;
 
-    public ActividadEstudiante(int aciertos, int errores, float tiempo, int nivel, bool completado, int idActividad, int nivelMaximo, int cantidadAyudas)
+    public ActividadEstudiante(int aciertos, int errores, float tiempo, int nivel, bool completado, int idActividad, int nivelMaximo)
     {
         this.aciertos = aciertos;
         this.errores = errores;
@@ -24,9 +24,8 @@ public class ActividadEstudiante{
         this.completado = completado;
         this.idActividad = idActividad;
         this.nivelMaximo = nivelMaximo;
-        this.cantidadAyudas = cantidadAyudas;
         this.ejerciciosEstudiante = new List<EjercicioEstudiante>();
-
+		this.cantidadEjercicios = 0;
     }
 
 }
