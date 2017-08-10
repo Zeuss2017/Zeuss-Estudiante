@@ -27,6 +27,10 @@ public class Respuesta_Control3 : MonoBehaviour {
       
     }
 
+	public int getPregunta(){
+		return this.pregunta;
+	}
+
     
 
 

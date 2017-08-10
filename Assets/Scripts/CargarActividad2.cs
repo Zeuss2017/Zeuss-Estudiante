@@ -207,5 +207,25 @@ public class CargarActividad2 : MonoBehaviour {
         }
         
     }
+
+	public void pista(){
+		bool disponible = false;
+		if (Persistencia.sistema.actual.cantidadAyudas > 0) {
+			foreach (GameObject gm in listaGlobos) {
+				if (gm != null) {
+					if (gm.GetComponent<ControladorGlobo> ().correcta != 1) {
+						disponible = true;
+						Persistencia.sistema.erroresActual++;
+						Destroy (gm);
+						break;
+					}
+				}
+			}
+
+		} else {
+			EditorUtility.DisplayDialog ("Advertencia", "No tienes pistas disponibles!", "Ok");
+		}
+
+	}
    
 }

@@ -18,8 +18,8 @@ public class Disparar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		if (Input.GetMouseButtonDown(0) && disparar && vivo == null && Input.mousePosition.y < 600)
+		//Debug.Log (Input.mousePosition.y);
+		if (Input.GetMouseButtonDown(0) && disparar && vivo == null && Input.mousePosition.y < Screen.height*0.8)
         {
             
             Vector2 target = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x,Input.mousePosition.y));

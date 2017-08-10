@@ -334,5 +334,62 @@ public class Actividad3_Logica : MonoBehaviour {
 
         }
     }  
+
+	public void pista(){
+		bool disponible = false;
+		if (Persistencia.sistema.actual.cantidadAyudas > 0) {
+			if (pregunta1 != null) {		
+				int x = pregunta1.GetComponent<Pregunta_Control3> ().getId ();
+				if (respuesta1 != null) {
+					if (respuesta1.GetComponent<Respuesta_Control3> ().getPregunta () == x) {
+						Destroy (pregunta1);
+						Destroy (respuesta1);
+					}
+				}
+				if (respuesta2 != null) {
+					if (respuesta2.GetComponent<Respuesta_Control3> ().getPregunta () == x) {
+						Destroy (pregunta1);
+						Destroy (respuesta2);
+					}
+				}
+				if (respuesta3 != null) {
+					if (respuesta3.GetComponent<Respuesta_Control3> ().getPregunta () == x) {
+						Destroy (pregunta1);
+						Destroy (respuesta3);
+					}
+				}
+				Destroy (canon1);
+				pregunta2.SendMessage("activarDisparo");
+				Persistencia.sistema.erroresActual++;
+			} else if (pregunta2 != null) {
+				int x = pregunta2.GetComponent<Pregunta_Control3> ().getId ();
+				if (respuesta1 != null) {
+					if (respuesta1.GetComponent<Respuesta_Control3> ().getPregunta () == x) {
+						Destroy (pregunta2);
+						Destroy (respuesta1);
+					}
+				}
+				if (respuesta2 != null) {
+					if (respuesta2.GetComponent<Respuesta_Control3> ().getPregunta () == x) {
+						Destroy (pregunta2);
+						Destroy (respuesta2);
+					}
+				}
+				if (respuesta3 != null) {
+					if (respuesta3.GetComponent<Respuesta_Control3> ().getPregunta () == x) {
+						Destroy (pregunta2);
+						Destroy (respuesta3);
+					}
+				}
+				Destroy (canon2);
+				pregunta3.SendMessage("activarDisparo");
+				Persistencia.sistema.erroresActual++;
+			}
+		} else {
+			EditorUtility.DisplayDialog ("Advertencia", "No tienes pistas disponibles!", "Ok");
+		}
+
+	}
+
     
 }
