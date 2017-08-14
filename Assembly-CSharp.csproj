@@ -46,6 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\JSON\JSONObject.cs" />
+     <Compile Include="Assets\JSON\JSONTemplates.cs" />
+     <Compile Include="Assets\JSON\VectorTemplates.cs" />
      <Compile Include="Assets\Scripts\Actividad.cs" />
      <Compile Include="Assets\Scripts\Actividad1_Logica.cs" />
      <Compile Include="Assets\Scripts\Actividad3_Logica.cs" />
@@ -73,6 +76,7 @@
      <Compile Include="Assets\Scripts\Sistema.cs" />
      <Compile Include="Assets\Scripts\TablaCargarPartida.cs" />
      <Compile Include="Assets\Scripts\TiendaController.cs" />
+     <None Include="Assets\JSON\readme.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/David/Universidad/Trabajo de Grado/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

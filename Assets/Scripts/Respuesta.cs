@@ -14,4 +14,8 @@ public class Respuesta{
         this.enunciado = enunciado;
         this.correcto = correcto;
     }
+
+	public Respuesta(){
+
+	}
 }

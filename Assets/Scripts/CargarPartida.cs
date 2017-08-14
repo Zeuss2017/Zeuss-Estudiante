@@ -19,5 +19,6 @@ public class CargarPartida : MonoBehaviour {
     {
         Persistencia.sistema.CargarPartida(this.transform.Find("Apodo").GetComponent<Text>().text);
         Debug.Log(Persistencia.sistema.actual.nombre);
+		Application.LoadLevel("MenuActividades");
     }
 }

@@ -223,6 +223,7 @@ public class CargarActividad2 : MonoBehaviour {
 			}
 
 		} else {
+			//Quitar comentario
 			EditorUtility.DisplayDialog ("Advertencia", "No tienes pistas disponibles!", "Ok");
 		}
 

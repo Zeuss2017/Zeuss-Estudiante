@@ -25,4 +25,8 @@ public class IntermedioActividades : MonoBehaviour {
 	public void click3(){
 		Application.LoadLevel("Shooter");
 	}
+	public void clickTienda(){
+		Application.LoadLevel("Tienda");
+	}
+
 }

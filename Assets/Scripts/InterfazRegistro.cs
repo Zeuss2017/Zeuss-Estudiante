@@ -9,7 +9,7 @@ public class InterfazRegistro : MonoBehaviour {
 
     public Text nombre;
     public Text apodo;
-    public Regex regNombre = new Regex(@"^[a-zA-Z_áéíóúñÁÉÍÓÚ \s]*$");
+    public Regex regNombre = new Regex(@"^[a-zA-Z_ \s]*$");
     public Regex regApodo = new Regex(@"^[a-zA-Z0-9 ]*$");
     public Dropdown dropdia;
     public Dropdown dropmes;
@@ -109,22 +109,25 @@ public class InterfazRegistro : MonoBehaviour {
                     Persistencia.sistema.actual.idEstudiante = -1;
                     Persistencia.sistema.actual.nombreColegio = "";
                     Persistencia.sistema.actual.nombreCurso = "";
-                    Persistencia.sistema.actual.fechaNacimiento = seldia + "/" + selmes + "/" + selano;                  
+                    Persistencia.sistema.actual.fechaNacimiento = seldia + "-" + selmes + "-" + selano;                  
                     Application.LoadLevel("ConexionColegio");
                 }
                 else
                 {
+					//Quitar comentario
                     EditorUtility.DisplayDialog("Advertencia", "Este apodo ya existe en este dispositivo, escoge otro!", "Ok");
                 }
                 
             }
             else
             {
+				//Quitar comentario
                 EditorUtility.DisplayDialog("Advertencia", "Pon únicamente letras y números en tu apodo", "Ok");
             }
         }
         else
         {
+			//Quitar comentario
             EditorUtility.DisplayDialog("Advertencia", "Pon únicamente letras en tu nombre", "Ok");
         }
     }
@@ -160,22 +163,28 @@ public class InterfazRegistro : MonoBehaviour {
                     Persistencia.sistema.actual.nombreColegio = "";
                     Persistencia.sistema.actual.nombreCurso = "";
                     Persistencia.sistema.actual.fechaNacimiento = seldia + "/" + selmes + "/" + selano;
+					//QUITAR CUANDO ESTÉ PANTALLA DE ELEGIR ESCENARIO
+					Persistencia.sistema.actual.escenario = "PIRATAS";
                     Application.LoadLevel("Intermedia");
+
                     //Application.LoadLevel("");   conectar a pantalla de preferencias
                 }
                 else
                 {
+					//Quitar comentario
                     EditorUtility.DisplayDialog("Advertencia", "Este apodo ya existe en este dispositivo, escoge otro!", "Ok");
                 }
 
             }
             else
             {
+				//Quitar comentario
                 EditorUtility.DisplayDialog("Advertencia", "Pon únicamente letras y números en tu apodo", "Ok");
             }
         }
         else
         {
+			//Quitar comentario
             EditorUtility.DisplayDialog("Advertencia", "Pon únicamente letras en tu nombre", "Ok");
         }
     }

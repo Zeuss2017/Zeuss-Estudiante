@@ -166,7 +166,8 @@ public class CargarActividad1 : MonoBehaviour {
 
 	public void pista(){
 		if (ayudado == true) {
-			EditorUtility.DisplayDialog ("Advertencia", "Ya utilizaste tu pista!", "Ok");
+			//Quitar comentario
+			//EditorUtility.DisplayDialog ("Advertencia", "Ya utilizaste tu pista!", "Ok");
 		} else {
 			if (Persistencia.sistema.actual.cantidadAyudas > 0) {
 				if (GameObject.Find ("Opcion1").GetComponent<Actividad1_Logica> ().correcta == 1) {
@@ -179,6 +180,7 @@ public class CargarActividad1 : MonoBehaviour {
 				Persistencia.sistema.erroresActual++;
 				ayudado = true;
 			} else {
+				//Quitar comentario
 				EditorUtility.DisplayDialog ("Advertencia", "No tienes pistas disponibles!", "Ok");
 			}
 		}

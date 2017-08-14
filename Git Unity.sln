@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Git Unity", "Assembly-CShar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Git Unity", "Assembly-CSharp-Editor-firstpass.csproj", "{5434BBC3-0F48-FE14-E0D4-4307C5866C1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Git Unity", "Assembly-CSharp-Editor.csproj", "{5263B0F6-50CC-BDB4-1C11-516ACE5783EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{5434BBC3-0F48-FE14-E0D4-4307C5866C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5434BBC3-0F48-FE14-E0D4-4307C5866C1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5434BBC3-0F48-FE14-E0D4-4307C5866C1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5263B0F6-50CC-BDB4-1C11-516ACE5783EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5263B0F6-50CC-BDB4-1C11-516ACE5783EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5263B0F6-50CC-BDB4-1C11-516ACE5783EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5263B0F6-50CC-BDB4-1C11-516ACE5783EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

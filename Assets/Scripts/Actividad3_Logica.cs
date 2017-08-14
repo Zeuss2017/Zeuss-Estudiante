@@ -386,6 +386,7 @@ public class Actividad3_Logica : MonoBehaviour {
 				Persistencia.sistema.erroresActual++;
 			}
 		} else {
+			//No tiene pistas disponibles
 			EditorUtility.DisplayDialog ("Advertencia", "No tienes pistas disponibles!", "Ok");
 		}
 

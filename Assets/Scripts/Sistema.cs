@@ -42,7 +42,7 @@ public class Sistema {
 				//Se recorren los ejercicios de la actividad y se ponen en una lista los ejercicios con el nivel en el que va el estudiante
 				List<Ejercicio> ejer = new List<Ejercicio> ();
 				foreach (Ejercicio e in a.ejercicios) {
-					if (e.nivel == nivel) {
+					if (e.nivel == nivel && actual.escenario.Equals(e.escenario)) {
 						ejer.Add (e);
 					}
 				}
@@ -71,7 +71,7 @@ public class Sistema {
 				//Se recorren los ejercicios de la actividad y se ponen en una lista los ejercicios con el nivel en el que va el estudiante
 				List<Ejercicio> ejer = new List<Ejercicio> ();
 				foreach (Ejercicio e in a.ejercicios) {
-					if (e.nivel == nivel) {
+					if (e.nivel == nivel && actual.escenario.Equals(e.escenario)) {
 						ejer.Add (e);
 					}
 				}
@@ -112,4 +112,24 @@ public class Sistema {
 		this.actual.monedas += 3;
 		Persistencia.Save ();
 	}
+
+	public void agregarEjercicio(Ejercicio ej , int id){
+		bool bandera = false;
+		foreach (Ejercicio e in actividades.ElementAt(id-1).ejercicios) {
+			if (e.idEjercicio == ej.idEjercicio) {
+				e.enunciado1 = ej.enunciado1;
+				e.enunciado2 = ej.enunciado2;
+				e.enunciado3 = ej.enunciado3;
+				e.escenario = ej.escenario;
+				e.nivel = ej.nivel;
+				bandera = true;
+			}
+		}
+		if (bandera == false) {
+			actividades.ElementAt (id - 1).ejercicios.Add (ej);
+		}
+		Persistencia.Save ();
+	}
+
+
 }

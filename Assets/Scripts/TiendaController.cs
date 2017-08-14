@@ -23,13 +23,33 @@ public class TiendaController : MonoBehaviour {
 
 
     void Start () {
-        monedasUsuario = int.Parse(monedas.GetComponent<Text>().text);
+        //monedasUsuario = int.Parse(monedas.GetComponent<Text>().text);
+		monedas.GetComponent<Text>().text = Persistencia.sistema.actual.monedas.ToString();
         avatar1.SendMessage("AsignarPrecio", precioA1);
         avatar2.SendMessage("AsignarPrecio", precioA2);
         avatar3.SendMessage("AsignarPrecio", precioA3);
         avatar4.SendMessage("AsignarPrecio", precioA4);
-        avatar1.SetActive(true);
-        avatar1.SendMessage("mostrarAvatar");
+		avatar1.SendMessage("AvatarComprado", false);
+		avatar2.SendMessage("AvatarComprado", false);
+		avatar3.SendMessage("AvatarComprado", false);
+		avatar4.SendMessage("AvatarComprado", false);
+               
+		foreach (int i in Persistencia.sistema.actual.avataresComprados) {
+			if (i == 1) {
+				avatar1.SendMessage("AvatarComprado", true);
+			}
+			if (i == 2) {
+				avatar2.SendMessage("AvatarComprado", true);
+			}
+			if (i == 3) {
+				avatar3.SendMessage("AvatarComprado", true);
+			}
+			if (i == 4) {
+				avatar4.SendMessage("AvatarComprado", true);
+			}
+		}
+		avatar1.SetActive(true);
+		avatar1.SendMessage("mostrarAvatar");
         contadorAvatar++;
         avatar2.SetActive(false);
         avatar3.SetActive(false);
@@ -113,7 +133,7 @@ public class TiendaController : MonoBehaviour {
 
     public void Volver()
     {
-
+		Application.LoadLevel("Intermedia");
     }
 
     public void ComprarAvatar()
@@ -121,12 +141,14 @@ public class TiendaController : MonoBehaviour {
         switch (contadorAvatar)
         {
             case 1:
-                if (precioA1 <= monedasUsuario)
+				if (precioA1 <= Persistencia.sistema.actual.monedas)
                 {
-                    monedasUsuario = monedasUsuario - precioA1;
-                    monedas.GetComponent<Text>().text = monedasUsuario.ToString();
+					Persistencia.sistema.actual.monedas -= precioA1;
+					monedas.GetComponent<Text>().text = Persistencia.sistema.actual.monedas.ToString();
                     avatar1.SendMessage("AvatarComprado", true);
                     avatar1.SendMessage("mostrarAvatar");
+					Persistencia.sistema.actual.avataresComprados.Add (1);
+					Persistencia.Save ();
                 }
                 else
                 {
@@ -135,12 +157,14 @@ public class TiendaController : MonoBehaviour {
 
                 break;
             case 2:
-                if (precioA2 <= monedasUsuario)
+				if (precioA2 <= Persistencia.sistema.actual.monedas)
                 {
-                    monedasUsuario = monedasUsuario - precioA2;
-                    monedas.GetComponent<Text>().text = monedasUsuario.ToString();
+					Persistencia.sistema.actual.monedas -= precioA2;
+					monedas.GetComponent<Text>().text = Persistencia.sistema.actual.monedas.ToString();
                     avatar2.SendMessage("AvatarComprado", true);
                     avatar2.SendMessage("mostrarAvatar");
+					Persistencia.sistema.actual.avataresComprados.Add (2);
+					Persistencia.Save ();
                 }
                 else
                 {
@@ -148,12 +172,14 @@ public class TiendaController : MonoBehaviour {
                 }
                 break;
             case 3:
-                if (precioA3 <= monedasUsuario)
+				if (precioA3 <= Persistencia.sistema.actual.monedas)
                 {
-                    monedasUsuario = monedasUsuario - precioA3;
-                    monedas.GetComponent<Text>().text = monedasUsuario.ToString();
+					Persistencia.sistema.actual.monedas -= precioA3;
+					monedas.GetComponent<Text>().text = Persistencia.sistema.actual.monedas.ToString();
                     avatar3.SendMessage("AvatarComprado", true);
                     avatar3.SendMessage("mostrarAvatar");
+					Persistencia.sistema.actual.avataresComprados.Add (3);
+					Persistencia.Save ();
                 }
                 else
                 {
@@ -161,12 +187,14 @@ public class TiendaController : MonoBehaviour {
                 }
                 break;
             case 4:
-                if (precioA4 <= monedasUsuario)
+				if (precioA4 <= Persistencia.sistema.actual.monedas)
                 {
-                    monedasUsuario = monedasUsuario - precioA4;
-                    monedas.GetComponent<Text>().text = monedasUsuario.ToString();
+					Persistencia.sistema.actual.monedas -= precioA4;
+					monedas.GetComponent<Text>().text = Persistencia.sistema.actual.monedas.ToString();
                     avatar4.SendMessage("AvatarComprado", true);
                     avatar4.SendMessage("mostrarAvatar");
+					Persistencia.sistema.actual.avataresComprados.Add (4);
+					Persistencia.Save ();
                 }
                 else
                 {
@@ -178,11 +206,12 @@ public class TiendaController : MonoBehaviour {
     
     public void ComprarPista()
     {
-        if (precioPista <= monedasUsuario)
+		if (precioPista <= Persistencia.sistema.actual.monedas)
         {
-            monedasUsuario = monedasUsuario - precioPista;
-            monedas.GetComponent<Text>().text = monedasUsuario.ToString();
-            
+			Persistencia.sistema.actual.monedas -= precioPista;
+			monedas.GetComponent<Text>().text = Persistencia.sistema.actual.monedas.ToString();
+			Persistencia.sistema.actual.cantidadAyudas++;
+			Persistencia.Save ();
         }
         else
         {

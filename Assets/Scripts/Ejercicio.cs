@@ -12,9 +12,10 @@ public class Ejercicio{
     public int nivel;
     public bool basico;
     public List<Respuesta> respuestas;
+	public string escenario;
 
 
-	public Ejercicio (int idEjercicio, string enunciado1, string enunciado2, string enunciado3, int nivel, bool basico)
+	public Ejercicio (int idEjercicio, string enunciado1, string enunciado2, string enunciado3, int nivel, bool basico, string escenario)
     {
         this.idEjercicio = idEjercicio;
         this.enunciado1 = enunciado1;
@@ -23,6 +24,11 @@ public class Ejercicio{
         this.nivel = nivel;
         this.basico = basico;
         this.respuestas = new List<Respuesta>();
+		this.escenario = escenario;
     }
+
+	public Ejercicio(){
+		this.respuestas = new List<Respuesta> ();
+	}
 
 }
