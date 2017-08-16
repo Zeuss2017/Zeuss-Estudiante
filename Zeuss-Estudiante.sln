@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeuss-Estudiante", "Assembl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeuss-Estudiante", "Assembly-CSharp-Editor-firstpass.csproj", "{57EEAA95-B10E-BDE4-CA74-416428F6A1B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeuss-Estudiante", "Assembly-CSharp-Editor.csproj", "{D5E625A0-6C42-1C6F-A097-CC3BCB5A57CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{57EEAA95-B10E-BDE4-CA74-416428F6A1B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57EEAA95-B10E-BDE4-CA74-416428F6A1B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57EEAA95-B10E-BDE4-CA74-416428F6A1B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5E625A0-6C42-1C6F-A097-CC3BCB5A57CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5E625A0-6C42-1C6F-A097-CC3BCB5A57CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5E625A0-6C42-1C6F-A097-CC3BCB5A57CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5E625A0-6C42-1C6F-A097-CC3BCB5A57CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
