@@ -73,10 +73,10 @@ public class Awake : MonoBehaviour {
 
 
 		//Ejercicio para actividad3
-		Respuesta r7 = new Respuesta (1 , "grande que hay en el barrio" , 1);
-		Respuesta r8 = new Respuesta (2 , "ricos que me había comido en mi vida" , 2);
-		Respuesta r9 = new Respuesta (3 , "hermosa, llevaba un traje azul que brillaba\t" , 3);
-		Ejercicio ej3 = new Ejercicio (3 , "Mi casa es la más" , "Un día, mi papá y yo preparamos cupcakes. \n Yo mezcle los ingredientes y mi papá puso la mezcla en el horno. \n Cuando estuvieron listos nos los comimos. \n Eran los más" , "Los piratas secuestraron \n a una princesa muy" , 1 , true, "PIRATAS" );
+		Respuesta r7 = new Respuesta (1 , "grande que hay \n en el barrio" , 1);
+		Respuesta r8 = new Respuesta (2 , "ricos que me había \n comido en mi vida" , 2);
+		Respuesta r9 = new Respuesta (3 , "hermosa, llevaba un traje \n azul que brillaba" , 3);
+		Ejercicio ej3 = new Ejercicio (3 , "Mi casa es la más" , "Un día, mi papá y yo preparamos \n cupcakes. Mezclamos los \n ingredientes y los pusimos en \n el horno. Cuando estuvieron listos \n nos los comimos. Eran los más" , "Los piratas secuestraron \n a una princesa muy" , 1 , true, "PIRATAS" );
 		ej3.respuestas.Add (r7);
 		ej3.respuestas.Add (r8);
 		ej3.respuestas.Add (r9);

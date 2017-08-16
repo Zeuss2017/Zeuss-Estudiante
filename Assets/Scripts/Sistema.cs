@@ -134,8 +134,8 @@ public class Sistema {
 				//Se tiene que realizar la lógica de subir o bajar nivel!!!
 				//Modificar nivel máximo si es necesario
 				//Modificar completado si es necesario
-				Debug.Log("Se guarda: actividad " + a.idActividad + " ejercicio "+ ej.idEjercicio + " tiempo: " + ej.tiempo+"  consecutivo: " + ej.consecutivo);
-				Debug.Log("Totales actividad:  aciertos" + a.aciertos + " errores "+ a.errores + " tiempo: " + a.tiempo);
+				Debug.Log("Se guarda: actividad " + a.idActividad + " ejercicio "+ ej.idEjercicio + " tiempo: " + ej.tiempo+"  Errores: " + ej.errores);
+				//Debug.Log("Totales actividad:  aciertos" + a.aciertos + " errores "+ a.errores + " tiempo: " + a.tiempo);
 			}
 		}
 		//Suma las monedas ganadas
