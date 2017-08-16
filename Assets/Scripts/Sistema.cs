@@ -62,6 +62,36 @@ public class Sistema {
 		return null;
 	}
 
+	public Ejercicio obtenerEjercicio2(){
+
+		int nivel = actual.actividadesEstudiante.ElementAt(0).nivel;
+		Debug.Log ("nivel: " + nivel);
+		//Se recorren las actividades y se encuentra la primera
+		foreach (Actividad a in actividades) {
+			if (a.idActividad == 2) {
+				//Se recorren los ejercicios de la actividad y se ponen en una lista los ejercicios con el nivel en el que va el estudiante
+				List<Ejercicio> ejer = new List<Ejercicio> ();
+				foreach (Ejercicio e in a.ejercicios) {
+					if (e.nivel == nivel && actual.escenario.Equals(e.escenario)) {
+						ejer.Add (e);
+					}
+				}
+				//Se halla un indice aleatorio de ejercicio con ese nivel
+				bool bandera = false;
+				while (bandera == false) {
+					int indice = Random.Range (0, ejer.Count);
+					int idEj = ejer.ElementAt(indice).idEjercicio;
+					Debug.Log ("Encuentra ejercicio con id " + idEj);
+					if (actual.ejerciciosDisponibles.Contains(idEj) ) {
+						return ejer.ElementAt (indice);
+					}
+				}
+			}
+		}
+
+		return null;
+	}
+
 	public Ejercicio obtenerEjercicio3(){
 		int nivel = actual.actividadesEstudiante.ElementAt(2).nivel;
 		Debug.Log ("nivel: " + nivel);

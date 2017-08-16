@@ -46,9 +46,9 @@ public class CargarActividad2 : MonoBehaviour {
             Persistencia.sistema.tiempoActual = Time.time;
             gameState = GameState.Ejecucion;
             uiInstrucciones.SetActive(false);
-			Ejercicio ej = Persistencia.sistema.obtenerEjercicio1 ();
+			Ejercicio ej = Persistencia.sistema.obtenerEjercicio2 ();
 			Persistencia.sistema.idEjercicioActual = ej.idEjercicio;
-            for (int i = 0; i < cantidadGlobos; i++)
+			for (int i = 0; i < ej.respuestas.Count; i++)
             {
                 var position = new Vector2(Random.Range(-3, 3), Random.Range(-3, 3));
                 GameObject pl = Instantiate(globo,position,Quaternion.identity) as GameObject;
