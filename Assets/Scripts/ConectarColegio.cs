@@ -231,6 +231,7 @@ public class ConectarColegio : MonoBehaviour {
 			Persistencia.sistema.actual.idEstudiante = int.Parse (jsonResponse);
 			Persistencia.Save ();
 			Debug.Log ("Exito en la creación");
+			Application.LoadLevel("Intermedia");
 		}else{
 			Debug.Log ("Error en la creación");
 		}

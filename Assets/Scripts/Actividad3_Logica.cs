@@ -149,7 +149,7 @@ public class Actividad3_Logica : MonoBehaviour {
             Persistencia.sistema.aciertosActual = 0;
             Persistencia.sistema.erroresActual = 0;
             Persistencia.sistema.tiempoActual = Time.time;
-
+			StartCoroutine(ayudaConcepto());
         }
 
         if (gameState == GameState.Ejecucion)
@@ -392,5 +392,15 @@ public class Actividad3_Logica : MonoBehaviour {
 
 	}
 
+	IEnumerator ayudaConcepto(){
+		while (true) {
+			float tiempo = Time.time - Persistencia.sistema.tiempoActual;
+			if (tiempo > 50.47f) {
+				Debug.Log ("Ayuda concepto!!!!");
+				yield break;
+			}
+			yield return new WaitForSeconds(1f);
+		}
+	}
     
 }

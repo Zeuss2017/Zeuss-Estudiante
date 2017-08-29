@@ -20,6 +20,7 @@ public class CargarActividad2 : MonoBehaviour {
     public GameObject globo;
     private static bool gano = false;
     private static bool noGano = false;
+	public Text uiDinero;
     
    
   
@@ -27,14 +28,14 @@ public class CargarActividad2 : MonoBehaviour {
         uiPausa.SetActive(false);
         uiGanar.SetActive(false);
         uiNuevoIntento.SetActive(false);
-        Persistencia.sistema.idActividadActual = 2;
+        Persistencia.sistema.idActividadActual = 1;
 		Persistencia.sistema.aciertosActual = 0;
 		Persistencia.sistema.erroresActual = 0;
 		gameState = GameState.Inicio;
         gano = false;
         noGano = false;
         Time.timeScale = 1;
-
+		uiDinero.text =  Persistencia.sistema.actual.monedas.ToString();
     }
 
 	void Update () {
@@ -46,7 +47,7 @@ public class CargarActividad2 : MonoBehaviour {
             Persistencia.sistema.tiempoActual = Time.time;
             gameState = GameState.Ejecucion;
             uiInstrucciones.SetActive(false);
-			Ejercicio ej = Persistencia.sistema.obtenerEjercicio2 ();
+			Ejercicio ej = Persistencia.sistema.obtenerEjercicio1 ();
 			Persistencia.sistema.idEjercicioActual = ej.idEjercicio;
 			for (int i = 0; i < ej.respuestas.Count; i++)
             {
@@ -57,7 +58,7 @@ public class CargarActividad2 : MonoBehaviour {
                 listaGlobos.Add(pl);
             }
             copialistaGlobos = listaGlobos;
-
+			StartCoroutine(ayudaConcepto());
             GameObject.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.enunciado1;
         }
 
@@ -177,7 +178,7 @@ public class CargarActividad2 : MonoBehaviour {
     */
     public void RegresarMenuPrincipal()
     {
-
+		Application.LoadLevel("MenuActividades");
     }
     /*Nombre del Metodo: Tienda
       Entradas: Ninguna
@@ -187,7 +188,7 @@ public class CargarActividad2 : MonoBehaviour {
     */
     public void Tienda()
     {
-
+		Application.LoadLevel("Tienda");
     }
     /*Nombre del Metodo: victoria
       Entradas: victoria
@@ -227,6 +228,17 @@ public class CargarActividad2 : MonoBehaviour {
 			EditorUtility.DisplayDialog ("Advertencia", "No tienes pistas disponibles!", "Ok");
 		}
 
+	}
+
+	IEnumerator ayudaConcepto(){
+		while (true) {
+			float tiempo = Time.time - Persistencia.sistema.tiempoActual;
+			if (tiempo > 19.11f) {
+				Debug.Log ("Ayuda concepto!!!!");
+				yield break;
+			}
+			yield return new WaitForSeconds(1f);
+		}
 	}
    
 }

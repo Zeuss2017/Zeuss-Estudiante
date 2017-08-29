@@ -15,11 +15,11 @@ public class IntermedioActividades : MonoBehaviour {
 	}
 
 	public void click1(){
-		Application.LoadLevel("ActividadSalto");
+		Application.LoadLevel("GlobosComida");
 	}
 
 	public void click2(){
-		Application.LoadLevel("Globos");
+		Application.LoadLevel("ActividadSalto");
 	}
 
 	public void click3(){

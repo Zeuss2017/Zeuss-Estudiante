@@ -34,7 +34,7 @@ public class CargarActividad1 : MonoBehaviour {
         {
             uiInstrucciones.SetActive(false);
             gameState = GameState.Ejecucion;
-            Ejercicio ej = Persistencia.sistema.obtenerEjercicio1();
+            Ejercicio ej = Persistencia.sistema.obtenerEjercicio2();
 
             GameObject.Find("Opcion1").GetComponent<TextMesh>().text = ej.respuestas.ElementAt(0).enunciado;
             GameObject.Find("Opcion1").GetComponent<Actividad1_Logica>().correcta = ej.respuestas.ElementAt(0).correcto;
@@ -48,10 +48,11 @@ public class CargarActividad1 : MonoBehaviour {
             GameObject.Find("Enunciado").GetComponent<TextMesh>().text = ej.enunciado1;
 
             Persistencia.sistema.idEjercicioActual = ej.idEjercicio;
-            Persistencia.sistema.idActividadActual = 1;
+            Persistencia.sistema.idActividadActual = 2;
             Persistencia.sistema.aciertosActual = 0;
             Persistencia.sistema.erroresActual = 0;
             Persistencia.sistema.tiempoActual = Time.time;
+			StartCoroutine(ayudaConcepto());
         }
         if (gameState == GameState.Ejecucion && Input.GetKeyDown("p"))
         {
@@ -183,6 +184,17 @@ public class CargarActividad1 : MonoBehaviour {
 				//Quitar comentario
 				EditorUtility.DisplayDialog ("Advertencia", "No tienes pistas disponibles!", "Ok");
 			}
+		}
+	}
+
+	IEnumerator ayudaConcepto(){
+		while (true) {
+			float tiempo = Time.time - Persistencia.sistema.tiempoActual;
+			if (tiempo > 67.5f) {
+				Debug.Log ("Ayuda concepto!!!!");
+				yield break;
+			}
+			yield return new WaitForSeconds(1f);
 		}
 	}
 }

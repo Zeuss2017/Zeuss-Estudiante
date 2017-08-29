@@ -40,9 +40,14 @@ public class ControladorGlobo : MonoBehaviour {
             {
                 Persistencia.sistema.aciertosActual++;
                 Persistencia.sistema.tiempoActual = Time.time - Persistencia.sistema.tiempoActual;
-                Persistencia.sistema.guardarEjercicio();
+                int diferencia = Persistencia.sistema.guardarEjercicio();
                 Destroy(this.gameObject);
                 CargarActividad2.victoria(true);
+				if (diferencia > 0) {
+					Debug.Log ("Mostrar mensaje de felicitaciones");
+				} else {
+					Debug.Log ("Mostrar mensaje de siguiente nivel");
+				}
             }
         }
     }

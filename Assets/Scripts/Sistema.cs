@@ -64,7 +64,7 @@ public class Sistema {
 
 	public Ejercicio obtenerEjercicio2(){
 
-		int nivel = actual.actividadesEstudiante.ElementAt(0).nivel;
+		int nivel = actual.actividadesEstudiante.ElementAt(1).nivel;
 		Debug.Log ("nivel: " + nivel);
 		//Se recorren las actividades y se encuentra la primera
 		foreach (Actividad a in actividades) {
@@ -121,8 +121,9 @@ public class Sistema {
 		return null;
 	}
 
-	public void guardarEjercicio(){
-		EjercicioEstudiante ej = new EjercicioEstudiante (this.aciertosActual, this.erroresActual, this.tiempoActual, this.idEjercicioActual,0);
+	public int guardarEjercicio(){
+		EjercicioEstudiante ej = new EjercicioEstudiante (this.aciertosActual, this.erroresActual, this.tiempoActual, this.idEjercicioActual,0, false);
+		int dif = -1;
 		foreach (ActividadEstudiante a in  this.actual.actividadesEstudiante) {
 			if (a.idActividad == this.idActividadActual) {
 				ej.consecutivo = a.cantidadEjercicios + 1;
@@ -131,16 +132,90 @@ public class Sistema {
 				a.aciertos += this.aciertosActual;
 				a.errores += this.erroresActual;
 				a.tiempo += this.tiempoActual;
+				if (this.erroresActual == 1) {
+					a.nivel = a.nivel - 1;
+				}
+				if (this.erroresActual >= 2) {
+					a.nivel = a.nivel - 2;
+				}
+				if (this.erroresActual == 0) {
+					if (a.idActividad == 1) {
+						if (this.tiempoActual < 9.37f) {
+							a.nivel = a.nivel + 2;
+							dif = 2;
+						}
+						if (this.tiempoActual >= 9.37f && this.tiempoActual < 13.32f) {
+							a.nivel = a.nivel + 1;
+							dif = 1;
+						}
+						if (this.tiempoActual >= 13.32f && this.tiempoActual < 21.6f) {
+							a.nivel = a.nivel - 1;
+							dif = -1;
+						}
+						if(this.tiempoActual >= 21.6f) {
+							a.nivel = a.nivel - 2;
+							dif = -2;
+						}
+					} else if (a.idActividad == 2) {
+						if (this.tiempoActual < 32.8f) {
+							a.nivel = a.nivel + 2;
+							dif = 2;
+						}
+						if (this.tiempoActual >= 32.8f && this.tiempoActual < 51.255f) {
+							a.nivel = a.nivel + 1;
+							dif = 1;
+						}
+						if (this.tiempoActual >= 51.255f && this.tiempoActual < 86.23f) {
+							a.nivel = a.nivel - 1;
+							dif = -1;
+						}
+						if(this.tiempoActual >= 86.23f) {
+							a.nivel = a.nivel - 2;
+							dif = -2;
+						}
+
+					} else if (a.idActividad == 3) {
+						if (this.tiempoActual < 32.46f) {
+							a.nivel = a.nivel + 2;
+							dif = 2;
+						}
+						if (this.tiempoActual >= 35.46f && this.tiempoActual < 51.035f) {
+							a.nivel = a.nivel + 1;
+							dif = 1;
+						}
+						if (this.tiempoActual >= 51.035f && this.tiempoActual < 61.7f) {
+							a.nivel = a.nivel - 1;
+							dif = -1;
+						}
+						if(this.tiempoActual >= 61.7f) {
+							a.nivel = a.nivel - 2;
+							dif = -2;
+						}
+					}
+				}
+
+				if (a.nivel < 1) {
+					a.nivel = 1; 
+				}
+				if (a.nivel > a.nivelMaximo) {
+					a.nivelMaximo = a.nivel;
+				}
+				if (a.nivel > 10) {
+					a.completado = 1;
+					a.nivel = 1;
+				}
 				//Se tiene que realizar la lógica de subir o bajar nivel!!!
 				//Modificar nivel máximo si es necesario
 				//Modificar completado si es necesario
 				Debug.Log("Se guarda: actividad " + a.idActividad + " ejercicio "+ ej.idEjercicio + " tiempo: " + ej.tiempo+"  Errores: " + ej.errores);
+				Debug.Log ("Nuevo nivel del estudiante: " + a.nivel);
 				//Debug.Log("Totales actividad:  aciertos" + a.aciertos + " errores "+ a.errores + " tiempo: " + a.tiempo);
 			}
 		}
 		//Suma las monedas ganadas
 		this.actual.monedas += 3;
 		Persistencia.Save ();
+		return dif;
 	}
 
 	public void agregarEjercicio(Ejercicio ej , int id){

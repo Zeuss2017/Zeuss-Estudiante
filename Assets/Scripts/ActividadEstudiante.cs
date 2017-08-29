@@ -9,13 +9,13 @@ public class ActividadEstudiante{
     public int errores;
     public float tiempo;
     public int nivel;
-    public bool completado;
+    public int completado;
     public int idActividad;
     public int nivelMaximo;
     public List<EjercicioEstudiante> ejerciciosEstudiante;
 	public int cantidadEjercicios;
 
-    public ActividadEstudiante(int aciertos, int errores, float tiempo, int nivel, bool completado, int idActividad, int nivelMaximo)
+	public ActividadEstudiante(int aciertos, int errores, float tiempo, int nivel, int completado, int idActividad, int nivelMaximo)
     {
         this.aciertos = aciertos;
         this.errores = errores;

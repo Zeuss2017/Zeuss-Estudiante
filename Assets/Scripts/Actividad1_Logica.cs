@@ -33,4 +33,6 @@ public class Actividad1_Logica : MonoBehaviour {
 		}
 	}
 
+
+
 }
