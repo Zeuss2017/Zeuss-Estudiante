@@ -44,9 +44,9 @@ public class ControladorGlobo : MonoBehaviour {
                 Destroy(this.gameObject);
                 CargarActividad2.victoria(true);
 				if (diferencia > 0) {
-					Debug.Log ("Mostrar mensaje de felicitaciones");
+                    CargarActividad2.subirNivel(true);
 				} else {
-					Debug.Log ("Mostrar mensaje de siguiente nivel");
+                    CargarActividad2.subirNivel(false);
 				}
             }
         }

@@ -148,6 +148,7 @@ public class TiendaController : MonoBehaviour {
                     avatar1.SendMessage("AvatarComprado", true);
                     avatar1.SendMessage("mostrarAvatar");
 					Persistencia.sistema.actual.avataresComprados.Add (1);
+                    Persistencia.sistema.actual.avatar = 1;
 					Persistencia.Save ();
                 }
                 else
@@ -164,7 +165,8 @@ public class TiendaController : MonoBehaviour {
                     avatar2.SendMessage("AvatarComprado", true);
                     avatar2.SendMessage("mostrarAvatar");
 					Persistencia.sistema.actual.avataresComprados.Add (2);
-					Persistencia.Save ();
+                    Persistencia.sistema.actual.avatar = 2;
+                    Persistencia.Save ();
                 }
                 else
                 {
@@ -179,7 +181,8 @@ public class TiendaController : MonoBehaviour {
                     avatar3.SendMessage("AvatarComprado", true);
                     avatar3.SendMessage("mostrarAvatar");
 					Persistencia.sistema.actual.avataresComprados.Add (3);
-					Persistencia.Save ();
+                    Persistencia.sistema.actual.avatar = 3;
+                    Persistencia.Save ();
                 }
                 else
                 {
@@ -194,7 +197,8 @@ public class TiendaController : MonoBehaviour {
                     avatar4.SendMessage("AvatarComprado", true);
                     avatar4.SendMessage("mostrarAvatar");
 					Persistencia.sistema.actual.avataresComprados.Add (4);
-					Persistencia.Save ();
+                    Persistencia.sistema.actual.avatar = 4;
+                    Persistencia.Save ();
                 }
                 else
                 {

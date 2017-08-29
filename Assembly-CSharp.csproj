@@ -59,6 +59,8 @@
      <Compile Include="Assets\Scripts\CargarActividad2.cs" />
      <Compile Include="Assets\Scripts\CargarPartida.cs" />
      <Compile Include="Assets\Scripts\ConectarColegio.cs" />
+     <Compile Include="Assets\Scripts\ContraladorAvatar.cs" />
+     <Compile Include="Assets\Scripts\ControladorAyudaContenido.cs" />
      <Compile Include="Assets\Scripts\ControladorGlobo.cs" />
      <Compile Include="Assets\Scripts\Disparar.cs" />
      <Compile Include="Assets\Scripts\Ejercicio.cs" />
@@ -76,6 +78,7 @@
      <Compile Include="Assets\Scripts\Sistema.cs" />
      <Compile Include="Assets\Scripts\TablaCargarPartida.cs" />
      <Compile Include="Assets\Scripts\TiendaController.cs" />
+     <Compile Include="Assets\tocarSuelo.cs" />
      <None Include="Assets\JSON\readme.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
  <Reference Include="UnityEngine.UI">

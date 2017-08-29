@@ -15,7 +15,7 @@ public class IntermedioActividades : MonoBehaviour {
 	}
 
 	public void click1(){
-		Application.LoadLevel("GlobosComida");
+		Application.LoadLevel("GlobosPiratas");
 	}
 
 	public void click2(){

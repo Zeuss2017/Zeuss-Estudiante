@@ -11,7 +11,9 @@ public class CargarActividad2 : MonoBehaviour {
     public GameObject uiInstrucciones;
     public GameObject uiPausa;
     public GameObject uiGanar;
+    public GameObject uiSubirNivel;
     public GameObject uiNuevoIntento;
+    public GameObject uiAyudaContenido;
     public enum GameState { Inicio, Ejecucion , Pausa};
     public static GameState gameState = GameState.Inicio;
     public int cantidadGlobos;
@@ -20,14 +22,19 @@ public class CargarActividad2 : MonoBehaviour {
     public GameObject globo;
     private static bool gano = false;
     private static bool noGano = false;
-	public Text uiDinero;
+    private static bool subioNivel = false;
+    private static bool reanudarActividad = false;
+    public Text uiDinero;
     
+          
    
   
     void Start () {
         uiPausa.SetActive(false);
         uiGanar.SetActive(false);
         uiNuevoIntento.SetActive(false);
+        uiSubirNivel.SetActive(false);
+        uiAyudaContenido.SetActive(false);
         Persistencia.sistema.idActividadActual = 1;
 		Persistencia.sistema.aciertosActual = 0;
 		Persistencia.sistema.erroresActual = 0;
@@ -36,12 +43,14 @@ public class CargarActividad2 : MonoBehaviour {
         noGano = false;
         Time.timeScale = 1;
 		uiDinero.text =  Persistencia.sistema.actual.monedas.ToString();
+        Debug.Log(Persistencia.sistema.actual.avatar.ToString());
+        //Toca cargar el avatar que tiene elegido el usuario!!
     }
 
 	void Update () {
 
         //Inicio de la Actividad
-        //Si el estado es Idle, y da click se cambia de estado, se cargan los globos.
+        //Si el estado es Inicio, y da click se cambia de estado, se cargan los globos.
         if(gameState== GameState.Inicio && Input.GetMouseButtonDown(0))
         {
             Persistencia.sistema.tiempoActual = Time.time;
@@ -82,8 +91,17 @@ public class CargarActividad2 : MonoBehaviour {
 
         if (gano)
         {
-            uiGanar.SetActive(true);
-            cambiarEstadoGlobos(true);
+            if (subioNivel)
+            {
+                uiSubirNivel.SetActive(true);
+                cambiarEstadoGlobos(true);
+            }
+            else
+            {
+                uiGanar.SetActive(true);
+                cambiarEstadoGlobos(true);
+            }
+            
 
             
         }
@@ -92,8 +110,14 @@ public class CargarActividad2 : MonoBehaviour {
             StartCoroutine(mostrarNuevoIntento());
             noGano = false;
         }
-        
 
+        if (reanudarActividad)
+        {
+            uiAyudaContenido.SetActive(false);
+            Time.timeScale = 1;
+            cambiarEstadoGlobos(false);
+            reanudarActividad = false;
+        }
     }
     /*Nombre del Metodo: MostrarNuevoIntento
       Entradas: Ninguna
@@ -208,8 +232,26 @@ public class CargarActividad2 : MonoBehaviour {
         }
         
     }
+    /*Nombre del Metodo: subirNivel
+      Entradas: subirNivel
+      Salidas: Void
+      Descripcion: Metodo ejecutado por un globo para indicar si el usuario ha subido de nivel.
+         
+    */
+    public static void subirNivel(bool subirNivel)
+    {
+        if (subirNivel)
+        {
+            subioNivel = true;
+        }
+        else
+        {
+            subioNivel = false;
+        }
 
-	public void pista(){
+    }
+
+    public void pista(){
 		bool disponible = false;
 		if (Persistencia.sistema.actual.cantidadAyudas > 0) {
 			foreach (GameObject gm in listaGlobos) {
@@ -229,13 +271,20 @@ public class CargarActividad2 : MonoBehaviour {
 		}
 
 	}
+    public static void reanudarActividadContenido()
+    {
+        reanudarActividad=true;
 
-	IEnumerator ayudaConcepto(){
+    }
+
+    IEnumerator ayudaConcepto(){
 		while (true) {
 			float tiempo = Time.time - Persistencia.sistema.tiempoActual;
-			if (tiempo > 19.11f) {
-				Debug.Log ("Ayuda concepto!!!!");
-				yield break;
+			if (tiempo > 19.11f && !gano) {
+                uiAyudaContenido.SetActive(true);
+                Time.timeScale = 0;
+                cambiarEstadoGlobos(true);
+                yield break;
 			}
 			yield return new WaitForSeconds(1f);
 		}
