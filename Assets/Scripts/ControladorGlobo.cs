@@ -76,7 +76,7 @@ public class ControladorGlobo : MonoBehaviour {
         }
         else if (coll.gameObject.tag == "Globo")
         {
-            rb.AddForce(new Vector2(Random.Range(-3f, 3f), Random.Range(-3f, 3f)) , ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) , ForceMode2D.Impulse);
         }
 
     }
