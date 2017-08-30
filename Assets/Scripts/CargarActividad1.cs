@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class CargarActividad1 : MonoBehaviour {
 
@@ -10,11 +11,13 @@ public class CargarActividad1 : MonoBehaviour {
     public GameObject uiPausa;
     public GameObject uiGanar;
     public GameObject uiNuevoIntento;
+	public GameObject enunciado;
     public enum GameState { Inicio, Ejecucion, Pausa };
     public static GameState gameState = GameState.Inicio;
     private static bool gano ;
     private static bool noGano ;
 	public bool ayudado = false;
+	public Text uiDinero;
     // Use this for initialization
     void Start () {
         gano = false;
@@ -24,7 +27,7 @@ public class CargarActividad1 : MonoBehaviour {
         uiNuevoIntento.SetActive(false);
         gameState = GameState.Inicio;
         Time.timeScale = 1;
-        
+		uiDinero.text =  Persistencia.sistema.actual.monedas.ToString();
 	}
 
     // Update is called once per frame
@@ -36,16 +39,16 @@ public class CargarActividad1 : MonoBehaviour {
             gameState = GameState.Ejecucion;
             Ejercicio ej = Persistencia.sistema.obtenerEjercicio2();
 
-            GameObject.Find("Opcion1").GetComponent<TextMesh>().text = ej.respuestas.ElementAt(0).enunciado;
-            GameObject.Find("Opcion1").GetComponent<Actividad1_Logica>().correcta = ej.respuestas.ElementAt(0).correcto;
+			GameObject.Find("Opcion1").transform.Find("Enunciado").GetComponent<TextMesh>().text = ej.respuestas.ElementAt(0).enunciado;
+			GameObject.Find("Opcion1").GetComponent<Actividad1_Logica>().correcta = ej.respuestas.ElementAt(0).correcto;
 
-            GameObject.Find("Opcion2").GetComponent<TextMesh>().text = ej.respuestas.ElementAt(1).enunciado;
+			GameObject.Find("Opcion2").transform.Find("Enunciado").GetComponent<TextMesh>().text = ej.respuestas.ElementAt(1).enunciado;
             GameObject.Find("Opcion2").GetComponent<Actividad1_Logica>().correcta = ej.respuestas.ElementAt(1).correcto;
 
-            GameObject.Find("Opcion3").GetComponent<TextMesh>().text = ej.respuestas.ElementAt(2).enunciado;
+			GameObject.Find("Opcion3").transform.Find("Enunciado").GetComponent<TextMesh>().text = ej.respuestas.ElementAt(2).enunciado;
             GameObject.Find("Opcion3").GetComponent<Actividad1_Logica>().correcta = ej.respuestas.ElementAt(2).correcto;
 
-            GameObject.Find("Enunciado").GetComponent<TextMesh>().text = ej.enunciado1;
+            enunciado.GetComponent<TextMesh>().text = ej.enunciado1;
 
             Persistencia.sistema.idEjercicioActual = ej.idEjercicio;
             Persistencia.sistema.idActividadActual = 2;
@@ -134,7 +137,7 @@ public class CargarActividad1 : MonoBehaviour {
     */
     public void RegresarMenuPrincipal()
     {
-
+		Application.LoadLevel("MenuActividades");
     }
     /*Nombre del Metodo: Tienda
       Entradas: Ninguna
@@ -144,7 +147,7 @@ public class CargarActividad1 : MonoBehaviour {
     */
     public void Tienda()
     {
-
+		Application.LoadLevel("Tienda");
     }
     /*Nombre del Metodo: victoria
       Entradas: victoria
@@ -178,7 +181,7 @@ public class CargarActividad1 : MonoBehaviour {
 				} else {
 					Destroy (GameObject.Find ("Opcion1"));
 				}
-				Persistencia.sistema.erroresActual++;
+				Persistencia.sistema.actual.cantidadAyudas--;
 				ayudado = true;
 			} else {
 				//Quitar comentario

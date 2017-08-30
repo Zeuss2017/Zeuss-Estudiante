@@ -258,13 +258,12 @@ public class CargarActividad2 : MonoBehaviour {
 				if (gm != null) {
 					if (gm.GetComponent<ControladorGlobo> ().correcta != 1) {
 						disponible = true;
-						Persistencia.sistema.erroresActual++;
 						Destroy (gm);
 						break;
 					}
 				}
 			}
-
+			Persistencia.sistema.actual.cantidadAyudas--;
 		} else {
 			//Quitar comentario
 			EditorUtility.DisplayDialog ("Advertencia", "No tienes pistas disponibles!", "Ok");

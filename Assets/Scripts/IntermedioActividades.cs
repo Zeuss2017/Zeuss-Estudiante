@@ -19,11 +19,11 @@ public class IntermedioActividades : MonoBehaviour {
 	}
 
 	public void click2(){
-		Application.LoadLevel("ActividadSalto");
+		Application.LoadLevel("ActividadSaltoComida");
 	}
 
 	public void click3(){
-		Application.LoadLevel("Shooter");
+		Application.LoadLevel("ShooterComida");
 	}
 	public void clickTienda(){
 		Application.LoadLevel("Tienda");

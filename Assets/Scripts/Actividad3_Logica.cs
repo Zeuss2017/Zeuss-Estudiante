@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.Linq;
+using UnityEngine.UI;
 
 public class Actividad3_Logica : MonoBehaviour {
 
@@ -28,6 +29,7 @@ public class Actividad3_Logica : MonoBehaviour {
 	bool ganador = false;
     private static int idDisparo=0;
     private int llevaDisparo=0; //pregunta que lleva el disparo
+	public Text uiDinero;
 
     void Start () {
         pregunta1.SetActive(false);
@@ -44,6 +46,7 @@ public class Actividad3_Logica : MonoBehaviour {
         uiPausa.SetActive(false);
         gameState = GameState.Inicio;
         Time.timeScale = 1;
+		uiDinero.text =  Persistencia.sistema.actual.monedas.ToString();
     }
 	
 	void Update () {
@@ -246,7 +249,7 @@ public class Actividad3_Logica : MonoBehaviour {
     */
     public void RegresarMenuPrincipal()
     {
-
+		Application.LoadLevel("MenuActividades");
     }
     /*Nombre del Metodo: Tienda
       Entradas: Ninguna
@@ -256,7 +259,7 @@ public class Actividad3_Logica : MonoBehaviour {
     */
     public void Tienda()
     {
-
+		Application.LoadLevel("Tienda");
     }
 
     public void regresar(){
@@ -383,8 +386,8 @@ public class Actividad3_Logica : MonoBehaviour {
 				}
 				Destroy (canon2);
 				pregunta3.SendMessage("activarDisparo");
-				Persistencia.sistema.erroresActual++;
 			}
+			Persistencia.sistema.actual.cantidadAyudas--;
 		} else {
 			//No tiene pistas disponibles
 			EditorUtility.DisplayDialog ("Advertencia", "No tienes pistas disponibles!", "Ok");
