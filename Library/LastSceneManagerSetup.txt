@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/ActividadSaltoComida.unity
+- path: Assets/Scenes/ActividadSaltoPiratas.unity
   isLoaded: 1
   isActive: 1

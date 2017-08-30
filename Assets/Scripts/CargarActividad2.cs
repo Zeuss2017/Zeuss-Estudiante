@@ -43,8 +43,7 @@ public class CargarActividad2 : MonoBehaviour {
         noGano = false;
         Time.timeScale = 1;
 		uiDinero.text =  Persistencia.sistema.actual.monedas.ToString();
-        Debug.Log(Persistencia.sistema.actual.avatar.ToString());
-        //Toca cargar el avatar que tiene elegido el usuario!!
+        ControladorAyudaContenido.actividadReanudar(2);
     }
 
 	void Update () {
@@ -56,7 +55,7 @@ public class CargarActividad2 : MonoBehaviour {
             Persistencia.sistema.tiempoActual = Time.time;
             gameState = GameState.Ejecucion;
             uiInstrucciones.SetActive(false);
-			Ejercicio ej = Persistencia.sistema.obtenerEjercicio1 ();
+			Ejercicio ej = Persistencia.sistema.obtenerEjercicio1();
 			Persistencia.sistema.idEjercicioActual = ej.idEjercicio;
 			for (int i = 0; i < ej.respuestas.Count; i++)
             {
@@ -250,7 +249,12 @@ public class CargarActividad2 : MonoBehaviour {
         }
 
     }
-
+    /*Nombre del Metodo: pista
+      Entradas: ninguna
+      Salidas: Void
+      Descripcion: descuenta una pista de las que tiene el usuario para ayudarlo a resolver el ejercicio.
+         
+    */
     public void pista(){
 		bool disponible = false;
 		if (Persistencia.sistema.actual.cantidadAyudas > 0) {
@@ -270,12 +274,26 @@ public class CargarActividad2 : MonoBehaviour {
 		}
 
 	}
+    /*Nombre del Metodo: reanudarActividadContenido
+      Entradas: ninguna
+      Salidas: Void
+      Descripcion: una vez se finaliza la ayuda de contenido, esta envia un mensaje a la actividad
+                   para que se reanude.
+         
+    */
     public static void reanudarActividadContenido()
     {
         reanudarActividad=true;
 
     }
-
+    /*Nombre del Metodo: ayudaConcepto
+      Entradas: ninguna
+      Salidas: IEnumerator
+      Descripcion: este metodo se ejecuta automaticamente una vez se llegue al tiempo promedio para
+                    resolver una actividad. si el usuario no ha resuleto la actividad; se le muestra 
+                    una ayuda de contenido que lo oriente a encontrar la solucion al ejercicio.
+         
+    */
     IEnumerator ayudaConcepto(){
 		while (true) {
 			float tiempo = Time.time - Persistencia.sistema.tiempoActual;

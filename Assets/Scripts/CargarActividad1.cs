@@ -12,12 +12,16 @@ public class CargarActividad1 : MonoBehaviour {
     public GameObject uiGanar;
     public GameObject uiNuevoIntento;
 	public GameObject enunciado;
+    public GameObject uiSubirNivel;
+    public GameObject uiAyudaContenido;
     public enum GameState { Inicio, Ejecucion, Pausa };
     public static GameState gameState = GameState.Inicio;
     private static bool gano ;
     private static bool noGano ;
 	public bool ayudado = false;
-	public Text uiDinero;
+    private static bool subioNivel = false;
+    private static bool reanudarActividad = false;
+    public Text uiDinero;
     // Use this for initialization
     void Start () {
         gano = false;
@@ -25,9 +29,12 @@ public class CargarActividad1 : MonoBehaviour {
         uiPausa.SetActive(false);
         uiGanar.SetActive(false);
         uiNuevoIntento.SetActive(false);
+        uiSubirNivel.SetActive(false);
+        uiAyudaContenido.SetActive(false);
         gameState = GameState.Inicio;
         Time.timeScale = 1;
 		uiDinero.text =  Persistencia.sistema.actual.monedas.ToString();
+        ControladorAyudaContenido.actividadReanudar(1);
 	}
 
     // Update is called once per frame
@@ -74,13 +81,31 @@ public class CargarActividad1 : MonoBehaviour {
 
         if (gano)
         {
-            uiGanar.SetActive(true);
-            Time.timeScale = 0;
+            Persistencia.sistema.aciertosActual++;
+            Persistencia.sistema.tiempoActual = Time.time - Persistencia.sistema.tiempoActual;
+            int diferencia = Persistencia.sistema.guardarEjercicio();
+            if (diferencia > 0)
+            {
+                uiSubirNivel.SetActive(true);
+                Time.timeScale = 0;
+            }
+            else
+            {
+                uiGanar.SetActive(true);
+                Time.timeScale = 0;
+            }
+            
         }
         if (noGano)
         {
             StartCoroutine(mostrarNuevoIntento());
             noGano = false;
+        }
+        if (reanudarActividad)
+        {
+            uiAyudaContenido.SetActive(false);
+            Time.timeScale = 1;
+            reanudarActividad = false;
         }
     }
 
@@ -107,8 +132,7 @@ public class CargarActividad1 : MonoBehaviour {
       Entradas: Ninguna
       Salidas: Void
       Descripcion: Permite reanudar la actividad ludica luego de que está se ha pausado.
-         
-    */
+     */
     public void ReanudarActividad()
     {
         gameState = GameState.Ejecucion;
@@ -167,8 +191,13 @@ public class CargarActividad1 : MonoBehaviour {
         }
 
     }
-
-	public void pista(){
+    /*Nombre del Metodo: pista
+      Entradas: ninguna
+      Salidas: Void
+      Descripcion: descuenta una pista de las que tiene el usuario para ayudarlo a resolver el ejercicio.
+         
+    */
+    public void pista(){
 		if (ayudado == true) {
 			//Quitar comentario
 			//EditorUtility.DisplayDialog ("Advertencia", "Ya utilizaste tu pista!", "Ok");
@@ -189,13 +218,33 @@ public class CargarActividad1 : MonoBehaviour {
 			}
 		}
 	}
+    /*Nombre del Metodo: reanudarActividadContenido
+      Entradas: ninguna
+      Salidas: Void
+      Descripcion: una vez se finaliza la ayuda de contenido, esta envia un mensaje a la actividad
+                   para que se reanude.
+         
+    */
+    public static void reanudarActividadContenido()
+    {
+        reanudarActividad = true;
 
-	IEnumerator ayudaConcepto(){
+    }
+    /*Nombre del Metodo: ayudaConcepto
+      Entradas: ninguna
+      Salidas: IEnumerator
+      Descripcion: este metodo se ejecuta automaticamente una vez se llegue al tiempo promedio para
+                    resolver una actividad. si el usuario no ha resuleto la actividad; se le muestra 
+                    una ayuda de contenido que lo oriente a encontrar la solucion al ejercicio.
+         
+    */
+    IEnumerator ayudaConcepto(){
 		while (true) {
 			float tiempo = Time.time - Persistencia.sistema.tiempoActual;
 			if (tiempo > 67.5f) {
-				Debug.Log ("Ayuda concepto!!!!");
-				yield break;
+                uiAyudaContenido.SetActive(true);
+                Time.timeScale = 0;
+                yield break;
 			}
 			yield return new WaitForSeconds(1f);
 		}

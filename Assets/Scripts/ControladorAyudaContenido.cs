@@ -20,6 +20,7 @@ public class ControladorAyudaContenido : MonoBehaviour {
     public Sprite avatarVeterinario;
     private int contador;
     private int numeroAvatar;
+    private static int actividad;
 
 	void Start () {
         numeroAvatar=int.Parse(Persistencia.sistema.actual.avatar.ToString());
@@ -34,16 +35,13 @@ public class ControladorAyudaContenido : MonoBehaviour {
         contador = 0;
     }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-    /*Nombre del Metodo: siguienteConcepto
-  Entradas: ninguna
-  Salidas: Void
-  Descripcion: Cambia al siguiente concepto.
 
-*/
+    /*Nombre del Metodo: siguienteConcepto
+    Entradas: ninguna
+    Salidas: Void
+    Descripcion: Cambia al siguiente concepto.
+
+    */
     private void inicializarAvatar(int numeroAvatar)
     {
         switch (numeroAvatar)
@@ -138,13 +136,36 @@ public class ControladorAyudaContenido : MonoBehaviour {
         }
     }
     /*Nombre del Metodo: reanudarActividad
-  Entradas: ninguna
-  Salidas: Void
-  Descripcion: reanuda la actividad.
+    Entradas: ninguna
+    Salidas: Void
+    Descripcion: reanuda la actividad.
 
-*/
+    */
     public void reanudarActividad()
     {
-        CargarActividad2.reanudarActividadContenido();
+        switch (actividad)
+        {
+            case 1:
+                CargarActividad1.reanudarActividadContenido();
+                break;
+            case 2:
+                CargarActividad2.reanudarActividadContenido();
+                break;
+            case 3:
+                Actividad3_Logica.reanudarActividadContenido();
+                break;
+        }
+        
+    }
+
+    /*Nombre del Metodo: actividadReanudar
+    Entradas: entero que indica que actividad se debe reanudar
+    Salidas: Void
+    Descripcion: recibe el entero con la actividad que se va areanudar.
+
+    */
+    public static void actividadReanudar(int act)
+    {
+        actividad = act;
     }
 }

@@ -20,6 +20,9 @@ public class Actividad3_Logica : MonoBehaviour {
     public GameObject uiPausa;
     public GameObject uiGanar;
     public GameObject uiNuevoIntento;
+    public GameObject uiSubirNivel;
+    public GameObject uiAyudaContenido;
+    private static bool reanudarActividad = false;
     public enum GameState { Inicio, Ejecucion, Pausa };
     public static GameState gameState ;
     List<GameObject> listaPreguntas= new List<GameObject>();
@@ -44,9 +47,12 @@ public class Actividad3_Logica : MonoBehaviour {
         uiGanar.SetActive(false);
         uiNuevoIntento.SetActive(false);
         uiPausa.SetActive(false);
+        uiSubirNivel.SetActive(false);
+        uiAyudaContenido.SetActive(false);
         gameState = GameState.Inicio;
         Time.timeScale = 1;
 		uiDinero.text =  Persistencia.sistema.actual.monedas.ToString();
+        ControladorAyudaContenido.actividadReanudar(3);
     }
 	
 	void Update () {
@@ -187,8 +193,18 @@ public class Actividad3_Logica : MonoBehaviour {
                     case 5:
                         Persistencia.sistema.tiempoActual = Time.time - Persistencia.sistema.tiempoActual;
                         Persistencia.sistema.guardarEjercicio();
-                        uiGanar.SetActive(true);
                         idDisparo = 0;
+                        int diferencia = Persistencia.sistema.guardarEjercicio();
+                        if (diferencia > 0)
+                        {
+                            uiSubirNivel.SetActive(true);
+                            Time.timeScale = 0;
+                        }
+                        else
+                        {
+                            uiGanar.SetActive(true);
+                            Time.timeScale = 0;
+                        }
                         break;
                 }
              }
@@ -210,9 +226,16 @@ public class Actividad3_Logica : MonoBehaviour {
             cambiarEstadoDisparo(true);
             Time.timeScale = 1;
         }
+        if (reanudarActividad)
+        {
+            Debug.Log("cambio");
+            uiAyudaContenido.SetActive(false);
+            Time.timeScale = 1;
+            cambiarEstadoDisparo(true);
+            reanudarActividad = false;
+        }
 
-        
-        
+
     }
 
     /*Nombre del Metodo: ReanudarActividad
@@ -265,14 +288,7 @@ public class Actividad3_Logica : MonoBehaviour {
     public void regresar(){
 		Application.LoadLevel("Intermedia");
 	}
-    /*Nombre del Metodo: DisparoExitoso
-      Entradas: entero id
-      Salidas: Void
-      Descripcion: Cuando el proyectil choca con una respuesta, la respuesta un entero
-                   que pemite identificar si el disparo fue acertado, o si tendra que disparar nuevamente
-         
-    */
-
+    
 
     /*Nombre del Metodo: MostrarNuevoIntento
       Entradas: Ninguna
@@ -291,6 +307,12 @@ public class Actividad3_Logica : MonoBehaviour {
         uiNuevoIntento.SetActive(false);
         cambiarEstadoDisparo(true);
     }
+    /*Nombre del Metodo: DisparoExitoso
+      Entradas: entero id
+      Salidas: void
+      Descripcion: Mensaje enviado por un proyectil para informar que ha tenido exito.
+         
+    */
     public static void DisparoExitoso(int id)
     {
         idDisparo = id;
@@ -336,9 +358,14 @@ public class Actividad3_Logica : MonoBehaviour {
                 break;
 
         }
-    }  
-
-	public void pista(){
+    }
+    /*Nombre del Metodo: pista
+      Entradas: ninguna
+      Salidas: Void
+      Descripcion: descuenta una pista de las que tiene el usuario para ayudarlo a resolver el ejercicio.
+         
+    */
+    public void pista(){
 		bool disponible = false;
 		if (Persistencia.sistema.actual.cantidadAyudas > 0) {
 			if (pregunta1 != null) {		
@@ -395,12 +422,34 @@ public class Actividad3_Logica : MonoBehaviour {
 
 	}
 
-	IEnumerator ayudaConcepto(){
+    /*Nombre del Metodo: reanudarActividadContenido
+      Entradas: ninguna
+      Salidas: Void
+      Descripcion: una vez se finaliza la ayuda de contenido, esta envia un mensaje a la actividad
+                   para que se reanude.
+         
+    */
+    public static void reanudarActividadContenido()
+    {
+        reanudarActividad = true;
+
+    }
+    /*Nombre del Metodo: ayudaConcepto
+      Entradas: ninguna
+      Salidas: IEnumerator
+      Descripcion: este metodo se ejecuta automaticamente una vez se llegue al tiempo promedio para
+                    resolver una actividad. si el usuario no ha resuleto la actividad; se le muestra 
+                    una ayuda de contenido que lo oriente a encontrar la solucion al ejercicio.
+         
+    */
+    IEnumerator ayudaConcepto(){
 		while (true) {
 			float tiempo = Time.time - Persistencia.sistema.tiempoActual;
-			if (tiempo > 50.47f) {
-				Debug.Log ("Ayuda concepto!!!!");
-				yield break;
+			if (tiempo > 50.47f) {//50.47
+                uiAyudaContenido.SetActive(true);
+                Time.timeScale = 0;
+                cambiarEstadoDisparo(false);
+                yield break;
 			}
 			yield return new WaitForSeconds(1f);
 		}
