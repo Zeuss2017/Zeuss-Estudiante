@@ -7,11 +7,13 @@ public class TiendaController : MonoBehaviour {
 
     // Use this for initialization
 
+    public GameObject avatar0;
     public GameObject avatar1;
     public GameObject avatar2;
     public GameObject avatar3;
     public GameObject avatar4;
     public Text monedas;
+    public Text pistas;
     private int contadorAvatar;
     private int precioA1=20;
     private int precioA2=50;
@@ -25,32 +27,57 @@ public class TiendaController : MonoBehaviour {
     void Start () {
         //monedasUsuario = int.Parse(monedas.GetComponent<Text>().text);
 		monedas.GetComponent<Text>().text = Persistencia.sistema.actual.monedas.ToString();
+        pistas.GetComponent<Text>().text = Persistencia.sistema.actual.cantidadAyudas.ToString();
         avatar1.SendMessage("AsignarPrecio", precioA1);
         avatar2.SendMessage("AsignarPrecio", precioA2);
         avatar3.SendMessage("AsignarPrecio", precioA3);
         avatar4.SendMessage("AsignarPrecio", precioA4);
-		avatar1.SendMessage("AvatarComprado", false);
-		avatar2.SendMessage("AvatarComprado", false);
-		avatar3.SendMessage("AvatarComprado", false);
-		avatar4.SendMessage("AvatarComprado", false);
-               
-		foreach (int i in Persistencia.sistema.actual.avataresComprados) {
-			if (i == 1) {
+        Persistencia.sistema.actual.avataresComprados.Add(0);
+        Persistencia.sistema.actual.avatar = 0;
+        Persistencia.Save();
+
+        foreach (int i in Persistencia.sistema.actual.avataresComprados) {
+            if (i == 0)
+            {
+                Debug.Log("comprado");
+                avatar0.SendMessage("AvatarComprado", true);
+
+            }
+            if (i == 1) {
 				avatar1.SendMessage("AvatarComprado", true);
-			}
-			if (i == 2) {
+            }
+            else
+            {
+                avatar1.SendMessage("AvatarComprado", false);
+
+            }
+            if (i == 2) {
 				avatar2.SendMessage("AvatarComprado", true);
-			}
-			if (i == 3) {
+            }else
+            {
+                avatar2.SendMessage("AvatarComprado", false);
+            }
+            if (i == 3) {
 				avatar3.SendMessage("AvatarComprado", true);
-			}
-			if (i == 4) {
+            }
+            else
+            {
+                avatar3.SendMessage("AvatarComprado", false);
+
+            }
+            if (i == 4) {
 				avatar4.SendMessage("AvatarComprado", true);
-			}
-		}
-		avatar1.SetActive(true);
-		avatar1.SendMessage("mostrarAvatar");
-        contadorAvatar++;
+            }
+            else
+            {
+                avatar4.SendMessage("AvatarComprado", false);
+
+            }
+        }
+        avatar0.SetActive(true);
+        avatar0.SendMessage("mostrarAvatar");
+        //contadorAvatar++;
+        avatar1.SetActive(false);
         avatar2.SetActive(false);
         avatar3.SetActive(false);
         avatar4.SetActive(false);
@@ -62,7 +89,17 @@ public class TiendaController : MonoBehaviour {
         
         switch (contadorAvatar)
         {
+            case 0:
+                avatar0.SetActive(true);
+                avatar0.SendMessage("mostrarAvatar");
+                avatar1.SetActive(false);
+                avatar2.SetActive(false);
+                avatar3.SetActive(false);
+                avatar4.SetActive(false);
+
+                break;
             case 1:
+                avatar0.SetActive(false);
                 avatar1.SetActive(true);
                 avatar1.SendMessage("mostrarAvatar");
                 avatar2.SetActive(false);
@@ -71,6 +108,7 @@ public class TiendaController : MonoBehaviour {
                 
                 break;
             case 2:
+                avatar0.SetActive(false);
                 avatar1.SetActive(false);
                 avatar2.SetActive(true);
                 avatar2.SendMessage("mostrarAvatar");
@@ -78,6 +116,7 @@ public class TiendaController : MonoBehaviour {
                 avatar4.SetActive(false);
                 break;
             case 3:
+                avatar0.SetActive(false);
                 avatar1.SetActive(false);
                 avatar2.SetActive(false);
                 avatar3.SetActive(true);
@@ -85,6 +124,7 @@ public class TiendaController : MonoBehaviour {
                 avatar4.SetActive(false);
                 break;
             case 4:
+                avatar0.SetActive(false);
                 avatar1.SetActive(false);
                 avatar2.SetActive(false);
                 avatar3.SetActive(false);
@@ -110,7 +150,7 @@ public class TiendaController : MonoBehaviour {
     {
         if (contadorAvatar == 4)
         {
-            contadorAvatar = 1;
+            contadorAvatar = 0;
         }
         else
         {
@@ -119,7 +159,7 @@ public class TiendaController : MonoBehaviour {
     }
     public void DecrementarContador()
     {
-        if (contadorAvatar == 1)
+        if (contadorAvatar == 0)
         {
             contadorAvatar = 4;
         }
@@ -135,7 +175,33 @@ public class TiendaController : MonoBehaviour {
     {
 		Application.LoadLevel("Intermedia");
     }
-
+    public void SeleccionarAvatar()
+    {
+        switch (contadorAvatar)
+        {
+            case 0:
+                Persistencia.sistema.actual.avatar = 0;
+                Persistencia.Save();
+                break;
+            case 1:
+                Persistencia.sistema.actual.avatar = 1;
+                Persistencia.Save();
+                break;
+            case 2:
+                Persistencia.sistema.actual.avatar = 2;
+                Persistencia.Save();
+                break;
+            case 3:
+                Persistencia.sistema.actual.avatar = 3;
+                Persistencia.Save();
+                break;
+            case 4:
+                Persistencia.sistema.actual.avatar = 4;
+                Persistencia.Save();
+                break;
+        }
+    }
+    
     public void ComprarAvatar()
     {
         switch (contadorAvatar)

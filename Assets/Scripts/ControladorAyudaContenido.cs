@@ -46,7 +46,7 @@ public class ControladorAyudaContenido : MonoBehaviour {
     {
         switch (numeroAvatar)
         {
-            case -1:
+            case 0:
                 avatar.sprite = avatarPrincipal;
                 break;
             case 1:

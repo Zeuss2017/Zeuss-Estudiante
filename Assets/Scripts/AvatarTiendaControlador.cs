@@ -9,13 +9,14 @@ public class AvatarTiendaControlador : MonoBehaviour {
     public GameObject imagenBn;
     public GameObject imagenColor;
     public Text valor;
+    public GameObject botonSeleccionar;
     public GameObject botonComprar;
     private int precio;
     private bool comprado;
     
 
     void Start () {
- 
+        botonSeleccionar.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -33,13 +34,18 @@ public class AvatarTiendaControlador : MonoBehaviour {
     {
         if (comprado)
         {
+            Debug.Log("avatar comprado");
             imagenBn.SetActive(false);
             imagenColor.SetActive(true);
             botonComprar.SetActive(false);
+            botonSeleccionar.SetActive(true);
         }else
         {
+            Debug.Log("avatar no comprado");
+            botonSeleccionar.SetActive(false);
             imagenBn.SetActive(true);
             imagenColor.SetActive(false);
+            botonComprar.SetActive(true);
         }
     }
     public void AvatarComprado(bool c)
