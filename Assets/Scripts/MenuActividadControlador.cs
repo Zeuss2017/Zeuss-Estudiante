@@ -17,12 +17,18 @@ public class MenuActividadControlador : MonoBehaviour {
     public void ComenzarAventura()
     {
         //Application.LoadLevel("CargarPartida");
-		Application.LoadLevel("Intermedia");
+		if (Persistencia.sistema.actual.escenario.Equals ("COMIDA")) {
+			Application.LoadLevel ("IntermediaComida");
+		} else {
+			//Cambiar a piratas
+			//Application.LoadLevel ("IntermediaComida");
+			Application.LoadLevel ("IntermediaPiratas");
+		}
     }
 
     public void Tienda()
     {
-
+		Application.LoadLevel("Tienda");
     }
 
     public void DescargarEjercicios()
@@ -35,6 +41,11 @@ public class MenuActividadControlador : MonoBehaviour {
     }
     public void ConectarColegio()
     {
+		if (Persistencia.sistema.actual.idEstudiante != -1) {
+			Debug.Log ("Ya estás conectado a tu colegio");
+		} else {
+			Application.LoadLevel("ConexionColegio");
+		}
 
     }
     public void Creditos()

@@ -152,7 +152,11 @@ public class CargarActividad2 : MonoBehaviour {
         }
     }
     public void regresar(){
-        Application.LoadLevel("Intermedia");
+		if (Persistencia.sistema.actual.escenario.Equals ("COMIDA")) {
+			Application.LoadLevel ("IntermediaComida");
+		} else {
+			Application.LoadLevel ("IntermediaPiratas");
+		}
     }
 
     /*Nombre del Metodo: ReanudarActividad

@@ -21,6 +21,7 @@ public class CargarActividad1 : MonoBehaviour {
 	public bool ayudado = false;
     private static bool subioNivel = false;
     private static bool reanudarActividad = false;
+	private bool parar = false;
     public Text uiDinero;
     // Use this for initialization
     void Start () {
@@ -79,7 +80,7 @@ public class CargarActividad1 : MonoBehaviour {
             uiPausa.SetActive(false);
          }
 
-        if (gano)
+        if (gano && !parar)
         {
             Persistencia.sistema.aciertosActual++;
             Persistencia.sistema.tiempoActual = Time.time - Persistencia.sistema.tiempoActual;
@@ -94,7 +95,7 @@ public class CargarActividad1 : MonoBehaviour {
                 uiGanar.SetActive(true);
                 Time.timeScale = 0;
             }
-            
+			parar = true;
         }
         if (noGano)
         {
@@ -126,7 +127,11 @@ public class CargarActividad1 : MonoBehaviour {
         
     }
     public void regresar(){
-		Application.LoadLevel("Intermedia");
+		if (Persistencia.sistema.actual.escenario.Equals ("COMIDA")) {
+			Application.LoadLevel ("IntermediaComida");
+		} else {
+			Application.LoadLevel ("IntermediaPiratas");
+		}
 	}
     /*Nombre del Metodo: ReanudarActividad
       Entradas: Ninguna

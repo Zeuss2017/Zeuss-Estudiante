@@ -23,7 +23,7 @@ public class Actividad1_Logica : MonoBehaviour {
 			Destroy (this.gameObject);
 			Persistencia.sistema.aciertosActual++;
 			Persistencia.sistema.tiempoActual = Time.time - Persistencia.sistema.tiempoActual;
-			Persistencia.sistema.guardarEjercicio ();
+			//Persistencia.sistema.guardarEjercicio ();
             
             CargarActividad1.victoria(true);
 		} else {

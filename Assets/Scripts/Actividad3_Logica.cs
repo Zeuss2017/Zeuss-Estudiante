@@ -192,7 +192,6 @@ public class Actividad3_Logica : MonoBehaviour {
                         break;
                     case 5:
                         Persistencia.sistema.tiempoActual = Time.time - Persistencia.sistema.tiempoActual;
-                        Persistencia.sistema.guardarEjercicio();
                         idDisparo = 0;
                         int diferencia = Persistencia.sistema.guardarEjercicio();
                         if (diferencia > 0)
@@ -286,7 +285,12 @@ public class Actividad3_Logica : MonoBehaviour {
     }
 
     public void regresar(){
-		Application.LoadLevel("Intermedia");
+		if (Persistencia.sistema.actual.escenario.Equals ("COMIDA")) {
+			Application.LoadLevel ("IntermediaComida");
+		} else {
+			Application.LoadLevel ("IntermediaPiratas");
+		}
+
 	}
     
 
