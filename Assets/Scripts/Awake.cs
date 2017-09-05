@@ -97,7 +97,7 @@ public class Awake : MonoBehaviour {
         Estudiante d = new Estudiante();
         d.nombre = "Pedro";
         d.usuario = "Pebbel";
-		d.escenario = "PIRATAS";
+		d.escenario = "COMIDA";
         Persistencia.sistema.actual = d;
         Persistencia.Save();
 

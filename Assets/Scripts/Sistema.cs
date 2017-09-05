@@ -48,6 +48,7 @@ public class Sistema {
 				}
 				//Se halla un indice aleatorio de ejercicio con ese nivel
 				bool bandera = false;
+				Debug.Log ("Se elige un ejercicio entre " + ejer.Count);
 				while (bandera == false) {
 					int indice = Random.Range (0, ejer.Count);
 					int idEj = ejer.ElementAt(indice).idEjercicio;

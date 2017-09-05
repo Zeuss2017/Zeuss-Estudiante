@@ -47,8 +47,9 @@ public class Estudiante{
 		this.actividadesEstudiante.Add (a3);
 		this.ejerciciosDisponibles = new List<int>();
 		this.avataresComprados = new List<int> ();
+		this.avataresComprados.Add (0);
         this.monedas = 10;
-		this.avatar = -1;
+		this.avatar = 0;
 		this.cantidadAyudas = 2;
 		this.idEstudiante = -1;
 		this.fechaNacimiento = "1995-10-23";

@@ -20,8 +20,6 @@ public class MenuActividadControlador : MonoBehaviour {
 		if (Persistencia.sistema.actual.escenario.Equals ("COMIDA")) {
 			Application.LoadLevel ("IntermediaComida");
 		} else {
-			//Cambiar a piratas
-			//Application.LoadLevel ("IntermediaComida");
 			Application.LoadLevel ("IntermediaPiratas");
 		}
     }
@@ -157,8 +155,10 @@ public class MenuActividadControlador : MonoBehaviour {
 		ej.respuestas = respuestas;
 		if (!Persistencia.sistema.actual.ejerciciosDisponibles.Contains (ej.idEjercicio)) {
 			Persistencia.sistema.actual.ejerciciosDisponibles.Add (ej.idEjercicio);
-		}
-		Persistencia.sistema.agregarEjercicio(ej , id);
+		} 
+		Persistencia.sistema.agregarEjercicio (ej, id);
+
+		Debug.Log ("Descarga ejercicio: " + ej.enunciado1);
 
 	}
 

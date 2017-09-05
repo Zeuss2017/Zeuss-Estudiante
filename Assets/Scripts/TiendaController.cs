@@ -173,7 +173,11 @@ public class TiendaController : MonoBehaviour {
 
     public void Volver()
     {
-		Application.LoadLevel("Intermedia");
+		if (Persistencia.sistema.actual.escenario.Equals ("COMIDA")) {
+			Application.LoadLevel ("IntermediaComida");
+		} else {
+			Application.LoadLevel ("IntermediaPiratas");
+		}
     }
     public void SeleccionarAvatar()
     {

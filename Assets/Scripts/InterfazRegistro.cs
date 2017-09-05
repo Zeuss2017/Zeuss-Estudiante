@@ -164,8 +164,7 @@ public class InterfazRegistro : MonoBehaviour {
                     Persistencia.sistema.actual.nombreCurso = "";
                     Persistencia.sistema.actual.fechaNacimiento = seldia + "/" + selmes + "/" + selano;
 					//QUITAR CUANDO ESTÉ PANTALLA DE ELEGIR ESCENARIO
-					Persistencia.sistema.actual.escenario = "PIRATAS";
-                    Application.LoadLevel("Intermedia");
+                    Application.LoadLevel("Escenario");
 
                     //Application.LoadLevel("");   conectar a pantalla de preferencias
                 }

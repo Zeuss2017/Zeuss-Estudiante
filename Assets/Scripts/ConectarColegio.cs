@@ -229,9 +229,8 @@ public class ConectarColegio : MonoBehaviour {
 		if (jsonResponse != null && !jsonResponse.Equals ("")) {			
 			Debug.Log (jsonResponse);
 			Persistencia.sistema.actual.idEstudiante = int.Parse (jsonResponse);
-			Persistencia.Save ();
 			Debug.Log ("Exito en la creación");
-			Application.LoadLevel("Intermedia");
+			Application.LoadLevel("Escenario");
 		}else{
 			Debug.Log ("Error en la creación");
 		}
