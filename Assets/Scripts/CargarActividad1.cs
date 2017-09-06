@@ -14,6 +14,7 @@ public class CargarActividad1 : MonoBehaviour {
 	public GameObject enunciado;
     public GameObject uiSubirNivel;
     public GameObject uiAyudaContenido;
+    public GameObject uiSinPistas;
     public enum GameState { Inicio, Ejecucion, Pausa };
     public static GameState gameState = GameState.Inicio;
     private static bool gano ;
@@ -32,6 +33,7 @@ public class CargarActividad1 : MonoBehaviour {
         uiNuevoIntento.SetActive(false);
         uiSubirNivel.SetActive(false);
         uiAyudaContenido.SetActive(false);
+        uiSinPistas.SetActive(false);
         gameState = GameState.Inicio;
         Time.timeScale = 1;
 		uiDinero.text =  Persistencia.sistema.actual.monedas.ToString();
@@ -126,6 +128,22 @@ public class CargarActividad1 : MonoBehaviour {
         uiNuevoIntento.SetActive(false);
         
     }
+    /*Nombre del Metodo: MostrarSinPistas
+      Entradas: Ninguna
+      Salidas: IEnumerator
+      Descripcion: Cuando el usuario no tiene pistas y desea usar una
+                   se le muestra la excepcion que dura aproximadamente 1 segundo en pantalla.
+         
+    */
+    IEnumerator mostrarSinPistas()
+    {
+        uiSinPistas.SetActive(true);
+        Time.timeScale = 0.0000001f;
+        yield return new WaitForSeconds(1 * Time.timeScale);
+        Time.timeScale = 1;
+        uiSinPistas.SetActive(false);
+
+    }
     public void regresar(){
 		if (Persistencia.sistema.actual.escenario.Equals ("COMIDA")) {
 			Application.LoadLevel ("IntermediaComida");
@@ -218,9 +236,8 @@ public class CargarActividad1 : MonoBehaviour {
 				Persistencia.sistema.actual.cantidadAyudas--;
 				ayudado = true;
 			} else {
-				//Quitar comentario
-				EditorUtility.DisplayDialog ("Advertencia", "No tienes pistas disponibles!", "Ok");
-			}
+                StartCoroutine(mostrarSinPistas());
+            }
 		}
 	}
     /*Nombre del Metodo: reanudarActividadContenido

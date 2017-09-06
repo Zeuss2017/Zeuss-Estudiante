@@ -22,6 +22,8 @@ public class Actividad3_Logica : MonoBehaviour {
     public GameObject uiNuevoIntento;
     public GameObject uiSubirNivel;
     public GameObject uiAyudaContenido;
+    public GameObject uiSinPistas;
+
     private static bool reanudarActividad = false;
     public enum GameState { Inicio, Ejecucion, Pausa };
     public static GameState gameState ;
@@ -41,6 +43,7 @@ public class Actividad3_Logica : MonoBehaviour {
         respuesta1.SetActive(false);
         respuesta2.SetActive(false);
         respuesta3.SetActive(false);
+        uiSinPistas.SetActive(false);
         canon1.SetActive(false);
         canon2.SetActive(false);
         canon3.SetActive(false);
@@ -250,6 +253,22 @@ public class Actividad3_Logica : MonoBehaviour {
         cambiarEstadoDisparo(true);
         Time.timeScale = 1;
     }
+    /*Nombre del Metodo: MostrarSinPistas
+      Entradas: Ninguna
+      Salidas: IEnumerator
+      Descripcion: Cuando el usuario no tiene pistas y desea usar una
+                   se le muestra la excepcion que dura aproximadamente 1 segundo en pantalla.
+         
+    */
+    IEnumerator mostrarSinPistas()
+    {
+        uiSinPistas.SetActive(true);
+        Time.timeScale = 0.0000001f;
+        yield return new WaitForSeconds(1 * Time.timeScale);
+        Time.timeScale = 1;
+        uiSinPistas.SetActive(false);
+
+    }
     /*Nombre del Metodo: PausarActividad
       Entradas: Ninguna
       Salidas: Void
@@ -420,9 +439,8 @@ public class Actividad3_Logica : MonoBehaviour {
 			}
 			Persistencia.sistema.actual.cantidadAyudas--;
 		} else {
-			//No tiene pistas disponibles
-			EditorUtility.DisplayDialog ("Advertencia", "No tienes pistas disponibles!", "Ok");
-		}
+            StartCoroutine(mostrarSinPistas());
+        }
 
 	}
 

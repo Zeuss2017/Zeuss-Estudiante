@@ -14,6 +14,7 @@ public class CargarActividad2 : MonoBehaviour {
     public GameObject uiSubirNivel;
     public GameObject uiNuevoIntento;
     public GameObject uiAyudaContenido;
+    public GameObject uiSinPistas;
     public enum GameState { Inicio, Ejecucion , Pausa};
     public static GameState gameState = GameState.Inicio;
     public int cantidadGlobos;
@@ -32,6 +33,7 @@ public class CargarActividad2 : MonoBehaviour {
     void Start () {
         uiPausa.SetActive(false);
         uiGanar.SetActive(false);
+        uiSinPistas.SetActive(false);
         uiNuevoIntento.SetActive(false);
         uiSubirNivel.SetActive(false);
         uiAyudaContenido.SetActive(false);
@@ -134,6 +136,22 @@ public class CargarActividad2 : MonoBehaviour {
         Time.timeScale = 1;
         uiNuevoIntento.SetActive(false);
         cambiarEstadoGlobos(false);
+    }
+    /*Nombre del Metodo: MostrarSinPistas
+      Entradas: Ninguna
+      Salidas: IEnumerator
+      Descripcion: Cuando el usuario no tiene pistas y desea usar una
+                   se le muestra la excepcion que dura aproximadamente 1 segundo en pantalla.
+         
+    */
+    IEnumerator mostrarSinPistas()
+    {
+        uiSinPistas.SetActive(true);
+        Time.timeScale = 0.0000001f;
+        yield return new WaitForSeconds(1 * Time.timeScale);
+        Time.timeScale = 1;
+        uiSinPistas.SetActive(false);
+
     }
     /*Nombre del Metodo: cambiarEstadoGlobos
       Entradas: booleano pausado
@@ -273,9 +291,8 @@ public class CargarActividad2 : MonoBehaviour {
 			}
 			Persistencia.sistema.actual.cantidadAyudas--;
 		} else {
-			//Quitar comentario
-			EditorUtility.DisplayDialog ("Advertencia", "No tienes pistas disponibles!", "Ok");
-		}
+            StartCoroutine(mostrarSinPistas());
+        }
 
 	}
     /*Nombre del Metodo: reanudarActividadContenido
