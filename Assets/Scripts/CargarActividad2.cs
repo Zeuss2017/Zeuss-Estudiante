@@ -59,6 +59,7 @@ public class CargarActividad2 : MonoBehaviour {
             uiInstrucciones.SetActive(false);
 			Ejercicio ej = Persistencia.sistema.obtenerEjercicio1();
 			Persistencia.sistema.idEjercicioActual = ej.idEjercicio;
+			Debug.Log ("Cantidad globos: " + ej.respuestas.Count);
 			for (int i = 0; i < ej.respuestas.Count; i++)
             {
                 var position = new Vector2(Random.Range(-3, 3), Random.Range(-3, 3));
@@ -326,6 +327,16 @@ public class CargarActividad2 : MonoBehaviour {
 			}
 			yield return new WaitForSeconds(1f);
 		}
+	}
+
+
+	public void siguiente(){
+		if (Persistencia.sistema.actual.escenario.Equals ("COMIDA")) {
+			Application.LoadLevel ("GlobosComida");
+		} else {
+			Application.LoadLevel ("GlobosPiratas");
+		}
+
 	}
    
 }

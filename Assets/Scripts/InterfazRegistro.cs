@@ -84,12 +84,12 @@ public class InterfazRegistro : MonoBehaviour {
         int valor = dropdia.value;
         string seldia = dropdia.options[valor].text;
         valor = dropmes.value;
-        string selmes = dropdia.options[valor].text;
+        string selmes = dropmes.options[valor].text;
         valor = dropano.value;
-        string selano = dropdia.options[valor].text;
-        if (regNombre.IsMatch(nombre.text))
+        string selano = dropano.options[valor].text;
+		if (regNombre.IsMatch(nombre.text) && !nombre.text.Equals(""))
         {
-            if (regApodo.IsMatch(apodo.text))
+			if (regApodo.IsMatch(apodo.text) && !apodo.text.Equals(""))
             {
                 bool bandera = true;
                 foreach(Estudiante e in Persistencia.sistema.estudiantes)
@@ -140,9 +140,9 @@ public class InterfazRegistro : MonoBehaviour {
         string selmes = dropmes.options[valor].text;
         valor = dropano.value;
         string selano = dropano.options[valor].text;
-        if (regNombre.IsMatch(nombre.text))
+		if (regNombre.IsMatch(nombre.text) && !nombre.text.Equals(""))
         {
-            if (regApodo.IsMatch(apodo.text))
+			if (regApodo.IsMatch(apodo.text) && !apodo.text.Equals(""))
             {
                 bool bandera = true;
                 foreach (Estudiante e in Persistencia.sistema.estudiantes)
@@ -162,11 +162,8 @@ public class InterfazRegistro : MonoBehaviour {
                     Persistencia.sistema.actual.idEstudiante = -1;
                     Persistencia.sistema.actual.nombreColegio = "";
                     Persistencia.sistema.actual.nombreCurso = "";
-                    Persistencia.sistema.actual.fechaNacimiento = seldia + "/" + selmes + "/" + selano;
-					//QUITAR CUANDO ESTÉ PANTALLA DE ELEGIR ESCENARIO
+                    Persistencia.sistema.actual.fechaNacimiento = seldia + "-" + selmes + "-" + selano;
                     Application.LoadLevel("Escenario");
-
-                    //Application.LoadLevel("");   conectar a pantalla de preferencias
                 }
                 else
                 {

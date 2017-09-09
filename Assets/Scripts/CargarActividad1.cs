@@ -85,7 +85,9 @@ public class CargarActividad1 : MonoBehaviour {
         if (gano && !parar)
         {
             Persistencia.sistema.aciertosActual++;
+			Debug.Log ("Tiempo api: " + Time.time + " Tiempo inicio: "  + Persistencia.sistema.tiempoActual);
             Persistencia.sistema.tiempoActual = Time.time - Persistencia.sistema.tiempoActual;
+
             int diferencia = Persistencia.sistema.guardarEjercicio();
             if (diferencia > 0)
             {
@@ -270,5 +272,14 @@ public class CargarActividad1 : MonoBehaviour {
 			}
 			yield return new WaitForSeconds(1f);
 		}
+	}
+
+	public void siguiente(){
+		if (Persistencia.sistema.actual.escenario.Equals ("COMIDA")) {
+			Application.LoadLevel ("ActividadSaltoComida");
+		} else {
+			Application.LoadLevel ("ActividadSaltoPiratas");
+		}
+
 	}
 }

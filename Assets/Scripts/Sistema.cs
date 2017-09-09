@@ -201,7 +201,7 @@ public class Sistema {
 				if (a.nivel > a.nivelMaximo) {
 					a.nivelMaximo = a.nivel;
 				}
-				if (a.nivel > 10) {
+				if (a.nivel > 10 || (a.idActividad == 3 && a.nivel > 7) ) {
 					a.completado = 1;
 					a.nivel = 1;
 				}

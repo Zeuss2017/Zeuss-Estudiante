@@ -204,6 +204,7 @@ public class ConectarColegio : MonoBehaviour {
 
 	IEnumerator registrarEstudiante(float sel){
 		string[] lista = Persistencia.sistema.actual.nombre.Split (' ');
+		int sele = (int) sel;
 		string nombre = "";
 		foreach (string s in lista) {
 			nombre = nombre + s + "%20";
@@ -214,7 +215,7 @@ public class ConectarColegio : MonoBehaviour {
 			user = user + s + "%20";
 		}
 		string cad = "http://174.138.36.65:8080/Zeuss/webresources/estudiante/crear/" + nombre + "/" + user + "/" +
-		             Persistencia.sistema.actual.fechaNacimiento + "/" + sel;
+		             Persistencia.sistema.actual.fechaNacimiento + "/" + sele;
 		Debug.Log (cad);
 		WWW w = new WWW(cad);
 		yield return w;
@@ -229,8 +230,13 @@ public class ConectarColegio : MonoBehaviour {
 		if (jsonResponse != null && !jsonResponse.Equals ("")) {			
 			Debug.Log (jsonResponse);
 			Persistencia.sistema.actual.idEstudiante = int.Parse (jsonResponse);
+			Persistencia.Save ();
 			Debug.Log ("Exito en la creación");
-			Application.LoadLevel("Escenario");
+			if (Persistencia.sistema.actual.escenario.Equals ("NO")) {
+				Application.LoadLevel ("Escenario");
+			} else {
+				Application.LoadLevel ("MenuActividades");
+			}
 		}else{
 			Debug.Log ("Error en la creación");
 		}

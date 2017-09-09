@@ -21,9 +21,6 @@ public class Actividad1_Logica : MonoBehaviour {
 		if (correcta == 1) {
 			//GANA ACTIVIDAD 1
 			Destroy (this.gameObject);
-			Persistencia.sistema.aciertosActual++;
-			Persistencia.sistema.tiempoActual = Time.time - Persistencia.sistema.tiempoActual;
-			//Persistencia.sistema.guardarEjercicio ();
             
             CargarActividad1.victoria(true);
 		} else {

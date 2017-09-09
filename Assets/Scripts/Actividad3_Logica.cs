@@ -413,7 +413,6 @@ public class Actividad3_Logica : MonoBehaviour {
 				}
 				Destroy (canon1);
 				pregunta2.SendMessage("activarDisparo");
-				Persistencia.sistema.erroresActual++;
 			} else if (pregunta2 != null) {
 				int x = pregunta2.GetComponent<Pregunta_Control3> ().getId ();
 				if (respuesta1 != null) {
@@ -475,6 +474,15 @@ public class Actividad3_Logica : MonoBehaviour {
 			}
 			yield return new WaitForSeconds(1f);
 		}
+	}
+
+	public void siguiente(){
+		if (Persistencia.sistema.actual.escenario.Equals ("COMIDA")) {
+			Application.LoadLevel ("ShooterComida");
+		} else {
+			Application.LoadLevel ("ShooterPiratas");
+		}
+
 	}
     
 }

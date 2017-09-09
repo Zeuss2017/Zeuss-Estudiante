@@ -50,6 +50,7 @@ public class Estudiante{
 		this.avataresComprados.Add (0);
         this.monedas = 10;
 		this.avatar = 0;
+		this.escenario = "NO";
 		this.cantidadAyudas = 2;
 		this.idEstudiante = -1;
 		this.fechaNacimiento = "1995-10-23";
