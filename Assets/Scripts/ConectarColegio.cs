@@ -43,6 +43,7 @@ public class ConectarColegio : MonoBehaviour {
 		procesarCiudades(w.text);
 	}
 
+    
 	void procesarCiudades(string jsonResponse){
 		//Debug.Log(jsonResponse);
 		JSONObject jo = new JSONObject(jsonResponse);
@@ -242,5 +243,17 @@ public class ConectarColegio : MonoBehaviour {
 		}
 
 	}
+
+    public void menuPrincipal()
+    {
+        if (Persistencia.sistema.actual.escenario.Equals("NO"))
+        {
+            Application.LoadLevel("Escenario");
+        }
+        else
+        {
+            Application.LoadLevel("MenuActividades");
+        }
+    }
 
 }

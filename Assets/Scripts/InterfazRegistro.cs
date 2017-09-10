@@ -14,6 +14,11 @@ public class InterfazRegistro : MonoBehaviour {
     public Dropdown dropdia;
     public Dropdown dropmes;
     public Dropdown dropano;
+    public Sprite alertaNombre;
+    public Sprite alertaApodo;
+    public Sprite alertaApodoRepetido;
+    public Image alerta;
+    public GameObject uiAlerta;
     List<string> listadia31 = new List<string> { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
                                                     "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" };
     List<string> listadia30 = new List<string> { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
@@ -31,7 +36,7 @@ public class InterfazRegistro : MonoBehaviour {
         dropdia.ClearOptions();
         dropano.ClearOptions();
         dropmes.ClearOptions();
-
+        uiAlerta.SetActive(false);
 
         dropdia.AddOptions(listadia31);
         dropmes.AddOptions(listames);
@@ -114,21 +119,20 @@ public class InterfazRegistro : MonoBehaviour {
                 }
                 else
                 {
-					//Quitar comentario
-                    EditorUtility.DisplayDialog("Advertencia", "Este apodo ya existe en este dispositivo, escoge otro!", "Ok");
+                    StartCoroutine(mostrarAlertas(3));
                 }
                 
             }
             else
             {
-				//Quitar comentario
-                EditorUtility.DisplayDialog("Advertencia", "Pon únicamente letras y números en tu apodo", "Ok");
+                
+                StartCoroutine(mostrarAlertas(2));
             }
         }
         else
         {
-			//Quitar comentario
-            EditorUtility.DisplayDialog("Advertencia", "Pon únicamente letras en tu nombre", "Ok");
+            
+            StartCoroutine(mostrarAlertas(1));
         }
     }
 
@@ -167,21 +171,37 @@ public class InterfazRegistro : MonoBehaviour {
                 }
                 else
                 {
-					//Quitar comentario
-                    EditorUtility.DisplayDialog("Advertencia", "Este apodo ya existe en este dispositivo, escoge otro!", "Ok");
+                    StartCoroutine(mostrarAlertas(3));
                 }
 
             }
             else
             {
-				//Quitar comentario
-                EditorUtility.DisplayDialog("Advertencia", "Pon únicamente letras y números en tu apodo", "Ok");
+                StartCoroutine(mostrarAlertas(2));
             }
         }
         else
         {
-			//Quitar comentario
-            EditorUtility.DisplayDialog("Advertencia", "Pon únicamente letras en tu nombre", "Ok");
+            StartCoroutine(mostrarAlertas(1));
         }
+    }
+    IEnumerator mostrarAlertas(int num)
+    {
+        switch (num)
+        {
+            case 1:
+                alerta.sprite = alertaNombre;
+                break;
+            case 2:
+                alerta.sprite = alertaApodo;
+                break;
+            case 3:
+                alerta.sprite = alertaApodoRepetido;
+                break;
+        }
+        uiAlerta.SetActive(true);
+        yield return new WaitForSeconds( 1);
+        uiAlerta.SetActive(false);
+
     }
 }

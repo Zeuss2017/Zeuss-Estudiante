@@ -22,7 +22,12 @@ public class TiendaController : MonoBehaviour {
     private int precioPista=20;
     private int monedasUsuario;
     public GameObject uiMensajeAlerta;
-
+    public Image alerta;
+    public Sprite alertaSinMonedas;
+    public Sprite alertaCompraAvatar;
+    public Sprite alertaCompraPista;
+    public Sprite alertaSeleccionAvatar;
+    
 
     void Start () {
         //monedasUsuario = int.Parse(monedas.GetComponent<Text>().text);
@@ -35,11 +40,12 @@ public class TiendaController : MonoBehaviour {
         Persistencia.sistema.actual.avataresComprados.Add(0);
         Persistencia.sistema.actual.avatar = 0;
         Persistencia.Save();
+        
 
         foreach (int i in Persistencia.sistema.actual.avataresComprados) {
             if (i == 0)
             {
-                Debug.Log("comprado");
+                
                 avatar0.SendMessage("AvatarComprado", true);
 
             }
@@ -76,7 +82,6 @@ public class TiendaController : MonoBehaviour {
         }
         avatar0.SetActive(true);
         avatar0.SendMessage("mostrarAvatar");
-        //contadorAvatar++;
         avatar1.SetActive(false);
         avatar2.SetActive(false);
         avatar3.SetActive(false);
@@ -134,8 +139,24 @@ public class TiendaController : MonoBehaviour {
         }
 		
 	}
-    IEnumerator mostrarAlerta()
+    IEnumerator mostrarAlerta( int mensaje)
     {
+        switch (mensaje)
+        {
+            case 1:
+                alerta.sprite = alertaSinMonedas;
+                break;
+            case 2:
+                alerta.sprite = alertaCompraAvatar;
+                break;
+            case 3:
+                alerta.sprite = alertaCompraPista;
+                break;
+            case 4:
+                alerta.sprite = alertaSeleccionAvatar;
+                break;
+
+        }
         uiMensajeAlerta.SetActive(true);
         Time.timeScale = 0.0000001f;
         yield return new WaitForSeconds(1 * Time.timeScale);
@@ -186,22 +207,27 @@ public class TiendaController : MonoBehaviour {
             case 0:
                 Persistencia.sistema.actual.avatar = 0;
                 Persistencia.Save();
+                StartCoroutine(mostrarAlerta(4));
                 break;
             case 1:
                 Persistencia.sistema.actual.avatar = 1;
                 Persistencia.Save();
+                StartCoroutine(mostrarAlerta(4));
                 break;
             case 2:
                 Persistencia.sistema.actual.avatar = 2;
                 Persistencia.Save();
+                StartCoroutine(mostrarAlerta(4));
                 break;
             case 3:
                 Persistencia.sistema.actual.avatar = 3;
                 Persistencia.Save();
+                StartCoroutine(mostrarAlerta(4));
                 break;
             case 4:
                 Persistencia.sistema.actual.avatar = 4;
                 Persistencia.Save();
+                StartCoroutine(mostrarAlerta(4));
                 break;
         }
     }
@@ -220,10 +246,11 @@ public class TiendaController : MonoBehaviour {
 					Persistencia.sistema.actual.avataresComprados.Add (1);
                     Persistencia.sistema.actual.avatar = 1;
 					Persistencia.Save ();
+                    StartCoroutine(mostrarAlerta(2));
                 }
                 else
                 {
-                    StartCoroutine(mostrarAlerta());
+                    StartCoroutine(mostrarAlerta(1));
                 }
 
                 break;
@@ -237,10 +264,11 @@ public class TiendaController : MonoBehaviour {
 					Persistencia.sistema.actual.avataresComprados.Add (2);
                     Persistencia.sistema.actual.avatar = 2;
                     Persistencia.Save ();
+                    StartCoroutine(mostrarAlerta(2));
                 }
                 else
                 {
-                    StartCoroutine(mostrarAlerta());
+                    StartCoroutine(mostrarAlerta(1));
                 }
                 break;
             case 3:
@@ -253,10 +281,11 @@ public class TiendaController : MonoBehaviour {
 					Persistencia.sistema.actual.avataresComprados.Add (3);
                     Persistencia.sistema.actual.avatar = 3;
                     Persistencia.Save ();
+                    StartCoroutine(mostrarAlerta(2));
                 }
                 else
                 {
-                    StartCoroutine(mostrarAlerta());
+                    StartCoroutine(mostrarAlerta(1));
                 }
                 break;
             case 4:
@@ -269,10 +298,11 @@ public class TiendaController : MonoBehaviour {
 					Persistencia.sistema.actual.avataresComprados.Add (4);
                     Persistencia.sistema.actual.avatar = 4;
                     Persistencia.Save ();
+                    StartCoroutine(mostrarAlerta(2));
                 }
                 else
                 {
-                    StartCoroutine(mostrarAlerta());
+                    StartCoroutine(mostrarAlerta(1));
                 }
                 break;
         }
@@ -286,10 +316,11 @@ public class TiendaController : MonoBehaviour {
 			monedas.GetComponent<Text>().text = Persistencia.sistema.actual.monedas.ToString();
 			Persistencia.sistema.actual.cantidadAyudas++;
 			Persistencia.Save ();
+            StartCoroutine(mostrarAlerta(3));
         }
         else
         {
-            StartCoroutine(mostrarAlerta());
+            StartCoroutine(mostrarAlerta(1));
         }
     }
 

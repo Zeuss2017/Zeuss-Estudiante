@@ -1,20 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuActividadControlador : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public GameObject uiAlerta;
+    public Image alerta;
+    public Sprite alertaConexionColegio;
+    public Sprite alertaConexionRealizada;
+    public Sprite alertaEjerciciosEnviados;
+    public Sprite alertaEjerciciosDescargados;
 
-    public void ComenzarAventura()
+    public void Start()
+    {
+        uiAlerta.SetActive(false);
+    }
+	public void ComenzarAventura()
     {
         //Application.LoadLevel("CargarPartida");
 		if (Persistencia.sistema.actual.escenario.Equals ("COMIDA")) {
@@ -40,8 +42,9 @@ public class MenuActividadControlador : MonoBehaviour {
     public void ConectarColegio()
     {
 		if (Persistencia.sistema.actual.idEstudiante != -1) {
-			Debug.Log ("Ya estás conectado a tu colegio");
-		} else {
+            StartCoroutine(mostrarAlertas(2));
+
+        } else {
 			Application.LoadLevel("ConexionColegio");
 		}
 
@@ -51,12 +54,7 @@ public class MenuActividadControlador : MonoBehaviour {
 
     }
 
-
-
-
-
-
-
+    
 	IEnumerator descargarEjercicios(){
 		if (Persistencia.sistema.actual.idEstudiante != -1) {
 			WWW w = new WWW ("http://174.138.36.65:8080/Zeuss/webresources/estudiante/ejercicios/" + Persistencia.sistema.actual.idEstudiante /*+ playerIPAddress*/);
@@ -66,8 +64,9 @@ public class MenuActividadControlador : MonoBehaviour {
 
 			descargar(w.text);
 		} else {
-			Debug.Log ("Conectate primero con tu colegio");
-		}
+            StartCoroutine(mostrarAlertas(1));
+
+        }
 	}
 
 	void descargar(string jsonResponse){
@@ -123,8 +122,8 @@ public class MenuActividadControlador : MonoBehaviour {
 
 			descargarRespuestas(w.text , ej, id);
 		} else {
-			Debug.Log ("Conectate primero con tu colegio");
-		}
+            StartCoroutine(mostrarAlertas(1));
+        }
 	}
 
 	void descargarRespuestas(string jsonResponse , Ejercicio ej, int id){
@@ -196,14 +195,36 @@ public class MenuActividadControlador : MonoBehaviour {
 				}
 			}
 
-			Debug.Log ("Éxito enviando los resultados!!");
-			yield return new WaitForSeconds (1f);
+            StartCoroutine(mostrarAlertas(4));
+            yield return new WaitForSeconds (1f);
 
 		} else {
-			Debug.Log ("Conectate primero con tu colegio");
-		}
+            StartCoroutine(mostrarAlertas(1));
+        }
 	}
+    
+    IEnumerator mostrarAlertas(int num)
+    {
+        switch (num)
+        {
+            case 1:
+                alerta.sprite = alertaConexionColegio;
+                break;
+            case 2:
+                alerta.sprite = alertaConexionRealizada;
+                break;
+            case 3:
+                alerta.sprite = alertaEjerciciosDescargados;
+                break;
+            case 4:
+                alerta.sprite = alertaEjerciciosEnviados;
+                break;
+        }
+        uiAlerta.SetActive(true);
+        yield return new WaitForSeconds(1);
+        uiAlerta.SetActive(false);
 
+    }
 
 
 

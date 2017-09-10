@@ -66,7 +66,9 @@ public class CargarActividad1 : MonoBehaviour {
             Persistencia.sistema.erroresActual = 0;
             Persistencia.sistema.tiempoActual = Time.time;
 			StartCoroutine(ayudaConcepto());
+           
         }
+
         if (gameState == GameState.Ejecucion && Input.GetKeyDown("p"))
         {
             uiPausa.SetActive(true);
