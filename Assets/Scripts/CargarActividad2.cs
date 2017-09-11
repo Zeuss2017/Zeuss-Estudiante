@@ -31,6 +31,7 @@ public class CargarActividad2 : MonoBehaviour {
    
   
     void Start () {
+        
         uiPausa.SetActive(false);
         uiGanar.SetActive(false);
         uiSinPistas.SetActive(false);
@@ -46,6 +47,26 @@ public class CargarActividad2 : MonoBehaviour {
         Time.timeScale = 1;
 		uiDinero.text =  Persistencia.sistema.actual.monedas.ToString();
         ControladorAyudaContenido.actividadReanudar(2);
+        foreach (ActividadEstudiante e in Persistencia.sistema.actual.actividadesEstudiante.ToArray())
+        {
+            if (e.idActividad == 1)
+            {
+                if (e.completado==1)
+                {
+                    if (Persistencia.sistema.actual.escenario.Equals("COMIDA"))
+                    {
+                        Application.LoadLevel("IntermediaComida");
+                        IntermedioActividades.desbloqueado();
+                    }
+                    else
+                    {
+                        Application.LoadLevel("IntermediaPiratas");
+                        IntermedioActividadesPiratas.desbloqueado();
+                    }
+                }
+            }
+            
+        }
     }
 
 	void Update () {
@@ -59,7 +80,6 @@ public class CargarActividad2 : MonoBehaviour {
             uiInstrucciones.SetActive(false);
 			Ejercicio ej = Persistencia.sistema.obtenerEjercicio1();
 			Persistencia.sistema.idEjercicioActual = ej.idEjercicio;
-			Debug.Log ("Cantidad globos: " + ej.respuestas.Count);
 			for (int i = 0; i < ej.respuestas.Count; i++)
             {
                 var position = new Vector2(Random.Range(-3, 3), Random.Range(-3, 3));

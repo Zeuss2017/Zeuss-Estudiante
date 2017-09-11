@@ -38,7 +38,27 @@ public class CargarActividad1 : MonoBehaviour {
         Time.timeScale = 1;
 		uiDinero.text =  Persistencia.sistema.actual.monedas.ToString();
         ControladorAyudaContenido.actividadReanudar(1);
-	}
+        foreach (ActividadEstudiante e in Persistencia.sistema.actual.actividadesEstudiante.ToArray())
+        {
+            if (e.idActividad == 2)
+            {
+                if (e.completado == 1)
+                {
+                    if (Persistencia.sistema.actual.escenario.Equals("COMIDA"))
+                    {
+                        Application.LoadLevel("IntermediaComida");
+                        IntermedioActividades.desbloqueado();
+                    }
+                    else
+                    {
+                        Application.LoadLevel("IntermediaPiratas");
+                        IntermedioActividadesPiratas.desbloqueado();
+                    }
+                }
+            }
+
+        }
+    }
 
     // Update is called once per frame
     void Update()
