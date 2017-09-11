@@ -26,6 +26,7 @@ public class CargarActividad2 : MonoBehaviour {
     private static bool subioNivel = false;
     private static bool reanudarActividad = false;
     public Text uiDinero;
+    private static bool finalizo=false; 
     
           
    
@@ -47,26 +48,32 @@ public class CargarActividad2 : MonoBehaviour {
         Time.timeScale = 1;
 		uiDinero.text =  Persistencia.sistema.actual.monedas.ToString();
         ControladorAyudaContenido.actividadReanudar(2);
-        foreach (ActividadEstudiante e in Persistencia.sistema.actual.actividadesEstudiante.ToArray())
+        if (!finalizo)
         {
-            if (e.idActividad == 1)
+            foreach (ActividadEstudiante e in Persistencia.sistema.actual.actividadesEstudiante.ToArray())
             {
-                if (e.completado==1)
+                if (e.idActividad == 1)
                 {
-                    if (Persistencia.sistema.actual.escenario.Equals("COMIDA"))
+                    if (e.completado == 1)
                     {
-                        Application.LoadLevel("IntermediaComida");
-                        IntermedioActividades.desbloqueado();
-                    }
-                    else
-                    {
-                        Application.LoadLevel("IntermediaPiratas");
-                        IntermedioActividadesPiratas.desbloqueado();
+                        if (Persistencia.sistema.actual.escenario.Equals("COMIDA"))
+                        {
+                            Application.LoadLevel("IntermediaComida");
+                            IntermedioActividades.desbloqueado();
+                            finalizo = true;
+                        }
+                        else
+                        {
+                            finalizo = true;
+                            Application.LoadLevel("IntermediaPiratas");
+                            IntermedioActividadesPiratas.desbloqueado();
+                        }
                     }
                 }
+
             }
-            
         }
+        
     }
 
 	void Update () {
