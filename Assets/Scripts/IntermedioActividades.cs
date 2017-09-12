@@ -21,11 +21,6 @@ public class IntermedioActividades : MonoBehaviour {
     private bool actividad2B;
     private bool actividad3B;
     void Start () {
-        if (Time.timeScale == 0)
-        {
-            Time.timeScale = 1;
-        }
-
         uiAlerta.SetActive(false);
         actividad1.sprite = actividad1Normal;
         actividad2.sprite = actividad2Bloqueada;

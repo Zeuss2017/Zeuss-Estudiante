@@ -5,11 +5,9 @@ using UnityEngine.UI;
 
 public class IntermedioActividadesPiratas : MonoBehaviour {
 
-	// Use this for initialization
-
-        public Image actividad1;
-        public Image actividad2;
-        public Image actividad3;
+	public Image actividad1;
+    public Image actividad2;
+    public Image actividad3;
     public Image alerta;
     public GameObject uiAlerta;
     public Sprite actividad2Bloqueada;
@@ -23,12 +21,7 @@ public class IntermedioActividadesPiratas : MonoBehaviour {
     private bool actividad2B;
     private bool actividad3B;
     void Start () {
-        
-        if (Time.timeScale == 0)
-        {
-            Time.timeScale = 1;
-        }
-        
+       
         uiAlerta.SetActive(false);
         actividad1.sprite = actividad1Normal;
         actividad2.sprite = actividad2Bloqueada;
@@ -55,7 +48,7 @@ public class IntermedioActividadesPiratas : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
+	
 	void Update () {
         if (recienDesbloqueado)
         {

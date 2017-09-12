@@ -252,6 +252,7 @@ public class CargarActividad2 : MonoBehaviour {
     public void RegresarMenuPrincipal()
     {
 		Application.LoadLevel("MenuActividades");
+        Time.timeScale = 1;
     }
     /*Nombre del Metodo: Tienda
       Entradas: Ninguna
@@ -262,6 +263,7 @@ public class CargarActividad2 : MonoBehaviour {
     public void Tienda()
     {
 		Application.LoadLevel("Tienda");
+        Time.timeScale = 1;
     }
     /*Nombre del Metodo: victoria
       Entradas: victoria

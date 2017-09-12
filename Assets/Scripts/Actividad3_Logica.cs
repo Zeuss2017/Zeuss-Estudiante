@@ -291,6 +291,7 @@ public class Actividad3_Logica : MonoBehaviour {
     public void RegresarMenuPrincipal()
     {
 		Application.LoadLevel("MenuActividades");
+        Time.timeScale = 1;
     }
     /*Nombre del Metodo: Tienda
       Entradas: Ninguna
@@ -301,6 +302,7 @@ public class Actividad3_Logica : MonoBehaviour {
     public void Tienda()
     {
 		Application.LoadLevel("Tienda");
+        Time.timeScale = 1;
     }
 
     public void regresar(){
