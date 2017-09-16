@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class Awake : MonoBehaviour {
 
+	public AudioClip sonido;
+	public AudioSource audioSource;
+
 	// Use this for initialization
 	void Start () {
+
+		audioSource.loop = true;
+		audioSource.clip = sonido;
+		audioSource.volume = 0.1f;
+		audioSource.Play();
+
+
 		Persistencia.sistema = new Sistema ();
 		Persistencia.sistema.actual = new Estudiante ();
 

@@ -20,6 +20,10 @@ public class IntermedioActividades : MonoBehaviour {
     public static bool recienDesbloqueado;
     private bool actividad2B;
     private bool actividad3B;
+	public AudioSource audioSource;
+	public AudioClip sonidoDesbloquear;
+
+
     void Start () {
         uiAlerta.SetActive(false);
         actividad1.sprite = actividad1Normal;
@@ -50,6 +54,10 @@ public class IntermedioActividades : MonoBehaviour {
 	void Update () {
         if (recienDesbloqueado)
         {
+			audioSource.clip = sonidoDesbloquear;
+			audioSource.volume = 1f;
+			audioSource.Play();
+			StartCoroutine (subirResultados());
             StartCoroutine(mostrarAlertas(2));
             recienDesbloqueado = false;
         }
@@ -106,8 +114,42 @@ public class IntermedioActividades : MonoBehaviour {
 
         }
         uiAlerta.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(4f);
         uiAlerta.SetActive(false);
 
     }
+
+	IEnumerator subirResultados(){
+		if (Persistencia.sistema.actual.idEstudiante != -1) {
+			foreach (ActividadEstudiante a in Persistencia.sistema.actual.actividadesEstudiante) {
+				int tiempo = (int)a.tiempo;
+				WWW w = new WWW ("http://174.138.36.65:8080/Zeuss/webresources/actividadestudiante/subirAct/" + a.idActividad + "/" + Persistencia.sistema.actual.idEstudiante
+					+ "/" + a.aciertos + "/" + a.errores + "/" + tiempo + "/" + a.completado + "/" + a.nivelMaximo);
+				yield return w;
+				foreach (EjercicioEstudiante e in a.ejerciciosEstudiante) {
+					if (e.enviado == false) {
+						int nivel = -1;
+						int tiempo2 = (int)e.tiempo;
+						foreach (Actividad ac in Persistencia.sistema.actividades) {
+							if (ac.idActividad == a.idActividad) {
+								foreach (Ejercicio ej in ac.ejercicios) {
+									if (ej.idEjercicio == e.idEjercicio) {
+										nivel = ej.nivel;
+									}
+								}
+							}
+						}
+						WWW w2 = new WWW ("http://174.138.36.65:8080/Zeuss/webresources/ejercicioestudiante/subirEj/" + a.idActividad + "/" + Persistencia.sistema.actual.idEstudiante
+							+ "/" + e.aciertos + "/" + e.errores + "/" + tiempo2 + "/" + e.consecutivo + "/" + nivel);
+						e.enviado = true;
+						yield return w2;
+					}
+				}
+			}
+			yield return new WaitForSeconds (1f);
+
+		} else {
+		}
+	}
+
 }

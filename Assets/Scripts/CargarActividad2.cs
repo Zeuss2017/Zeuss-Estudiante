@@ -27,12 +27,23 @@ public class CargarActividad2 : MonoBehaviour {
     private static bool reanudarActividad = false;
     public Text uiDinero;
     private static bool finalizo=false; 
-    
-          
-   
+	public AudioClip sonido;
+	public AudioSource audioSource;   
+	public AudioClip sonidoExplo;
+	public static bool explota=false;
+	public static bool sonar1 = false;
+	public static bool sonar2 = false;
+	public AudioClip sonidoAyuda1;
+	public AudioClip sonidoAyuda2;
+	public bool ponerSonido = false;
   
     void Start () {
         
+		audioSource.loop = true;
+		audioSource.clip = sonido;
+		audioSource.volume = 0.51f;
+		audioSource.Play();
+
         uiPausa.SetActive(false);
         uiGanar.SetActive(false);
         uiSinPistas.SetActive(false);
@@ -58,9 +69,9 @@ public class CargarActividad2 : MonoBehaviour {
                     {
                         if (Persistencia.sistema.actual.escenario.Equals("COMIDA"))
                         {
+							finalizo = true;
                             Application.LoadLevel("IntermediaComida");
-                            IntermedioActividades.desbloqueado();
-                            finalizo = true;
+                            IntermedioActividades.desbloqueado();           
                         }
                         else
                         {
@@ -77,7 +88,26 @@ public class CargarActividad2 : MonoBehaviour {
     }
 
 	void Update () {
-
+		if (explota) {
+			audioSource.PlayOneShot (sonidoExplo, 1f);
+			explota = false;
+		}
+		if (ponerSonido) {
+			if (sonar1) {
+				audioSource.Stop ();
+				audioSource.clip = sonidoAyuda1;
+				audioSource.volume = 1f;
+				audioSource.Play ();
+				sonar1 = false;
+			}
+			if (sonar2) {
+				audioSource.Stop ();
+				audioSource.clip = sonidoAyuda2;
+				audioSource.volume = 1f;
+				audioSource.Play ();
+				sonar2 = false;
+			}
+		}
         //Inicio de la Actividad
         //Si el estado es Inicio, y da click se cambia de estado, se cargan los globos.
         if(gameState== GameState.Inicio && Input.GetMouseButtonDown(0))
@@ -117,6 +147,7 @@ public class CargarActividad2 : MonoBehaviour {
             uiPausa.SetActive(false);
             cambiarEstadoGlobos(false);
         }
+		
 
         if (gano)
         {
@@ -273,6 +304,7 @@ public class CargarActividad2 : MonoBehaviour {
     */
     public static void victoria(bool victoria)
     {
+		explota = true;
         if (victoria)
         {
             gano = true;
@@ -366,6 +398,18 @@ public class CargarActividad2 : MonoBehaviour {
 			Application.LoadLevel ("GlobosPiratas");
 		}
 
+	}
+
+
+	public static void sonarAyudaV1(){
+		sonar1 = true;
+	}
+
+	public static void sonarAyudaV2(){
+		sonar2 = true;
+	}
+	public void activarSonido(){
+		ponerSonido = true;
 	}
    
 }

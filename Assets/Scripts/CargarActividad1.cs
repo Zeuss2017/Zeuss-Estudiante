@@ -25,6 +25,14 @@ public class CargarActividad1 : MonoBehaviour {
 	private bool parar = false;
     public Text uiDinero;
     private static bool superado = false;
+	public AudioClip sonido;
+	public AudioSource audioSource;
+	public AudioClip sonidoAyuda1;
+	public AudioClip sonidoAyuda2;
+	public static bool sonar1 = false;
+	public static bool sonar2 = false;
+	public bool ponerSonido = false;
+
     // Use this for initialization
     void Start () {
         if (!superado)
@@ -53,6 +61,11 @@ public class CargarActividad1 : MonoBehaviour {
             }
         }
         
+		audioSource.loop = true;
+		audioSource.clip = sonido;
+		audioSource.volume = 0.3f;
+		audioSource.Play();
+
         gano = false;
         noGano = false;
         uiPausa.SetActive(false);
@@ -71,20 +84,85 @@ public class CargarActividad1 : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+		if (ponerSonido) {
+			if (sonar1) {
+				audioSource.Stop ();
+				audioSource.clip = sonidoAyuda1;
+				audioSource.volume = 1f;
+				audioSource.Play ();
+				sonar1 = false;
+			}
+			if (sonar2) {
+				audioSource.Stop ();
+				audioSource.clip = sonidoAyuda2;
+				audioSource.volume = 1f;
+				audioSource.Play ();
+				sonar2 = false;
+			}
+		}
+
         if (gameState == GameState.Inicio && Input.GetMouseButtonDown(0))
         {
             uiInstrucciones.SetActive(false);
             gameState = GameState.Ejecucion;
             Ejercicio ej = Persistencia.sistema.obtenerEjercicio2();
+			int n1 = Random.Range(1, 7);
+			if (n1 == 1) {
+				GameObject.Find ("Opcion1").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (0).enunciado;
+				GameObject.Find ("Opcion1").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (0).correcto;
 
-			GameObject.Find("Opcion1").transform.Find("Enunciado").GetComponent<TextMesh>().text = ej.respuestas.ElementAt(0).enunciado;
-			GameObject.Find("Opcion1").GetComponent<Actividad1_Logica>().correcta = ej.respuestas.ElementAt(0).correcto;
+				GameObject.Find ("Opcion2").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (1).enunciado;
+				GameObject.Find ("Opcion2").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (1).correcto;
 
-			GameObject.Find("Opcion2").transform.Find("Enunciado").GetComponent<TextMesh>().text = ej.respuestas.ElementAt(1).enunciado;
-            GameObject.Find("Opcion2").GetComponent<Actividad1_Logica>().correcta = ej.respuestas.ElementAt(1).correcto;
+				GameObject.Find ("Opcion3").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (2).enunciado;
+				GameObject.Find ("Opcion3").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (2).correcto;
+			} else if (n1 == 2) {
+				GameObject.Find ("Opcion1").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (0).enunciado;
+				GameObject.Find ("Opcion1").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (0).correcto;
 
-			GameObject.Find("Opcion3").transform.Find("Enunciado").GetComponent<TextMesh>().text = ej.respuestas.ElementAt(2).enunciado;
-            GameObject.Find("Opcion3").GetComponent<Actividad1_Logica>().correcta = ej.respuestas.ElementAt(2).correcto;
+				GameObject.Find ("Opcion3").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (1).enunciado;
+				GameObject.Find ("Opcion3").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (1).correcto;
+
+				GameObject.Find ("Opcion2").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (2).enunciado;
+				GameObject.Find ("Opcion2").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (2).correcto;
+			} else if (n1 == 3) {
+				GameObject.Find ("Opcion2").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (0).enunciado;
+				GameObject.Find ("Opcion2").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (0).correcto;
+
+				GameObject.Find ("Opcion1").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (1).enunciado;
+				GameObject.Find ("Opcion1").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (1).correcto;
+
+				GameObject.Find ("Opcion3").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (2).enunciado;
+				GameObject.Find ("Opcion3").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (2).correcto;
+			} else if (n1 == 4) {
+				GameObject.Find ("Opcion2").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (0).enunciado;
+				GameObject.Find ("Opcion2").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (0).correcto;
+
+				GameObject.Find ("Opcion3").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (1).enunciado;
+				GameObject.Find ("Opcion3").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (1).correcto;
+
+				GameObject.Find ("Opcion1").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (2).enunciado;
+				GameObject.Find ("Opcion1").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (2).correcto;
+			} else if (n1 == 5) {
+				GameObject.Find ("Opcion3").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (0).enunciado;
+				GameObject.Find ("Opcion3").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (0).correcto;
+
+				GameObject.Find ("Opcion1").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (1).enunciado;
+				GameObject.Find ("Opcion1").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (1).correcto;
+
+				GameObject.Find ("Opcion2").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (2).enunciado;
+				GameObject.Find ("Opcion2").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (2).correcto;
+			} else if (n1 == 6) {
+				GameObject.Find ("Opcion3").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (0).enunciado;
+				GameObject.Find ("Opcion3").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (0).correcto;
+
+				GameObject.Find ("Opcion2").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (1).enunciado;
+				GameObject.Find ("Opcion2").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (1).correcto;
+
+				GameObject.Find ("Opcion1").transform.Find ("Enunciado").GetComponent<TextMesh> ().text = ej.respuestas.ElementAt (2).enunciado;
+				GameObject.Find ("Opcion1").GetComponent<Actividad1_Logica> ().correcta = ej.respuestas.ElementAt (2).correcto;
+			}
+
 
             enunciado.GetComponent<TextMesh>().text = ej.enunciado1;
 
@@ -314,4 +392,17 @@ public class CargarActividad1 : MonoBehaviour {
 		}
 
 	}
+
+	public static void sonarAyudaV1(){
+		sonar1 = true;
+	}
+
+	public static void sonarAyudaV2(){
+		sonar2 = true;
+	}
+
+	public void activarSonido(){
+		ponerSonido = true;
+	}
+
 }

@@ -80,6 +80,18 @@ public class ControladorAyudaContenido : MonoBehaviour {
                 concepto2.SetActive(false);
                 concepto3.SetActive(false);
                 botonAtras.SetActive(true);
+				switch (actividad)
+				{
+				case 1:
+					CargarActividad1.sonarAyudaV1();
+					break;
+				case 2:
+					CargarActividad2.sonarAyudaV1();
+					break;
+				case 3:
+					Actividad3_Logica.sonarAyudaV1();
+					break;
+				}
                 break;
             case 2:
                 avatarDialogo.SetActive(false);
@@ -94,6 +106,18 @@ public class ControladorAyudaContenido : MonoBehaviour {
                 concepto3.SetActive(true);
                 botonReanudar.SetActive(true);
                 botonAdelante.SetActive(false);
+				switch (actividad)
+				{
+				case 1:
+					CargarActividad1.sonarAyudaV2();
+					break;
+				case 2:
+					CargarActividad2.sonarAyudaV2();
+					break;
+				case 3:
+					Actividad3_Logica.sonarAyudaV2();
+					break;
+				}
                 break;
             
         }
@@ -123,6 +147,18 @@ public class ControladorAyudaContenido : MonoBehaviour {
                 concepto2.SetActive(false);
                 concepto3.SetActive(false);
                 botonAtras.SetActive(true);
+				switch (actividad)
+				{
+				case 1:
+					CargarActividad1.sonarAyudaV1();
+					break;
+				case 2:
+					CargarActividad2.sonarAyudaV1();
+					break;
+				case 3:
+					Actividad3_Logica.sonarAyudaV1();
+					break;
+				}
                 break;
             case 2:
                 avatarDialogo.SetActive(false);

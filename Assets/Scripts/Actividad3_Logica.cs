@@ -35,8 +35,23 @@ public class Actividad3_Logica : MonoBehaviour {
     private static int idDisparo=0;
     private int llevaDisparo=0; //pregunta que lleva el disparo
 	public Text uiDinero;
+	public static bool disp = false;
+	public AudioClip sonido;
+	public AudioSource audioSource;
+	public AudioClip sonidoExplo;
+	public static bool sonar1 = false;
+	public static bool sonar2 = false;
+	public AudioClip sonidoAyuda1;
+	public AudioClip sonidoAyuda2;
+	public AudioClip sonidoAyuda22;
+	public bool ponerSonido = false;
 
     void Start () {
+		audioSource.loop = true;
+		audioSource.clip = sonido;
+		audioSource.volume = 0.3f;
+		audioSource.Play();
+
         pregunta1.SetActive(false);
         pregunta2.SetActive(false);
         pregunta3.SetActive(false);
@@ -59,6 +74,30 @@ public class Actividad3_Logica : MonoBehaviour {
     }
 	
 	void Update () {
+		if (disp) {
+			audioSource.PlayOneShot (sonidoExplo, 1f);
+			disp = false;
+		}
+		if (ponerSonido) {
+			if (sonar1) {
+				audioSource.loop=false;
+				audioSource.Stop ();
+				audioSource.clip = sonidoAyuda1;
+				audioSource.volume = 1f;
+				audioSource.Play ();
+				sonar1 = false;
+			}
+			if (sonar2) {
+				audioSource.Stop ();
+				audioSource.clip = null;
+				audioSource.PlayOneShot (sonidoExplo, 1f);
+				audioSource.clip = sonidoAyuda22;
+				audioSource.volume = 1f;
+				audioSource.PlayScheduled (36000);
+				sonar2 = false;
+			}
+		}
+
         if(gameState==GameState.Inicio && Input.GetMouseButtonDown(0))
         {
 
@@ -485,6 +524,17 @@ public class Actividad3_Logica : MonoBehaviour {
 			Application.LoadLevel ("ShooterPiratas");
 		}
 
+	}
+
+	public static void sonarAyudaV1(){
+		sonar1 = true;
+	}
+
+	public static void sonarAyudaV2(){
+		sonar2 = true;
+	}
+	public void activarSonido(){
+		ponerSonido = true;
 	}
     
 }

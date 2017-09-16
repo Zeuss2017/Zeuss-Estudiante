@@ -21,7 +21,7 @@ public class Disparar : MonoBehaviour {
 		//Debug.Log (Input.mousePosition.y);
 		if (Input.GetMouseButtonDown(0) && disparar && vivo == null && Input.mousePosition.y < Screen.height*0.8)
         {
-            
+			Actividad3_Logica.disp = true;
             Vector2 target = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x,Input.mousePosition.y));
             Vector2 myPos = new Vector2(transform.position.x + 0.2f, transform.position.y);
             Vector2 direction = target - myPos;

@@ -10,6 +10,7 @@ public class ConectarColegio : MonoBehaviour {
     public Dropdown curso;
 	private string col;
 	private string cur;
+	private bool ban = false;
 
     // Use this for initialization
     void Start () {
@@ -22,6 +23,7 @@ public class ConectarColegio : MonoBehaviour {
 		ciudad.value = -1;
 		colegio.ClearOptions();
 		curso.ClearOptions ();
+		ban = false;
 
         //ciudad.options.Add(new Dropdown.OptionData("Bogotá") );
         //ciudad.options.Add(new Dropdown.OptionData("Medellín"));
@@ -39,6 +41,9 @@ public class ConectarColegio : MonoBehaviour {
 		yield return w;
 
 		yield return new WaitForSeconds(1f);
+		if (w.text == null) {
+			//Mostrar alerta de NO conexión internet
+		}
 
 		procesarCiudades(w.text);
 	}
@@ -164,43 +169,46 @@ public class ConectarColegio : MonoBehaviour {
 
 
 	public void conectar(){
-		int sel = ciudad.value;
-		string seleccionado = ciudad.options [sel].text;
-		int sel2 = colegio.value;
-		string seleccionado2 = colegio.options [sel2].text;
-		int sel3 = curso.value;
-		string seleccionado3 = curso.options [sel3].text;
-		if (!seleccionado.Equals ("Escoge la ciudad") && !seleccionado2.Equals ("Escoge tu colegio") && !seleccionado3.Equals ("Escoge tu curso")) {
-			JSONObject jo = new JSONObject (this.cur);
-			//recorre lista de colegios
-			foreach (JSONObject j in jo.list) {
-				//recorre lista de llaves
-				float cod = -1;
-				bool bandera = false;
-				for (int i = 0; i < j.list.Count; i++) {
-					string key = (string)j.keys [i];
-					//se encuentra el colegio escogido en el dropdown
-					if (key.Equals ("nombre")) {
-						if (j.list [i].str.Equals (seleccionado3)) {
-							bandera = true;
+		if (this.ban == false) {
+			this.ban = true;
+			int sel = ciudad.value;
+			string seleccionado = ciudad.options [sel].text;
+			int sel2 = colegio.value;
+			string seleccionado2 = colegio.options [sel2].text;
+			int sel3 = curso.value;
+			string seleccionado3 = curso.options [sel3].text;
+			if (!seleccionado.Equals ("Escoge la ciudad") && !seleccionado2.Equals ("Escoge tu colegio") && !seleccionado3.Equals ("Escoge tu curso")) {
+				JSONObject jo = new JSONObject (this.cur);
+				//recorre lista de colegios
+				foreach (JSONObject j in jo.list) {
+					//recorre lista de llaves
+					float cod = -1;
+					bool bandera = false;
+					for (int i = 0; i < j.list.Count; i++) {
+						string key = (string)j.keys [i];
+						//se encuentra el colegio escogido en el dropdown
+						if (key.Equals ("nombre")) {
+							if (j.list [i].str.Equals (seleccionado3)) {
+								bandera = true;
+							}
+						}
+						//se guarda el códgio
+						if (key.Equals ("id")) {
+							cod = j.list [i].n;
 						}
 					}
-					//se guarda el códgio
-					if (key.Equals ("id")) {
-						cod = j.list [i].n;
+					//Se llama la corrutina si es
+					if (bandera == true) {
+						Debug.Log ("Id del colegio:" + cod);
+						StartCoroutine (registrarEstudiante (cod));
+						return;
 					}
 				}
-				//Se llama la corrutina si es
-				if (bandera == true) {
-					Debug.Log ("Id del colegio:" + cod);
-					StartCoroutine (registrarEstudiante (cod));
-					return;
-				}
+			} else {
+				Debug.Log ("Faltan campos por llenar");
 			}
-		} else {
-			Debug.Log ("Faltan campos por llenar");
-		}
 
+		}
 	}
 
 	IEnumerator registrarEstudiante(float sel){
@@ -240,6 +248,7 @@ public class ConectarColegio : MonoBehaviour {
 			}
 		}else{
 			Debug.Log ("Error en la creación");
+			//Mostrar alerta de NO conexión internet
 		}
 
 	}

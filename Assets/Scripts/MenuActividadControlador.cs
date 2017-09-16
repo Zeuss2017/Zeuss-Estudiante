@@ -12,6 +12,7 @@ public class MenuActividadControlador : MonoBehaviour {
     public Sprite alertaEjerciciosEnviados;
     public Sprite alertaEjerciciosDescargados;
 
+
     public void Start()
     {
         uiAlerta.SetActive(false);
@@ -61,7 +62,9 @@ public class MenuActividadControlador : MonoBehaviour {
 			yield return w;
 
 			yield return new WaitForSeconds (1f);
-
+			if (w.text == null) {
+				//Mostrar alerta de NO conexión internet
+			}
 			descargar(w.text);
 		} else {
             StartCoroutine(mostrarAlertas(1));
@@ -160,9 +163,6 @@ public class MenuActividadControlador : MonoBehaviour {
 		Debug.Log ("Descarga ejercicio: " + ej.enunciado1);
 
 	}
-
-
-
 
 
 
