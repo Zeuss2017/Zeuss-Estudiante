@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using System.Linq;
 using UnityEngine.UI;
 
@@ -89,11 +88,10 @@ public class Actividad3_Logica : MonoBehaviour {
 			}
 			if (sonar2) {
 				audioSource.Stop ();
-				audioSource.clip = null;
-				audioSource.PlayOneShot (sonidoExplo, 1f);
-				audioSource.clip = sonidoAyuda22;
+				audioSource.clip = sonidoAyuda2;
 				audioSource.volume = 1f;
-				audioSource.PlayScheduled (36000);
+				audioSource.Play ();
+				//audioSource.PlayScheduled (36000);
 				sonar2 = false;
 			}
 		}

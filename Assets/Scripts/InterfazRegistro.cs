@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
-using UnityEditor;
 
 public class InterfazRegistro : MonoBehaviour {
 

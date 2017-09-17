@@ -37,6 +37,7 @@ public class Estudiante{
 
     public Estudiante()
     {
+		this.nombre = "-";
         this.actividadesEstudiante = new List<ActividadEstudiante>();
 		//Se crean las actividades con 0 aciertos, errores, tiempo, 1 de nivel actual , sin completar, id de la actividad, 1 de nivel maximo
 		ActividadEstudiante a1 = new ActividadEstudiante( 0  , 0 , 0f , 1 , 0 , 1 , 1);

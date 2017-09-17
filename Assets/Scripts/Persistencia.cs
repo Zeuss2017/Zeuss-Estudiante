@@ -26,7 +26,9 @@ public class Persistencia {
         {
             Persistencia.sistema.estudiantes.Remove(es);
         }
-        Persistencia.sistema.estudiantes.Add(Persistencia.sistema.actual);
+		if (!Persistencia.sistema.actual.nombre.Equals ("-")) {
+			Persistencia.sistema.estudiantes.Add (Persistencia.sistema.actual);
+		}
         BinaryFormatter bf = new BinaryFormatter();
         //Application.persistentDataPath is a string, so if you wanted you can put that into debug.log if you want to know where save games are located
         //Debug.Log(Application.persistentDataPath);
@@ -37,13 +39,14 @@ public class Persistencia {
 
     public static void Load()
     {
-        if (File.Exists(Application.persistentDataPath + "/savedGames.gd"))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/savedGames.gd", FileMode.Open);
-            Persistencia.sistema = (Sistema)bf.Deserialize(file);
-            file.Close();
-        }
+		if (File.Exists (Application.persistentDataPath + "/savedGames.gd")) {
+			BinaryFormatter bf = new BinaryFormatter ();
+			FileStream file = File.Open (Application.persistentDataPath + "/savedGames.gd", FileMode.Open);
+			Persistencia.sistema = (Sistema)bf.Deserialize (file);
+			file.Close ();
+		} else {
+			Awake.cargarEjercicios ();
+		}
     }
 
 }
