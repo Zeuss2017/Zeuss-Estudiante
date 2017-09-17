@@ -11,6 +11,7 @@ public class MenuActividadControlador : MonoBehaviour {
     public Sprite alertaConexionRealizada;
     public Sprite alertaEjerciciosEnviados;
     public Sprite alertaEjerciciosDescargados;
+    public Sprite alertaConexionInternet;
 
 
     public void Start()
@@ -63,7 +64,7 @@ public class MenuActividadControlador : MonoBehaviour {
 
 			yield return new WaitForSeconds (1f);
 			if (w.text == null) {
-				//Mostrar alerta de NO conexión internet
+                StartCoroutine(mostrarAlertas(5));
 			}
 			descargar(w.text);
 		} else {
@@ -75,45 +76,65 @@ public class MenuActividadControlador : MonoBehaviour {
 	void descargar(string jsonResponse){
 		JSONObject jo = new JSONObject(jsonResponse);
 		int id=-1;
-		foreach(JSONObject j in jo.list){
-			Debug.Log(j);
-			Ejercicio ej = new Ejercicio ();
-			//recorre lista de llaves
-			for(int i = 0; i < j.list.Count; i++){
-				string key = (string)j.keys[i];
-				if (key.Equals ("enunciado1")) {
-					ej.enunciado1 = j.list [i].str;
-				}
-				if (key.Equals ("enunciado2")) {
-					ej.enunciado2 = j.list [i].str;
-				}
-				if (key.Equals ("enunciado3")) {
-					ej.enunciado3 = j.list [i].str;
-				}
-				if (key.Equals ("escenario")) {
-					ej.escenario = j.list [i].str;
-				}
-				if (key.Equals ("id")) {
-					ej.idEjercicio = (int)j.list [i].i;
-				}
-				if (key.Equals ("nivel")) {
-					ej.nivel = (int)j.list [i].i;
-				}
-				if (key.Equals ("actividadId")) {
-					JSONObject inside = j.list [i];
-					for (int k = 0; k < inside.list.Count; k++) {
-						string key2 = (string)inside.keys [k];
-						if (key2.Equals ("id")) {
-							id = (int)inside.list [k].i;
-						}
-					}
-					Debug.Log ("Id de la actividad: " + id);
-				}
+        if (jo.list != null)
+        {
+            
+            foreach (JSONObject j in jo.list)
+            {
+                Debug.Log(j);
+                Ejercicio ej = new Ejercicio();
+                //recorre lista de llaves
+                for (int i = 0; i < j.list.Count; i++)
+                {
+                    string key = (string)j.keys[i];
+                    if (key.Equals("enunciado1"))
+                    {
+                        ej.enunciado1 = j.list[i].str;
+                    }
+                    if (key.Equals("enunciado2"))
+                    {
+                        ej.enunciado2 = j.list[i].str;
+                    }
+                    if (key.Equals("enunciado3"))
+                    {
+                        ej.enunciado3 = j.list[i].str;
+                    }
+                    if (key.Equals("escenario"))
+                    {
+                        ej.escenario = j.list[i].str;
+                    }
+                    if (key.Equals("id"))
+                    {
+                        ej.idEjercicio = (int)j.list[i].i;
+                    }
+                    if (key.Equals("nivel"))
+                    {
+                        ej.nivel = (int)j.list[i].i;
+                    }
+                    if (key.Equals("actividadId"))
+                    {
+                        JSONObject inside = j.list[i];
+                        for (int k = 0; k < inside.list.Count; k++)
+                        {
+                            string key2 = (string)inside.keys[k];
+                            if (key2.Equals("id"))
+                            {
+                                id = (int)inside.list[k].i;
+                            }
+                        }
+                        Debug.Log("Id de la actividad: " + id);
+                    }
 
-			}
-			ej.basico = false;
-			StartCoroutine (descargarRespuestas (ej , id));
-		}
+                }
+                ej.basico = false;
+                StartCoroutine(descargarRespuestas(ej, id));
+            }
+        }
+        else
+        {
+            StartCoroutine(mostrarAlertas(5));
+        }
+		
 	}
 
 	IEnumerator descargarRespuestas(Ejercicio ej, int id){
@@ -124,7 +145,8 @@ public class MenuActividadControlador : MonoBehaviour {
 			yield return new WaitForSeconds (1f);
 
 			descargarRespuestas(w.text , ej, id);
-		} else {
+            StartCoroutine(mostrarAlertas(3));
+        } else {
             StartCoroutine(mostrarAlertas(1));
         }
 	}
@@ -218,6 +240,9 @@ public class MenuActividadControlador : MonoBehaviour {
                 break;
             case 4:
                 alerta.sprite = alertaEjerciciosEnviados;
+                break;
+            case 5:
+                alerta.sprite = alertaConexionInternet;
                 break;
         }
         uiAlerta.SetActive(true);

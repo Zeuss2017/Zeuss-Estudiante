@@ -11,9 +11,14 @@ public class ConectarColegio : MonoBehaviour {
 	private string col;
 	private string cur;
 	private bool ban = false;
+    public GameObject uiAlerta;
+    public Image Alerta;
+    public Sprite sinInternet;
+    public Sprite camposVacios;
 
     // Use this for initialization
     void Start () {
+        uiAlerta.SetActive(false);
         //llamar servicio web
         Debug.Log(Persistencia.sistema.actual.nombre);
         Debug.Log(Persistencia.sistema.actual.fechaNacimiento);
@@ -42,7 +47,7 @@ public class ConectarColegio : MonoBehaviour {
 
 		yield return new WaitForSeconds(1f);
 		if (w.text == null) {
-			//Mostrar alerta de NO conexión internet
+            StartCoroutine(mostrarAlerta(1));
 		}
 
 		procesarCiudades(w.text);
@@ -52,10 +57,20 @@ public class ConectarColegio : MonoBehaviour {
 	void procesarCiudades(string jsonResponse){
 		//Debug.Log(jsonResponse);
 		JSONObject jo = new JSONObject(jsonResponse);
-		foreach(JSONObject j in jo.list){
-			Debug.Log(j.list[0]);
-			ciudad.options.Add(new Dropdown.OptionData( j.list[0].str ) );
-		}
+        if ( jo.list != null)
+        {
+           
+            foreach (JSONObject j in jo.list)
+            {
+                Debug.Log(j.list[0]);
+                ciudad.options.Add(new Dropdown.OptionData(j.list[0].str));
+            }
+        }
+        else
+        {
+            StartCoroutine(mostrarAlerta(1));
+        }
+		
 	}
 
 	public void cambioCiudad(){
@@ -79,7 +94,24 @@ public class ConectarColegio : MonoBehaviour {
 		procesarColegio(w.text);
 	}
 
-	void procesarColegio(string jsonResponse){
+    IEnumerator mostrarAlerta(int num)
+    {
+        switch (num)
+        {
+            case 1:
+                Alerta.sprite = sinInternet;
+                break;
+
+            case 2:
+                Alerta.sprite = camposVacios;
+                break;
+        }
+        uiAlerta.SetActive(true);
+        yield return new WaitForSeconds(1.3f);
+        uiAlerta.SetActive(false);
+      
+    }
+    void procesarColegio(string jsonResponse){
 		col = jsonResponse;
 		colegio.ClearOptions ();
 		colegio.options.Add(new Dropdown.OptionData( "Escoge tu colegio" ) );
@@ -205,7 +237,7 @@ public class ConectarColegio : MonoBehaviour {
 					}
 				}
 			} else {
-				Debug.Log ("Faltan campos por llenar");
+                StartCoroutine(mostrarAlerta(2));
 			}
 
 		}
@@ -248,7 +280,7 @@ public class ConectarColegio : MonoBehaviour {
 			}
 		}else{
 			Debug.Log ("Error en la creación");
-			//Mostrar alerta de NO conexión internet
+            StartCoroutine(mostrarAlerta(1));
 		}
 
 	}
