@@ -86,6 +86,7 @@ public class IntermedioActividadesPiratas : MonoBehaviour {
             Application.LoadLevel("ShooterPiratas");
         }else
         {
+
             StartCoroutine(mostrarAlertas(1));
         }
 		

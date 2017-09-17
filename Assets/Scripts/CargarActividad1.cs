@@ -219,6 +219,8 @@ public class CargarActividad1 : MonoBehaviour {
             uiAyudaContenido.SetActive(false);
             Time.timeScale = 1;
             reanudarActividad = false;
+            ponerSonido = false;
+            audioSource.Stop();
         }
     }
 
@@ -271,6 +273,7 @@ public class CargarActividad1 : MonoBehaviour {
         gameState = GameState.Ejecucion;
         Time.timeScale = 1;
         uiPausa.SetActive(false);
+        
         
     }
     /*Nombre del Metodo: PausarActividad
@@ -375,7 +378,8 @@ public class CargarActividad1 : MonoBehaviour {
     IEnumerator ayudaConcepto(){
 		while (true) {
 			float tiempo = Time.time - Persistencia.sistema.tiempoActual;
-			if (tiempo > 67.5f) {
+			if (tiempo > 67.5f)
+            {//
                 uiAyudaContenido.SetActive(true);
                 Time.timeScale = 0;
                 yield break;

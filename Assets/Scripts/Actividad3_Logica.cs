@@ -274,6 +274,8 @@ public class Actividad3_Logica : MonoBehaviour {
             Time.timeScale = 1;
             cambiarEstadoDisparo(true);
             reanudarActividad = false;
+            ponerSonido = false;
+            audioSource.Stop ();
         }
 
 

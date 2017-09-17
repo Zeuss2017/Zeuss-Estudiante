@@ -177,6 +177,8 @@ public class CargarActividad2 : MonoBehaviour {
             Time.timeScale = 1;
             cambiarEstadoGlobos(false);
             reanudarActividad = false;
+            ponerSonido = false;
+            audioSource.Stop();
         }
     }
     /*Nombre del Metodo: MostrarNuevoIntento
@@ -380,7 +382,7 @@ public class CargarActividad2 : MonoBehaviour {
     IEnumerator ayudaConcepto(){
 		while (true) {
 			float tiempo = Time.time - Persistencia.sistema.tiempoActual;
-			if (tiempo > 19.11f && !gano) {
+			if (tiempo > 19.11f && !gano){
                 uiAyudaContenido.SetActive(true);
                 Time.timeScale = 0;
                 cambiarEstadoGlobos(true);
