@@ -44,9 +44,35 @@ public class Actividad3_Logica : MonoBehaviour {
 	public AudioClip sonidoAyuda2;
 	public AudioClip sonidoAyuda22;
 	public bool ponerSonido = false;
+    private static int superado = 0;
 
     void Start () {
-		audioSource.loop = true;
+        if (superado==0)
+        {
+            foreach (ActividadEstudiante e in Persistencia.sistema.actual.actividadesEstudiante.ToArray())
+            {
+                if (e.idActividad == 3)
+                {
+                    if (e.completado == 1)
+                    {
+                        if (Persistencia.sistema.actual.escenario.Equals("COMIDA"))
+                        {
+                            Application.LoadLevel("IntermediaComida");
+                            IntermedioActividades.ActividadesSuperadas();
+                            superado ++;
+                        }
+                        else
+                        {
+                            Application.LoadLevel("IntermediaPiratas");
+                            IntermedioActividadesPiratas.ActividadesSuperadas();
+                            superado ++;
+                        }
+                    }
+                }
+
+            }
+        }
+        audioSource.loop = true;
 		audioSource.clip = sonido;
 		audioSource.volume = 0.3f;
 		audioSource.Play();

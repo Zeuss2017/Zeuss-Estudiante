@@ -10,6 +10,7 @@ public class IntermedioActividades : MonoBehaviour {
     public Image actividad3;
     public Image alerta;
     public GameObject uiAlerta;
+    
     public Sprite actividad2Bloqueada;
     public Sprite actividad3Bloqueada;
     public Sprite actividad1Normal;
@@ -17,14 +18,18 @@ public class IntermedioActividades : MonoBehaviour {
     public Sprite actividad3Normal;
     public Sprite alertaDesbloqueo;
     public Sprite alertaNuevaActividad;
+    
     public static bool recienDesbloqueado;
     private bool actividad2B;
     private bool actividad3B;
 	public AudioSource audioSource;
 	public AudioClip sonidoDesbloquear;
 
-
+    public GameObject uiGanar;
+    public static bool alertaGanar;
+    
     void Start () {
+        uiGanar.SetActive(false);
         uiAlerta.SetActive(false);
         actividad1.sprite = actividad1Normal;
         actividad2.sprite = actividad2Bloqueada;
@@ -61,6 +66,16 @@ public class IntermedioActividades : MonoBehaviour {
             StartCoroutine(mostrarAlertas(2));
             recienDesbloqueado = false;
         }
+
+        if (alertaGanar)
+        {
+            audioSource.clip = sonidoDesbloquear;
+            audioSource.volume = 1f;
+            audioSource.Play();
+            StartCoroutine(subirResultados());
+            StartCoroutine(GanarTodo(2));
+            alertaGanar = false;
+        }
     }
 
 	public void click1(){
@@ -86,6 +101,7 @@ public class IntermedioActividades : MonoBehaviour {
         }
         else
         {
+            Application.LoadLevel("ShooterComida");
             StartCoroutine(mostrarAlertas(1));
         }
         
@@ -101,6 +117,10 @@ public class IntermedioActividades : MonoBehaviour {
     {
         recienDesbloqueado = true;
     }
+    public static void ActividadesSuperadas()
+    {
+        alertaGanar = true;
+    }
     IEnumerator mostrarAlertas(int num)
     {
         switch (num)
@@ -111,15 +131,23 @@ public class IntermedioActividades : MonoBehaviour {
             case 2:
                 alerta.sprite = alertaNuevaActividad;
                 break;
-
+            
         }
+        
         uiAlerta.SetActive(true);
         yield return new WaitForSeconds(4f);
         uiAlerta.SetActive(false);
 
     }
+    IEnumerator GanarTodo(int num)
+    {
+        uiGanar.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        uiGanar.SetActive(false);
 
-	IEnumerator subirResultados(){
+    }
+
+    IEnumerator subirResultados(){
 		if (Persistencia.sistema.actual.idEstudiante != -1) {
 			foreach (ActividadEstudiante a in Persistencia.sistema.actual.actividadesEstudiante) {
 				int tiempo = (int)a.tiempo;

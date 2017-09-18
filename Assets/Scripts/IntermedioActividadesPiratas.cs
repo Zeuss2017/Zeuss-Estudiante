@@ -23,10 +23,12 @@ public class IntermedioActividadesPiratas : MonoBehaviour {
 	public AudioSource audioSource;
 	public AudioClip sonidoDesbloquear;
 
+    public GameObject uiGanar;
+    public static bool alertaGanar;
+
     void Start () {
-       
 
-
+        uiGanar.SetActive(false);
         uiAlerta.SetActive(false);
         actividad1.sprite = actividad1Normal;
         actividad2.sprite = actividad2Bloqueada;
@@ -63,6 +65,15 @@ public class IntermedioActividadesPiratas : MonoBehaviour {
 			StartCoroutine (subirResultados());
             StartCoroutine(mostrarAlertas(2));
             recienDesbloqueado = false;
+        }
+        if (alertaGanar)
+        {
+            audioSource.clip = sonidoDesbloquear;
+            audioSource.volume = 1f;
+            audioSource.Play();
+            StartCoroutine(subirResultados());
+            StartCoroutine(GanarTodo(2));
+            alertaGanar = false;
         }
     }
 
@@ -102,6 +113,10 @@ public class IntermedioActividadesPiratas : MonoBehaviour {
     {
         recienDesbloqueado = true;
     }
+    public static void ActividadesSuperadas()
+    {
+        alertaGanar = true;
+    }
     IEnumerator mostrarAlertas(int num)
     {
         switch (num)
@@ -119,10 +134,16 @@ public class IntermedioActividadesPiratas : MonoBehaviour {
         uiAlerta.SetActive(false);
 
     }
+    IEnumerator GanarTodo(int num)
+    {
+        uiGanar.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        uiGanar.SetActive(false);
+
+    }
 
 
-
-	IEnumerator subirResultados(){
+    IEnumerator subirResultados(){
 		if (Persistencia.sistema.actual.idEstudiante != -1) {
 			foreach (ActividadEstudiante a in Persistencia.sistema.actual.actividadesEstudiante) {
 				int tiempo = (int)a.tiempo;
