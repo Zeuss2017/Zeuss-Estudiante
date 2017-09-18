@@ -101,7 +101,6 @@ public class IntermedioActividades : MonoBehaviour {
         }
         else
         {
-            Application.LoadLevel("ShooterComida");
             StartCoroutine(mostrarAlertas(1));
         }
         
