@@ -328,7 +328,7 @@ public class Awake : MonoBehaviour {
 		ac2.ejercicios.Add (ej25);
 
 
-		Ejercicio ej26 = new Ejercicio (26 , "Juana ____ el chocolate en baño María y después agrega las avellenas" , "" , "" , 3 , true , "COMIDA" );
+		Ejercicio ej26 = new Ejercicio (26 , "Juana ____ el chocolate en baño María y después agrega las avellanas" , "" , "" , 3 , true , "COMIDA" );
 		r1 = new Respuesta (1 , "derrite" , 1);
 		r2 = new Respuesta (2 , "cortan" , 0);
 		r3 = new Respuesta (3 , "derriten" , 0);
@@ -563,7 +563,7 @@ public class Awake : MonoBehaviour {
 
 		Ejercicio ej46 = new Ejercicio (46 , "Las cerezas son \n pequeñas, muy" , "Para que la bizcotela \n quede más" , "La técnica de blanquear \n consiste en pasar por agua" , 3 , true , "COMIDA" );
 		r1 = new Respuesta (1 , "jugosas, de sabor dulce \n y color rojo oscuro" , 1);
-		r2 = new Respuesta (2 , "crocante, espolvoreala \n con azúcar" , 2);
+		r2 = new Respuesta (2 , "crocante, espolvoréala \n con azúcar" , 2);
 		r3 = new Respuesta (3 , "hirviendo ciertos ingredientes" , 3);
 		ej46.respuestas.Add (r1);
 		ej46.respuestas.Add (r2);
@@ -594,7 +594,7 @@ public class Awake : MonoBehaviour {
 		Ejercicio ej49 = new Ejercicio (49 , "Para obtener un \n sabor diferente, reemplaza \n los frutos" , "Las grageas son bolitas" , "La mermelada es \n de consistencia" , 5 , true , "COMIDA" );
 		r1 = new Respuesta (1 , "secos por cacahuetes \n picados" , 1);
 		r2 = new Respuesta (2 , "diminutas a base de \n azúcar o caramelo" , 2);
-		r3 = new Respuesta (3 , "espesa, a base de \n frutas hervisas con \n azúcar o miel" , 3);
+		r3 = new Respuesta (3 , "espesa, a base de \n frutas hervidas con \n azúcar o miel" , 3);
 		ej49.respuestas.Add (r1);
 		ej49.respuestas.Add (r2);
 		ej49.respuestas.Add (r3);
@@ -634,7 +634,7 @@ public class Awake : MonoBehaviour {
 		Ejercicio ej53 = new Ejercicio (53 , "Estas galletas son tan " , "Las pasas se deben \n colocar en agua" , "Estas galletas pueden \n conservarse en la nevera, \n dentro de un envase" , 7 , true , "COMIDA" );
 		r1 = new Respuesta (1 , "ligeras que se \n derretirán en tu boca" , 1);
 		r2 = new Respuesta (2 , "hirviendo hasta que \n se hayan hinchado" , 2);
-		r3 = new Respuesta (3 , "hérmetico" , 3);
+		r3 = new Respuesta (3 , "hermético" , 3);
 		ej53.respuestas.Add (r1);
 		ej53.respuestas.Add (r2);
 		ej53.respuestas.Add (r3);
@@ -666,7 +666,7 @@ public class Awake : MonoBehaviour {
 		ac1.ejercicios.Add (ej55);
 
 
-		Ejercicio ej56 = new Ejercicio (56 , "Cuando se acababa el agua potable, los _____ los llenaban con agua fresca de los yacimientos" , "" , "" , 1 , true , "PIRATAS" );
+		Ejercicio ej56 = new Ejercicio (56 , "Cuando se acababa el agua potable, los _____ llenaban con agua fresca de los yacimientos" , "" , "" , 1 , true , "PIRATAS" );
 		r1 = new Respuesta (1 , "piratas" , 1);
 		r2 = new Respuesta (2 , "barco" , 0);
 		r3 = new Respuesta (3 , "banderas" , 0);
@@ -706,7 +706,7 @@ public class Awake : MonoBehaviour {
 		ac1.ejercicios.Add (ej59);
 
 
-		Ejercicio ej60 = new Ejercicio (60 , "Se dice que prefería el té al ron pero su _____ siempre estaba ebria" , "" , "" , 3 , true , "PIRATAS" );
+		Ejercicio ej60 = new Ejercicio (60 , "Se dice que prefería el té al ron, pero su _____ siempre estaba ebria" , "" , "" , 3 , true , "PIRATAS" );
 		r1 = new Respuesta (1 , "tripulación" , 1);
 		r2 = new Respuesta (2 , "loro" , 0);
 		r3 = new Respuesta (3 , "velas" , 0);
@@ -748,7 +748,7 @@ public class Awake : MonoBehaviour {
 
 		Ejercicio ej64 = new Ejercicio (64 , "El cuarto de la _____ era vital para un barco pirata, la chispa más insignificante podría hacerlo explotar" , "" , "" , 5 , true , "PIRATAS" );
 		r1 = new Respuesta (1 , "pólvora" , 1);
-		r2 = new Respuesta (2 , "cápitan" , 0);
+		r2 = new Respuesta (2 , "capitán" , 0);
 		r3 = new Respuesta (3 , "cocinas" , 0);
 		ej64.respuestas.Add (r1);
 		ej64.respuestas.Add (r2);
@@ -883,7 +883,7 @@ public class Awake : MonoBehaviour {
 		ac2.ejercicios.Add (ej76);
 
 
-		Ejercicio ej77 = new Ejercicio (77 , "Los piratas ____ sus propias bomas y granadas a mano" , "" , "" , 2 , true , "PIRATAS" );
+		Ejercicio ej77 = new Ejercicio (77 , "Los piratas ____ sus propias bombas y granadas a mano" , "" , "" , 2 , true , "PIRATAS" );
 		r1 = new Respuesta (1 , "hacían" , 1);
 		r2 = new Respuesta (2 , "fabricaba" , 0);
 		r3 = new Respuesta (3 , "tenía" , 0);
@@ -943,7 +943,7 @@ public class Awake : MonoBehaviour {
 		ac2.ejercicios.Add (ej81);
 
 
-		Ejercicio ej82 = new Ejercicio (82 , "El teniende Robert M. mató a Barba Negra, le cortó la nariz y la ____ del mástil de su barco" , "" , "" , 4 , true , "PIRATAS" );
+		Ejercicio ej82 = new Ejercicio (82 , "El teniente Robert M. mató a Barba Negra, le cortó la nariz y la ____ del mástil de su barco" , "" , "" , 4 , true , "PIRATAS" );
 		r1 = new Respuesta (1 , "colgó" , 1);
 		r2 = new Respuesta (2 , "pintó" , 0);
 		r3 = new Respuesta (3 , "cargó" , 0);
@@ -967,7 +967,7 @@ public class Awake : MonoBehaviour {
 		ac2.ejercicios.Add (ej83);
 
 
-		Ejercicio ej84 = new Ejercicio (84 , "Los isoltes,las islas remotas y las cuevas ____ territorio ideal para forajidos y piratas" , "" , "" , 5 , true , "PIRATAS" );
+		Ejercicio ej84 = new Ejercicio (84 , "Los islotes, las islas remotas y las cuevas ____ territorio ideal para forajidos y piratas" , "" , "" , 5 , true , "PIRATAS" );
 		r1 = new Respuesta (1 , "eran" , 1);
 		r2 = new Respuesta (2 , "tenían" , 0);
 		r3 = new Respuesta (3 , "oscuras" , 0);
@@ -1015,7 +1015,7 @@ public class Awake : MonoBehaviour {
 		ac2.ejercicios.Add (ej87);
 
 
-		Ejercicio ej88 = new Ejercicio (88 , "Mientas el Capítan dormía en un gran camarote, su tripulación ____ bajo la cubierta del barco" , "" , "" , 7 , true , "PIRATAS" );
+		Ejercicio ej88 = new Ejercicio (88 , "Mientas el capitán dormía en un gran camarote, su tripulación ____ bajo la cubierta del barco" , "" , "" , 7 , true , "PIRATAS" );
 		r1 = new Respuesta (1 , "descansaba" , 1);
 		r2 = new Respuesta (2 , "dormían" , 0);
 		r3 = new Respuesta (3 , "comía" , 0);
@@ -1075,7 +1075,7 @@ public class Awake : MonoBehaviour {
 		ac2.ejercicios.Add (ej92);
 
 
-		Ejercicio ej93 = new Ejercicio (93 , "Los piratas  ____ desde Norteamerica hasta África y subían \n por el mar Rojo, ruta conocida como la Ronda Pirata" , "" , "" , 10 , true , "PIRATAS" );
+		Ejercicio ej93 = new Ejercicio (93 , "Los piratas  ____ desde Norteamérica hasta África y subían \n por el mar Rojo, ruta conocida como la Ronda Pirata" , "" , "" , 10 , true , "PIRATAS" );
 		r1 = new Respuesta (1 , "navegaban" , 1);
 		r2 = new Respuesta (2 , "jugaba" , 0);
 		r3 = new Respuesta (3 , "comía" , 0);
@@ -1102,7 +1102,7 @@ public class Awake : MonoBehaviour {
 		//Escenario Piratas Actividad Piratas
 
 
-		Ejercicio ej95 = new Ejercicio (95 , "El capitán de barba" , "Cliperon, el capitán \n del Mar del Sur, tenía" , "El viaje había sido muy" , 1 , true , "PIRATAS" );
+		Ejercicio ej95 = new Ejercicio (95 , "El capitán de barba" , "Cliperón, el capitán \n del Mar del Sur, tenía" , "El viaje había sido muy" , 1 , true , "PIRATAS" );
 		r1 = new Respuesta (1 , "rubia y fríos ojos \n azules, dirigía desde \n la plaza de Armas este \n nuevo saqueo" , 1);
 		r2 = new Respuesta (2 , "grandes ojos azules \n  y una larga nariz" , 2);
 		r3 = new Respuesta (3 , "difícil, pues las \n embarcaciones llevaban el \n peso de un enome cargamento \n de esclavos negros" , 3);
@@ -1111,7 +1111,7 @@ public class Awake : MonoBehaviour {
 		ej95.respuestas.Add (r3);
 		ac3.ejercicios.Add (ej95);
 
-		Ejercicio ej96 = new Ejercicio (96 , "Una ruidosa" , "Segundos después, \n una pesada" , "Se produció un gran" , 1 , true , "PIRATAS" );
+		Ejercicio ej96 = new Ejercicio (96 , "Una ruidosa" , "Segundos después, \n una pesada" , "Se produjo un gran", 1 , true , "PIRATAS" );
 		r1 = new Respuesta (1 , "carcajada se oyó \n en la nave capitana" , 1);
 		r2 = new Respuesta (2 , "bala de hierro caía \n cerca del palo mayor \n de la embarcación" , 2);
 		r3 = new Respuesta (3 , "incendio que se \n propagó rápidamente" , 3);
@@ -1124,7 +1124,7 @@ public class Awake : MonoBehaviour {
 		Ejercicio ej97 = new Ejercicio (97 , "Atardecía y hacía mucho" , "Los piratas secuestraron \n a una princesa muy" , "Dibujamos un mapa" , 2 , true , "PIRATAS" );
 		r1 = new Respuesta (1 , "calor cuando avistamos tierra" , 1);
 		r2 = new Respuesta (2 , "hermosa, llevaba un \n traje azul que brillaba" , 2);
-		r3 = new Respuesta (3 , "grande para poder encontrar\n el tesoso cuando volviéramos \npor él" , 3);
+		r3 = new Respuesta (3 , "grande para poder encontrar\n el tesoro cuando volviéramos \npor él" , 3);
 		ej97.respuestas.Add (r1);
 		ej97.respuestas.Add (r2);
 		ej97.respuestas.Add (r3);
@@ -1151,7 +1151,7 @@ public class Awake : MonoBehaviour {
 		ac3.ejercicios.Add (ej99);
 
 
-		Ejercicio ej100 = new Ejercicio (100 , "Los piratas se deshacen \n de sus pisioneros en islas" , "Los piratas " , "Cuando paso la fuerte" , 3 , true , "PIRATAS" );
+		Ejercicio ej100 = new Ejercicio (100 , "Los piratas se deshacen \n de sus prisioneros en islas" , "Los piratas " , "Cuando paso la fuerte" , 3 , true , "PIRATAS" );
 		r1 = new Respuesta (1 , "desiertas" , 1);
 		r2 = new Respuesta (2 , "capturados serán colgados \n hasta que mueran" , 2);
 		r3 = new Respuesta (3 , "tormenta, remamos hasta \n la playa y fuimos a  \n enterrar el cofre" , 3);
@@ -1163,7 +1163,7 @@ public class Awake : MonoBehaviour {
 
 		Ejercicio ej101 = new Ejercicio (101 , "Barba Negra era un hombre" , "El barco era guiado por una gran" , "Para una tripulación \n pirata, las armas" , 4 , true , "PIRATAS" );
 		r1 = new Respuesta (1 , "cruel que llevaba el \n cabello y la barba en largos y \n espesos bucles" , 1);
-		r2 = new Respuesta (2 , "rueda de madera  \n conectada con el \n tímon" , 2);
+		r2 = new Respuesta (2 , "rueda de madera  \n conectada con el \n timón" , 2);
 		r3 = new Respuesta (3 , "robadas eran tan valiosas \n como cualquier otro tesoro" , 3);
 		ej101.respuestas.Add (r1);
 		ej101.respuestas.Add (r2);
@@ -1181,9 +1181,9 @@ public class Awake : MonoBehaviour {
 		ac3.ejercicios.Add (ej102);
 
 
-		Ejercicio ej103 = new Ejercicio (103 , "Los piratas \n cilicos eran " , "Todos corrían" , "El cirujano es muy" , 5 , true , "PIRATAS" );
-		r1 = new Respuesta (1 , "temidos en el Mediterráneo \n por su cruealdad" , 1);
-		r2 = new Respuesta (2 , "rapidamente arriando velas \n y sujetando cañones" , 2);
+		Ejercicio ej103 = new Ejercicio (103 , "Los piratas \n cilicios eran ", "Todos corrían" , "El cirujano es muy" , 5 , true , "PIRATAS" );
+		r1 = new Respuesta (1 , "temidos en el Mediterráneo \n por su crueldad" , 1);
+		r2 = new Respuesta (2 , "rápidamente arriando velas \n y sujetando cañones", 2);
 		r3 = new Respuesta (3 , "rápido con la sierra, \n si te lastimas una pierna, \n te pondrá una de palo" , 3);
 		ej103.respuestas.Add (r1);
 		ej103.respuestas.Add (r2);
@@ -1203,7 +1203,7 @@ public class Awake : MonoBehaviour {
 
 		Ejercicio ej105 = new Ejercicio (105 , "Cuando llegaban a \n tierra los piratas eran" , "Las velas eran de \n lienzo o lona" , "La piratería era " , 6 , true , "PIRATAS" );
 		r1 = new Respuesta (1 , "vulnerables, no tenían \n manera de escapar" , 1);
-		r2 = new Respuesta (2 , "resistente, tejidas con \n cañamo o algodón" , 2);
+		r2 = new Respuesta (2 , "resistente, tejidas con \n cáñamo o algodón" , 2);
 		r3 = new Respuesta (3 , "criminal y violenta, se firmaban \n contratos entre capitanes \n y benefactores" , 3);
 		ej105.respuestas.Add (r1);
 		ej105.respuestas.Add (r2);
