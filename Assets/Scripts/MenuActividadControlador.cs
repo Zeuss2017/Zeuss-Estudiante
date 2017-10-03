@@ -53,11 +53,14 @@ public class MenuActividadControlador : MonoBehaviour {
     }
     public void Creditos()
     {
-
+        Application.LoadLevel("Creditos");
+    }
+    public void Referencias()
+    {
+        Application.LoadLevel("Referencias");
     }
 
-    
-	IEnumerator descargarEjercicios(){
+    IEnumerator descargarEjercicios(){
 		if (Persistencia.sistema.actual.idEstudiante != -1) {
 			WWW w = new WWW ("http://174.138.36.65:8080/Zeuss/webresources/estudiante/ejercicios/" + Persistencia.sistema.actual.idEstudiante /*+ playerIPAddress*/);
 			yield return w;

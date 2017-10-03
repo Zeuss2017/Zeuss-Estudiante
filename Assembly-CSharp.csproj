@@ -62,6 +62,8 @@
      <Compile Include="Assets\Scripts\ContraladorAvatar.cs" />
      <Compile Include="Assets\Scripts\ControladorAyudaContenido.cs" />
      <Compile Include="Assets\Scripts\ControladorGlobo.cs" />
+     <Compile Include="Assets\Scripts\Controlador_Referencias.cs" />
+     <Compile Include="Assets\Scripts\Creditos_Controlador.cs" />
      <Compile Include="Assets\Scripts\Disparar.cs" />
      <Compile Include="Assets\Scripts\Ejercicio.cs" />
      <Compile Include="Assets\Scripts\EjercicioEstudiante.cs" />
