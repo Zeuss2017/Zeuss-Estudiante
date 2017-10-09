@@ -14,7 +14,8 @@ public class CargarActividad1 : MonoBehaviour {
     public GameObject uiSubirNivel;
     public GameObject uiAyudaContenido;
     public GameObject uiSinPistas;
-    public enum GameState { Inicio, Ejecucion, Pausa };
+    public GameObject botonInstruccion;
+    public enum GameState { Inicio, Ejecucion, Pausa, Instruccion };
     public static GameState gameState = GameState.Inicio;
     private static bool gano ;
     private static bool noGano ;
@@ -31,6 +32,7 @@ public class CargarActividad1 : MonoBehaviour {
 	public static bool sonar1 = false;
 	public static bool sonar2 = false;
 	public bool ponerSonido = false;
+    private static int instrucciones = 0;
 
     // Use this for initialization
     void Start () {
@@ -73,6 +75,16 @@ public class CargarActividad1 : MonoBehaviour {
         uiSubirNivel.SetActive(false);
         uiAyudaContenido.SetActive(false);
         uiSinPistas.SetActive(false);
+        if (instrucciones == 0)
+        {
+            uiInstrucciones.SetActive(true);
+            botonInstruccion.SetActive(false);
+        }
+        else
+        {
+            uiInstrucciones.SetActive(false);
+            botonInstruccion.SetActive(true);
+        }
         gameState = GameState.Inicio;
         Time.timeScale = 1;
 		uiDinero.text =  Persistencia.sistema.actual.monedas.ToString();
@@ -99,9 +111,10 @@ public class CargarActividad1 : MonoBehaviour {
 				sonar2 = false;
 			}
 		}
-
-        if (gameState == GameState.Inicio && Input.GetMouseButtonDown(0))
+        
+        if ((gameState == GameState.Inicio && Input.GetMouseButtonDown(0) && instrucciones==0) ||(gameState == GameState.Inicio && instrucciones > 0))
         {
+            instrucciones++;
             uiInstrucciones.SetActive(false);
             gameState = GameState.Ejecucion;
             Ejercicio ej = Persistencia.sistema.obtenerEjercicio2();
@@ -188,7 +201,12 @@ public class CargarActividad1 : MonoBehaviour {
             Time.timeScale = 1;
             uiPausa.SetActive(false);
          }
-
+        if (gameState == GameState.Instruccion && Input.GetMouseButtonDown(0))
+        {
+            gameState = GameState.Ejecucion;
+            Time.timeScale = 1;
+            uiInstrucciones.SetActive(false);
+        }
         if (gano && !parar)
         {
             Persistencia.sistema.aciertosActual++;
@@ -287,6 +305,19 @@ public class CargarActividad1 : MonoBehaviour {
         Time.timeScale = 0;
         uiPausa.SetActive(true);
         
+    }
+    /*Nombre del Metodo: MostrarInstrucciones
+      Entradas: Ninguna
+      Salidas: Void
+      Descripcion: Permite las instrucciones de la actividad lúdica.
+         
+    */
+    public void MostrarInstrucciones()
+    {
+        gameState = GameState.Instruccion;
+        Time.timeScale = 0;
+        uiInstrucciones.SetActive(true);
+
     }
     /*Nombre del Metodo: RegresarMenuPrincipal
       Entradas: Ninguna

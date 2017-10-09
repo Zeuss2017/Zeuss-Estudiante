@@ -15,16 +15,17 @@ public class Actividad3_Logica : MonoBehaviour {
 	public GameObject canon1;
 	public GameObject canon2;
 	public GameObject canon3;
-    public GameObject uiInicio;
+    public GameObject uiInstrucciones;
     public GameObject uiPausa;
     public GameObject uiGanar;
     public GameObject uiNuevoIntento;
     public GameObject uiSubirNivel;
     public GameObject uiAyudaContenido;
     public GameObject uiSinPistas;
+    public GameObject botonInstruccion;
 
     private static bool reanudarActividad = false;
-    public enum GameState { Inicio, Ejecucion, Pausa };
+    public enum GameState { Inicio, Ejecucion, Pausa, Instruccion };
     public static GameState gameState ;
     List<GameObject> listaPreguntas= new List<GameObject>();
     List<GameObject> listaRespuestas = new List<GameObject>();
@@ -45,6 +46,7 @@ public class Actividad3_Logica : MonoBehaviour {
 	public AudioClip sonidoAyuda22;
 	public bool ponerSonido = false;
     private static int superado = 0;
+    private static int instrucciones = 0;
 
     void Start () {
         if (superado==0)
@@ -96,6 +98,18 @@ public class Actividad3_Logica : MonoBehaviour {
         Time.timeScale = 1;
 		uiDinero.text =  Persistencia.sistema.actual.monedas.ToString();
         ControladorAyudaContenido.actividadReanudar(3);
+        if (instrucciones == 0)
+        {
+
+            uiInstrucciones.SetActive(true);
+            botonInstruccion.SetActive(false);
+        }
+        else
+        {
+
+            uiInstrucciones.SetActive(false);
+            botonInstruccion.SetActive(true);
+        }
     }
 	
 	void Update () {
@@ -122,11 +136,11 @@ public class Actividad3_Logica : MonoBehaviour {
 			}
 		}
 
-        if(gameState==GameState.Inicio && Input.GetMouseButtonDown(0))
+        if((gameState == GameState.Inicio && Input.GetMouseButtonDown(0) && instrucciones == 0) || (gameState == GameState.Inicio && instrucciones > 0))
         {
-
+            instrucciones++;
             gameState = GameState.Ejecucion;
-            uiInicio.SetActive(false);
+            uiInstrucciones.SetActive(false);
             pregunta1.SetActive(true);
             pregunta2.SetActive(true);
             pregunta3.SetActive(true);
@@ -301,7 +315,14 @@ public class Actividad3_Logica : MonoBehaviour {
             ponerSonido = false;
             audioSource.Stop ();
         }
+        if (gameState == GameState.Instruccion && Input.GetMouseButtonDown(0))
+        {
+            gameState = GameState.Ejecucion;
+            Time.timeScale = 1;
+            uiInstrucciones.SetActive(false);
+            cambiarEstadoDisparo(true);
 
+        }
 
     }
 
@@ -346,6 +367,20 @@ public class Actividad3_Logica : MonoBehaviour {
         uiPausa.SetActive(true);
         cambiarEstadoDisparo(false);
         Time.timeScale = 0;
+    }
+    /*Nombre del Metodo: MostrarInstrucciones
+      Entradas: Ninguna
+      Salidas: Void
+      Descripcion: Permite las instrucciones de la actividad lúdica.
+         
+    */
+    public void MostrarInstrucciones()
+    {
+        gameState = GameState.Instruccion;
+        Time.timeScale = 0;
+        uiInstrucciones.SetActive(true);
+        cambiarEstadoDisparo(false);
+
     }
     /*Nombre del Metodo: RegresarMenuPrincipal
       Entradas: Ninguna

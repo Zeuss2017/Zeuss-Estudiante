@@ -37,48 +37,42 @@ public class TiendaController : MonoBehaviour {
         avatar2.SendMessage("AsignarPrecio", precioA2);
         avatar3.SendMessage("AsignarPrecio", precioA3);
         avatar4.SendMessage("AsignarPrecio", precioA4);
-        Persistencia.sistema.actual.avataresComprados.Add(0);
-        Persistencia.sistema.actual.avatar = 0;
-        Persistencia.Save();
+        bool avatarinicial = false;
+        foreach (int i in Persistencia.sistema.actual.avataresComprados)
+        {
+            if(i == 0)
+            {
+                avatarinicial = true;
+            }
+        }
+        if (!avatarinicial)
+        {
+            Persistencia.sistema.actual.avataresComprados.Add(0);
+            Persistencia.sistema.actual.avatar = 0;
+            Persistencia.Save();
+        }
         
-
         foreach (int i in Persistencia.sistema.actual.avataresComprados) {
             if (i == 0)
             {
-                
                 avatar0.SendMessage("AvatarComprado", true);
 
             }
             if (i == 1) {
 				avatar1.SendMessage("AvatarComprado", true);
             }
-            else
-            {
-                avatar1.SendMessage("AvatarComprado", false);
-
-            }
+            
             if (i == 2) {
 				avatar2.SendMessage("AvatarComprado", true);
-            }else
-            {
-                avatar2.SendMessage("AvatarComprado", false);
             }
             if (i == 3) {
 				avatar3.SendMessage("AvatarComprado", true);
             }
-            else
-            {
-                avatar3.SendMessage("AvatarComprado", false);
-
-            }
+            
             if (i == 4) {
 				avatar4.SendMessage("AvatarComprado", true);
             }
-            else
-            {
-                avatar4.SendMessage("AvatarComprado", false);
-
-            }
+            
         }
         avatar0.SetActive(true);
         avatar0.SendMessage("mostrarAvatar");

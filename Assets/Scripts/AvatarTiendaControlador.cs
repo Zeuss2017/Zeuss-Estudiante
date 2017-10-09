@@ -34,14 +34,12 @@ public class AvatarTiendaControlador : MonoBehaviour {
     {
         if (comprado)
         {
-            Debug.Log("avatar comprado");
             imagenBn.SetActive(false);
             imagenColor.SetActive(true);
             botonComprar.SetActive(false);
             botonSeleccionar.SetActive(true);
         }else
         {
-            Debug.Log("avatar no comprado");
             botonSeleccionar.SetActive(false);
             imagenBn.SetActive(true);
             imagenColor.SetActive(false);

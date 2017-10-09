@@ -666,7 +666,7 @@ public class Awake : MonoBehaviour {
 		ac1.ejercicios.Add (ej55);
 
 
-		Ejercicio ej56 = new Ejercicio (56 , "Cuando se acababa el agua potable, los _____ llenaban con agua fresca de los yacimientos" , "" , "" , 1 , true , "PIRATAS" );
+		Ejercicio ej56 = new Ejercicio (56 , "Cuando se acababa el agua potable, los _____ los llenaban con agua fresca de los yacimientos" , "" , "" , 1 , true , "PIRATAS" );
 		r1 = new Respuesta (1 , "piratas" , 1);
 		r2 = new Respuesta (2 , "barco" , 0);
 		r3 = new Respuesta (3 , "banderas" , 0);

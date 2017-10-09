@@ -14,7 +14,8 @@ public class CargarActividad2 : MonoBehaviour {
     public GameObject uiNuevoIntento;
     public GameObject uiAyudaContenido;
     public GameObject uiSinPistas;
-    public enum GameState { Inicio, Ejecucion , Pausa};
+    public GameObject botonInstruccion;
+    public enum GameState { Inicio, Ejecucion , Pausa, Instruccion};
     public static GameState gameState = GameState.Inicio;
     public int cantidadGlobos;
     public List<GameObject> listaGlobos=new List<GameObject>();
@@ -35,10 +36,35 @@ public class CargarActividad2 : MonoBehaviour {
 	public AudioClip sonidoAyuda1;
 	public AudioClip sonidoAyuda2;
 	public bool ponerSonido = false;
-  
+    private static int instrucciones = 0;
+
     void Start () {
-        
-		audioSource.loop = true;
+        if (!finalizo)
+        {
+            foreach (ActividadEstudiante e in Persistencia.sistema.actual.actividadesEstudiante.ToArray())
+            {
+                if (e.idActividad == 1)
+                {
+                    if (e.completado == 1)
+                    {
+                        if (Persistencia.sistema.actual.escenario.Equals("COMIDA"))
+                        {
+                            finalizo = true;
+                            Application.LoadLevel("IntermediaComida");
+                            IntermedioActividades.desbloqueado();
+                        }
+                        else
+                        {
+                            finalizo = true;
+                            Application.LoadLevel("IntermediaPiratas");
+                            IntermedioActividadesPiratas.desbloqueado();
+                        }
+                    }
+                }
+
+            }
+        }
+        audioSource.loop = true;
 		audioSource.clip = sonido;
 		audioSource.volume = 0.51f;
 		audioSource.Play();
@@ -58,31 +84,20 @@ public class CargarActividad2 : MonoBehaviour {
         Time.timeScale = 1;
 		uiDinero.text =  Persistencia.sistema.actual.monedas.ToString();
         ControladorAyudaContenido.actividadReanudar(2);
-        if (!finalizo)
+    
+        if (instrucciones == 0)
         {
-            foreach (ActividadEstudiante e in Persistencia.sistema.actual.actividadesEstudiante.ToArray())
-            {
-                if (e.idActividad == 1)
-                {
-                    if (e.completado == 1)
-                    {
-                        if (Persistencia.sistema.actual.escenario.Equals("COMIDA"))
-                        {
-							finalizo = true;
-                            Application.LoadLevel("IntermediaComida");
-                            IntermedioActividades.desbloqueado();           
-                        }
-                        else
-                        {
-                            finalizo = true;
-                            Application.LoadLevel("IntermediaPiratas");
-                            IntermedioActividadesPiratas.desbloqueado();
-                        }
-                    }
-                }
-
-            }
+            
+            uiInstrucciones.SetActive(true);
+            botonInstruccion.SetActive(false);
         }
+        else
+        {
+           
+            uiInstrucciones.SetActive(false);
+            botonInstruccion.SetActive(true);
+        }
+       
         
     }
 
@@ -109,8 +124,9 @@ public class CargarActividad2 : MonoBehaviour {
 		}
         //Inicio de la Actividad
         //Si el estado es Inicio, y da click se cambia de estado, se cargan los globos.
-        if(gameState== GameState.Inicio && Input.GetMouseButtonDown(0))
+        if((gameState == GameState.Inicio && Input.GetMouseButtonDown(0) && instrucciones == 0) || (gameState == GameState.Inicio && instrucciones > 0))
         {
+            instrucciones++;
             Persistencia.sistema.tiempoActual = Time.time;
             gameState = GameState.Ejecucion;
             uiInstrucciones.SetActive(false);
@@ -146,7 +162,13 @@ public class CargarActividad2 : MonoBehaviour {
             uiPausa.SetActive(false);
             cambiarEstadoGlobos(false);
         }
-		
+        if (gameState == GameState.Instruccion && Input.GetMouseButtonDown(0))
+        {
+            gameState = GameState.Ejecucion;
+            Time.timeScale = 1;
+            uiInstrucciones.SetActive(false);
+            cambiarEstadoGlobos(false);
+        }
 
         if (gano)
         {
@@ -274,6 +296,26 @@ public class CargarActividad2 : MonoBehaviour {
                 globo.SendMessage("EnPausa", true);
             }
         }
+    }
+    /*Nombre del Metodo: MostrarInstrucciones
+      Entradas: Ninguna
+      Salidas: Void
+      Descripcion: Permite las instrucciones de la actividad lúdica.
+         
+    */
+    public void MostrarInstrucciones()
+    {
+        gameState = GameState.Instruccion;
+        Time.timeScale = 0;
+        uiInstrucciones.SetActive(true);
+        foreach (GameObject globo in listaGlobos)
+        {
+            if (globo != null)
+            {
+                globo.SendMessage("EnPausa", true);
+            }
+        }
+
     }
     /*Nombre del Metodo: RegresarMenuPrincipal
       Entradas: Ninguna
